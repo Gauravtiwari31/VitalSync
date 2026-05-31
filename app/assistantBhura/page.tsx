@@ -25,7 +25,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { curoAIResponse, curoFlash } from "@/lib/gemini";
+
 import SidebarComponent from "./Sidebar";
 import {
   Tooltip,
@@ -212,7 +212,7 @@ const Message = ({ message, isLast }: any) => {
           <Bot className="h-4 w-4 text-white" />
         </div>
         <div className="text-sm text-slate-500 dark:text-slate-400 flex items-center gap-2">
-          <span>Assistant Bhura Assistant</span>
+          <span>Bhura ji</span>
           <Badge
             variant="outline"
             className="bg-amber-100 dark:bg-amber-900/30 text-violet-800 dark:text-amber-300 border-amber-200 dark:border-amber-800"
@@ -283,7 +283,18 @@ const processText = (text: string) => {
 };
 
 const renderBotResponse = (content: any) => {
-  if (!content || typeof content !== "object") return null;
+  if (!content) return null;
+
+  // If the response is a plain string (error message), render it directly
+  if (typeof content === "string") {
+    return (
+      <div className="text-slate-600 dark:text-slate-300 leading-relaxed">
+        {content}
+      </div>
+    );
+  }
+
+  if (typeof content !== "object") return null;
 
   return (
     <div className="space-y-6">
@@ -293,7 +304,7 @@ const renderBotResponse = (content: any) => {
         iconBgClass="bg-gradient-to-tr from-pink-500 to-rose-500"
       >
         <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
-          {content.interpretation.summary}
+          {content.interpretation?.summary}
         </p>
       </ResponseSection>
 
@@ -303,10 +314,10 @@ const renderBotResponse = (content: any) => {
         iconBgClass="bg-gradient-to-tr from-green-500 to-emerald-600"
       >
         <p className="text-slate-600 dark:text-slate-300 mb-6 leading-relaxed">
-          {content.home_remedies.detailed_explanation}
+          {content.home_remedies?.detailed_explanation}
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {content.home_remedies.remedies.map((remedy: any, index: any) => (
+          {content.home_remedies?.remedies?.map((remedy: any, index: any) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, x: -20 }}
@@ -336,10 +347,10 @@ const renderBotResponse = (content: any) => {
         iconBgClass="bg-gradient-to-tr from-amber-500 to-yellow-500"
       >
         <p className="text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">
-          {content.precautions.detailed_explanation}
+          {content.precautions?.detailed_explanation}
         </p>
         <ul className="space-y-3">
-          {content.precautions.precaution_list.map(
+          {content.precautions?.precaution_list?.map(
             (precaution: any, index: any) => (
               <motion.li
                 key={index}
@@ -365,7 +376,7 @@ const renderBotResponse = (content: any) => {
         iconBgClass="bg-gradient-to-tr from-red-500 to-rose-600"
       >
         <p className="text-slate-600 dark:text-slate-300 mb-6 leading-relaxed">
-          {content.when_to_see_doctor.detailed_explanation}
+          {content.when_to_see_doctor?.detailed_explanation}
         </p>
         <div className="space-y-4">
           <h3 className="font-medium text-red-500 dark:text-red-400 flex items-center gap-2">
@@ -373,7 +384,7 @@ const renderBotResponse = (content: any) => {
             Red Flags:
           </h3>
           <ul className="space-y-3">
-            {content.when_to_see_doctor.red_flags.map(
+            {content.when_to_see_doctor?.red_flags?.map(
               (flag: any, index: any) => (
                 <motion.li
                   key={index}
@@ -397,7 +408,7 @@ const renderBotResponse = (content: any) => {
             After How Many Days:
           </h3>
           <ul className="space-y-3">
-            {content.when_to_see_doctor.after_how_many_days.map(
+            {content.when_to_see_doctor?.after_how_many_days?.map(
               (flag: any, index: any) => (
                 <motion.li
                   key={index}
@@ -423,7 +434,7 @@ const renderBotResponse = (content: any) => {
         iconBgClass="bg-gradient-to-tr from-slate-700 to-slate-800"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {content.relevant_medical_departments.map((dept: any, index: any) => (
+          {content.relevant_medical_departments?.map((dept: any, index: any) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, scale: 0.95 }}
@@ -568,7 +579,13 @@ const AssistantBhura = () => {
     setMessages([...newMessages]);
 
     try {
-      const response = await curoAIResponse(input);
+      const res = await fetch("/api/bhura/beat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ input }),
+      });
+      const data = await res.json();
+      const response = data.response;
       stopThinkingTimer();
       newMessages[botMessageIndex].content = response;
       setMessages([...newMessages]);
@@ -606,7 +623,13 @@ const AssistantBhura = () => {
     setMessages([...newMessages]);
 
     try {
-      const response = await curoFlash(input, messages);
+      const res = await fetch("/api/bhura/flash", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ input, messages }),
+      });
+      const data = await res.json();
+      const response = data.response;
       stopThinkingTimer();
       setTypingAnimation(false);
       newMessages[botMessageIndex].content = response;
@@ -652,7 +675,7 @@ const AssistantBhura = () => {
                 <Stethoscope className="h-6 w-6 text-white" />
               </motion.div>
               <h1 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent lg:ml-0">
-                Assistant Bhura Health Assistant
+                Bhura ji Health Assistant
               </h1>
             </div>
 
@@ -699,7 +722,7 @@ const AssistantBhura = () => {
                   <Bot className="h-12 w-12 text-white" />
                 </motion.div>
                 <h2 className="text-2xl md:text-3xl font-bold text-slate-800 dark:text-white mb-4 bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent">
-                  Welcome to Assistant Bhura Health Assistant
+                  Welcome to Bhura ji Health Assistant
                 </h2>
                 <p className="text-slate-600 dark:text-slate-300 max-w-xl mb-8 leading-relaxed">
                   Describe your health concerns, symptoms, or questions, and
@@ -932,7 +955,7 @@ const AssistantBhura = () => {
             </form>
             <div className="text-xs text-center mt-2 text-slate-500 dark:text-slate-400 flex items-center justify-center gap-1">
               <Info className="h-3 w-3" />
-              Assistant Bhura provides general health information. Always consult a
+              Bhura ji provides general health information. Always consult a
               healthcare professional for medical advice.
             </div>
           </div>

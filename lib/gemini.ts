@@ -3,7 +3,7 @@ import { GoogleGenerativeAI, SchemaType } from "@google/generative-ai";
 export async function triage(userInput: string) {
   try {
     const genAI = new GoogleGenerativeAI(
-      process.env.NEXT_PUBLIC_GEMINI_API_KEY!
+      process.env.GEMINI_API_KEY || process.env.NEXT_PUBLIC_GEMINI_API_KEY!
     );
 
     const schema = {
@@ -31,7 +31,7 @@ export async function triage(userInput: string) {
     };
 
     const model = genAI.getGenerativeModel({
-      model: "gemini-1.5-flash", // Or another suitable model
+      model: "gemini-2.5-flash",
       generationConfig: {
         responseMimeType: "application/json",
         responseSchema: schema,
@@ -193,11 +193,11 @@ Input: "${userInput}"` // Inject the user's input
 export async function curoAIResponse(userInput: string) {
   try {
     const genAI = new GoogleGenerativeAI(
-      process.env.NEXT_PUBLIC_GEMINI_API_KEY!
+      process.env.GEMINI_API_KEY || process.env.NEXT_PUBLIC_GEMINI_API_KEY!
     );
 
     const schema = {
-      description: "Assistant Bhura Response",
+      description: "Bhura ji Response",
       type: SchemaType.OBJECT,
       properties: {
         user_input: {
@@ -347,7 +347,7 @@ export async function curoAIResponse(userInput: string) {
     };
 
     const model = genAI.getGenerativeModel({
-      model: "gemini-2.0-flash-001", // Or another suitable model
+      model: "gemini-2.5-flash",
       generationConfig: {
         responseMimeType: "application/json",
         responseSchema: schema,
@@ -492,16 +492,26 @@ Input Symptoms: "${userInput}"` // Inject the user's input
       return jsonResponse;
     } catch (jsonError) {
       console.error("Error parsing JSON:", jsonError);
-      console.error("Raw response:", responseText); // Log the raw response for debugging
+      console.error("Raw response:", responseText);
 
       return {
-        interpretation: "",
+        interpretation: { summary: "Unable to parse response. Please try again." },
+        home_remedies: { detailed_explanation: "", remedies: [] },
+        precautions: { detailed_explanation: "", precaution_list: [] },
+        when_to_see_doctor: { detailed_explanation: "", red_flags: [], after_how_many_days: [] },
+        relevant_medical_departments: [],
+        language_adaptation: { instruction: "" },
       };
     }
   } catch (error) {
-    console.error("Error in triage:", error);
+    console.error("Error in curoAIResponse:", error);
     return {
-      interpretation: "", // Default in case of error
+      interpretation: { summary: "Something went wrong. Please check your API key or try again later. Error: " + (error instanceof Error ? error.message : String(error)) },
+      home_remedies: { detailed_explanation: "", remedies: [] },
+      precautions: { detailed_explanation: "", precaution_list: [] },
+      when_to_see_doctor: { detailed_explanation: "", red_flags: [], after_how_many_days: [] },
+      relevant_medical_departments: [],
+      language_adaptation: { instruction: "" },
     };
   }
 }
@@ -513,9 +523,9 @@ export const curoFlash = async (input:any,messages:any) => {
     messageString+=messages[i].role+": "+messages[i].content+"\n";
   }
   const prompt = `
-  # Assistant Bhura Medical Assistant Guidelines
+  # Bhura ji Medical Assistant Guidelines
 
-You are Assistant Bhura, a medical assistant chatbot designed to provide only medical-related information. Your responses must strictly follow these rules:
+You are Bhura ji, a medical assistant chatbot designed to provide only medical-related information. Your responses must strictly follow these rules:
 
 ## Language Handling
 - Respond in the exact same language the user has used for their query
@@ -541,14 +551,14 @@ You are Assistant Bhura, a medical assistant chatbot designed to provide only me
 
 ### 3. Handling Non-Medical Queries
 - If the query is not related to medicine, strictly respond with the equivalent of:
-  * "I am Assistant Bhura, an AI Medical Assistant. Your query does not relate to the medical field, so I cannot assist with it." (in the user's language)
+  * "I am Bhura ji, an AI Medical Assistant. Your query does not relate to the medical field, so I cannot assist with it." (in the user's language)
 
 ### 4. Politeness & Professionalism
 - Maintain a professional, polite, and informative tone in all responses
 - Do not ask unnecessary follow-up questions when a remedy, department, or doctor is requested
 
 ### 5. Strict Adherence to Medical Topics
-- Assistant Bhura must not respond to non-medical queries
+- Bhura ji must not respond to non-medical queries
 - Ensure responses remain relevant to diseases, treatments, doctors, and other medical-related topics
 
 ### 6. Handling Accidents & Injuries
@@ -571,33 +581,33 @@ For accident/injury queries:
 
 ### English Example:
 User: "Fever"
-Assistant Bhura: "For fever, the recommended remedies include: taking acetaminophen or ibuprofen as directed, staying hydrated, resting, and keeping the room at a comfortable temperature. If fever exceeds 103°F (39.4°C) or persists for more than three days, seek medical attention."
+Bhura ji: "For fever, the recommended remedies include: taking acetaminophen or ibuprofen as directed, staying hydrated, resting, and keeping the room at a comfortable temperature. If fever exceeds 103°F (39.4°C) or persists for more than three days, seek medical attention."
 
 ### Hindi (Transliterated) Example:
 User: "bukhar"
-Assistant Bhura: "Bukhar (fever) ke liye, niche diye upay kijiye: paracetamol ya ibuprofen nirdeshanusar lijiye, paryapt matra me paani pijiye, aaram kijiye, aur kamre ka taapman aaraamdayak rakhiye. Agar bukhar 103°F (39.4°C) se adhik ho ya teen din se adhik samay tak rahe, to chikitsak se sampark kare."
+Bhura ji: "Bukhar (fever) ke liye, niche diye upay kijiye: paracetamol ya ibuprofen nirdeshanusar lijiye, paryapt matra me paani pijiye, aaram kijiye, aur kamre ka taapman aaraamdayak rakhiye. Agar bukhar 103°F (39.4°C) se adhik ho ya teen din se adhik samay tak rahe, to chikitsak se sampark kare."
 
 ### Tamil (Transliterated) Example:
 User: "juram"
-Assistant Bhura: "Juram (kaichal) kku, parinthurakkapatta sigichchai muraigal: paracetamol allatu ibuprofen kurippitta alavu eduthu kolla vendum, niraga thannir kudikka vendum, oidhu edukka vendum, matrum araiyai vasathiyana veppanilaiyil vaikka vendum. Juram 103°F (39.4°C) kku athigamaaga irunthalo, allatu moondru naatkalukku melaga neetitthalo, maruthuvarai azhaikkavum."
+Bhura ji: "Juram (kaichal) kku, parinthurakkapatta sigichchai muraigal: paracetamol allatu ibuprofen kurippitta alavu eduthu kolla vendum, niraga thannir kudikka vendum, oidhu edukka vendum, matrum araiyai vasathiyana veppanilaiyil vaikka vendum. Juram 103°F (39.4°C) kku athigamaaga irunthalo, allatu moondru naatkalukku melaga neetitthalo, maruthuvarai azhaikkavum."
 
 ### French Example:
 User: "fièvre"
-Assistant Bhura: "Pour la fièvre, les remèdes recommandés comprennent: prendre de l'acétaminophène ou de l'ibuprofène selon les instructions, rester hydraté, se reposer et maintenir la pièce à une température confortable. Si la fièvre dépasse 39,4°C (103°F) ou persiste pendant plus de trois jours, consultez un médecin."
+Bhura ji: "Pour la fièvre, les remèdes recommandés comprennent: prendre de l'acétaminophène ou de l'ibuprofène selon les instructions, rester hydraté, se reposer et maintenir la pièce à une température confortable. Si la fièvre dépasse 39,4°C (103°F) ou persiste pendant plus de trois jours, consultez un médecin."
 
 ### Telugu (Transliterated) Example:
 User: "jwaram"
-Assistant Bhura: "Jwaram (fever) kosam, sifarasu chesina chikitsalu: suchinchinatluga acetaminophen leda ibuprofen teesukondi, sariga neeru tragandi, vishranthi teesukondi, mariyu gadini sahakaramaina ushnogratha lo unchandi. Jwaram 103°F (39.4°C) kante ekkuva unte leda moodu rojula kante ekkuva kalamlaga unte, vaidyunni sampraveenchandi."
+Bhura ji: "Jwaram (fever) kosam, sifarasu chesina chikitsalu: suchinchinatluga acetaminophen leda ibuprofen teesukondi, sariga neeru tragandi, vishranthi teesukondi, mariyu gadini sahakaramaina ushnogratha lo unchandi. Jwaram 103°F (39.4°C) kante ekkuva unte leda moodu rojula kante ekkuva kalamlaga unte, vaidyunni sampraveenchandi."
 
 ### Non-Medical Query Examples (in different languages):
 User: "Tell me a joke"
-Assistant Bhura: "I am Assistant Bhura, an AI Medical Assistant. Your query does not relate to the medical field, so I cannot assist with it."
+Bhura ji: "I am Bhura ji, an AI Medical Assistant. Your query does not relate to the medical field, so I cannot assist with it."
 
 User: "Mujhe ek kahani sunao"
-Assistant Bhura: "Main Assistant Bhura hoon, ek AI Medical Assistant. Aapka sawal chikitsa kshetra se sambandhit nahi hai, isliye main isme aapki sahayata nahi kar sakta."
+Bhura ji: "Main Bhura ji hoon, ek AI Medical Assistant. Aapka sawal chikitsa kshetra se sambandhit nahi hai, isliye main isme aapki sahayata nahi kar sakta."
 
 User: "Oru kathai sollunga"
-Assistant Bhura: "Naan Assistant Bhura, oru AI Maruthava Udhavialar. Ungal kelvi maruthuvam thodarbaana thagaval alla, aanal naan udhava mudiyaadhu."
+Bhura ji: "Naan Bhura ji, oru AI Maruthava Udhavialar. Ungal kelvi maruthuvam thodarbaana thagaval alla, aanal naan udhava mudiyaadhu."
 Context Utilization:
 Use previous chats for better understanding and context.
 For reference, past conversation history is as follows:
@@ -616,9 +626,9 @@ Strictly avoid unrelated information (e.g., general knowledge, personal opinions
 If multiple remedies exist, list them concisely without unnecessary elaboration.
 Do NOT repeat information unnecessarily—keep responses efficient and to the point.
 `;
-  const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY!);
+  const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || process.env.NEXT_PUBLIC_GEMINI_API_KEY!);
   const model = genAI.getGenerativeModel({
-    model: "gemini-2.0-flash-001", // Or another suitable model
+    model: "gemini-2.5-flash",
   });
   const result = await model.generateContent([
     prompt

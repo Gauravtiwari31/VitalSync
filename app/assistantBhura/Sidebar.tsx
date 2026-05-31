@@ -65,7 +65,7 @@ const SidebarComponent = ({setSelectedModel,selectedModel}:any) => {
       <div className="p-4 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
         <div className="flex items-center w-full justify-between">
           <h2 className="text-xl font-bold bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent">
-            Assistant Bhura
+            Bhura ji
           </h2>
           <DarkModeToggle />
         </div>
