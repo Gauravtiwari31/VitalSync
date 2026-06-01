@@ -10,9 +10,16 @@ const edgeStoreRouter = es.router({
   publicFiles: es.fileBucket(),
 });
 
-const handler = createEdgeStoreNextHandler({
-  router: edgeStoreRouter,
-});
+let handler: any;
+
+if (process.env.EDGE_STORE_ACCESS_KEY && process.env.EDGE_STORE_SECRET_KEY) {
+  handler = createEdgeStoreNextHandler({
+    router: edgeStoreRouter,
+  });
+} else {
+  handler = () => new Response("Edge Store not configured", { status: 500 });
+}
+
 export { handler as GET, handler as POST };
 /**
  * This type is used to create the type-safe client for the frontend.
