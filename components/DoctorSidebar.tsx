@@ -126,7 +126,7 @@ export function DoctorSidebar({ ...props }: any) {
                 </div>
                 <div className="grid flex-1 text-left text-2xl leading-tight">
                   <span className="truncate font-semibold text-teal-500">
-                    Health
+                    Vital
                     <span className="text-teal-700 font-extrabold">Sync</span>
                   </span>
                 </div>
