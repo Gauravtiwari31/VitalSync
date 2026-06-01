@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="./public/fi.drawio.svg" alt="VitalSync Logo" width="60" />
+<img src="./public/VitalSync_Logo.svg" alt="VitalSync Logo" width="60" />
 
 # 🩺 VitalSync
 
