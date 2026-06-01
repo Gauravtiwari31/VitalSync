@@ -5,25 +5,18 @@ import { FaSun, FaMoon, FaDesktop } from "react-icons/fa";
 type ThemeMode = "light" | "dark" | "system";
 
 const DarkModeToggle: React.FC = () => {
-  const [themeMode, setThemeMode] = useState<ThemeMode>("light");
+  const [themeMode, setThemeMode] = useState<ThemeMode>(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("themeMode") as ThemeMode | null;
+      return saved || "system";
+    }
+    return "system";
+  });
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  // Initialize theme from localStorage or system preference
+  // Apply theme on mount and listen for system preference changes
   useEffect(() => {
-    // Get saved theme from localStorage
-    const savedTheme = localStorage.getItem("themeMode") as ThemeMode | null;
-
-    if (savedTheme) {
-      setThemeMode(savedTheme);
-      applyTheme(savedTheme);
-    } else {
-      // Default to system preference if no saved theme
-      const systemPrefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)"
-      ).matches;
-      setThemeMode("system");
-      applyTheme(systemPrefersDark ? "dark" : "light");
-    }
+    applyTheme(themeMode);
 
     // Listen for system preference changes
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");

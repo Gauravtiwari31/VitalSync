@@ -8,15 +8,21 @@ type Props = {
 
 const Logo = ({ className }: Props) => {
   return (
-    <Link href={"/."}>
-      <h1
-        className={cn(
-          "text-3xl sm:text-4xl font-poppins-font font-semibold text-teal-500 text-center sm:text-left ",
-          className
-        )}
+    <Link href={"/."}  className={cn("flex items-center gap-2 select-none", className)}>
+      {/* Icon mark */}
+      <div className="w-7 h-7 rounded-lg bg-emerald-600 flex items-center justify-center flex-shrink-0">
+        <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4">
+          <path d="M10 2L4 7v9h4v-5h4v5h4V7L10 2z" fill="white" fillOpacity="0.9" />
+          <path d="M7 12h6" stroke="white" strokeWidth="1.2" strokeLinecap="round" />
+        </svg>
+      </div>
+      {/* Wordmark */}
+      <span
+        className="text-lg font-semibold tracking-tight text-slate-900 dark:text-white"
+        style={{ fontFamily: "'DM Serif Display', Georgia, serif" }}
       >
-        Vital<span className="text-teal-700 font-bold">Sync</span>
-      </h1>
+        Vital<span className="text-emerald-600">Sync</span>
+      </span>
     </Link>
   );
 };

@@ -3,13 +3,10 @@
 import React, { useState } from "react";
 import {
   Menu,
-  Home,
   Plus,
   ChevronDown,
-  Clock,
-  Settings,
-  LogOut,
   Bot,
+  Home,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -29,217 +26,128 @@ import {
 import Link from "next/link";
 import DarkModeToggle from "@/components/DarkModeToggle";
 
-// Types
 type ModelType = "curo-beat" | "curo-flash";
-type ChatHistoryItem = {
-  id: string;
-  title: string;
-  date: string;
-  model: ModelType;
-};
 
-const SidebarComponent = ({setSelectedModel,selectedModel}:any) => {
-  
+const SidebarComponent = ({ setSelectedModel, selectedModel }: any) => {
+  const [mobileOpen, setMobileOpen] = useState(false);
 
-  // Chat history — empty by default (no hardcoded/demo chats)
-  const [chatHistory, setChatHistory] = useState<ChatHistoryItem[]>([]);
-
-  // Function to start a new chat (dummy functionality)
-  const startNewChat = () => {
-    console.log("Starting new chat with model:", selectedModel);
-
-    // Start a new chat — do not persist/demo-save in sidebar
-    // Implementation note: actual chat creation should be handled by
-    // the chat view or backend. Sidebar will keep history empty.
-  };
-
-  // Function to select a chat (dummy functionality)
-  const selectChat = (chatId: string) => {
-    console.log("Selected chat:", chatId);
-  };
-
-  // Sidebar content component to avoid duplication
   const SidebarContent = ({ isMobile = false }) => (
-    <div className="flex flex-col h-full">
-      {/* Sidebar Header */}
-      <div className="p-4 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
-        <div className="flex items-center w-full justify-between">
-          <h2 className="text-xl font-bold bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent">
-            Bhura ji
-          </h2>
-          <DarkModeToggle />
+    <div className="flex flex-col h-full bg-white dark:bg-[#080e1a]">
+      {/* Header */}
+      <div className="px-4 h-14 flex items-center justify-between border-b border-slate-200 dark:border-slate-800 flex-shrink-0">
+        <div className="flex items-center gap-2.5">
+          <div className="w-7 h-7 rounded-lg bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center">
+            <Bot className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+          </div>
+          <span
+            className="font-semibold text-slate-900 dark:text-white text-sm"
+            style={{ fontFamily: "'DM Serif Display', Georgia, serif" }}
+          >
+            HealthBuddy
+          </span>
         </div>
+        <DarkModeToggle />
       </div>
 
-      {/* Model Selection and Actions */}
-      <div className="p-4 space-y-4">
-        {/* Model dropdown */}
+      {/* Actions */}
+      <div className="p-3 space-y-2 border-b border-slate-100 dark:border-slate-800 flex-shrink-0">
+        {/* Model picker */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button
               variant="outline"
-              className="w-full justify-between border-slate-200 dark:border-slate-700"
+              size="sm"
+              className="w-full justify-between h-9 text-sm border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/60 hover:bg-white dark:hover:bg-slate-800 font-medium"
             >
               <div className="flex items-center gap-2">
-                <Bot className="h-4 w-4 text-amber-500" />
-                <span className="font-medium">
-                  {selectedModel === "curo-beat" ? "Bhura 1.0 Pro" : "Bhura 1.0 Flash"}
-                </span>
+                <div className="w-2 h-2 rounded-full bg-emerald-500" />
+                {selectedModel === "curo-beat" ? "HealthBuddy Pro" : "HealthBuddy Flash"}
               </div>
-              <ChevronDown className="h-4 w-4 text-slate-500" />
+              <ChevronDown className="h-3.5 w-3.5 text-slate-400" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="start" className="w-56">
-            <DropdownMenuItem onClick={() => setSelectedModel("curo-beat")}>
-              <div className="flex items-center gap-2">
-                <Bot className="h-4 w-4 text-amber-600" />
-                <div className="flex flex-col">
-                  <span className="font-medium">Bhura 1.0 Pro</span>
-                  <span className="text-xs text-slate-500">
-                    Comprehensive health analysis
-                  </span>
-                </div>
+            <DropdownMenuItem
+              className="gap-3 cursor-pointer"
+              onClick={() => setSelectedModel("curo-beat")}
+            >
+              <div className="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0" />
+              <div>
+                <p className="text-sm font-medium">HealthBuddy Pro</p>
+                <p className="text-xs text-slate-500">Deep health analysis</p>
               </div>
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setSelectedModel("curo-flash")}>
-              <div className="flex items-center gap-2">
-                <Bot className="h-4 w-4 text-orange-600" />
-                <div className="flex flex-col">
-                  <span className="font-medium">Bhura 1.0 Flash</span>
-                  <span className="text-xs text-slate-500">
-                    Quick health responses
-                  </span>
-                </div>
+            <DropdownMenuItem
+              className="gap-3 cursor-pointer"
+              onClick={() => setSelectedModel("curo-flash")}
+            >
+              <div className="w-2 h-2 rounded-full bg-sky-400 flex-shrink-0" />
+              <div>
+                <p className="text-sm font-medium">HealthBuddy Flash</p>
+                <p className="text-xs text-slate-500">Quick responses</p>
               </div>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
 
-        {/* New Chat Button */}
         <Button
-          className="w-full bg-gradient-to-tr from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600"
-          onClick={startNewChat}
+          size="sm"
+          className="w-full h-9 text-sm bg-emerald-600 hover:bg-emerald-700 text-white gap-2"
+          onClick={() => window.location.reload()}
         >
-          <Plus className="h-4 w-4 mr-2" /> New Chat
-        </Button>
-
-        {/* Home Button */}
-        <Button
-          variant="outline"
-          className="w-full justify-start border-slate-200 dark:border-slate-700"
-          asChild
-        >
-          <Link href="/">
-            <Home className="h-4 w-4 mr-2 text-slate-500" /> Home
-          </Link>
+          <Plus className="h-3.5 w-3.5" />
+          New conversation
         </Button>
       </div>
 
-      {/* Chat History */}
-      {/* Chat list header removed to avoid showing demo history */}
-
-      {/* Chat List with Scroll Area */}
-      <ScrollArea className="flex-1 px-2">
-        <div className="space-y-1 py-2">
-          {chatHistory.map((chat) => {
-            const ChatItem = (
-              <Button
-                key={chat.id}
-                variant="ghost"
-                className="w-full justify-start px-3 py-2 h-auto text-left"
-                onClick={() => selectChat(chat.id)}
-              >
-                <div className="flex items-start gap-3 w-full">
-                  <div
-                    className={cn(
-                      "w-2 h-2 rounded-full mt-1.5",
-                      chat.model === "curo-beat"
-                        ? "bg-amber-500"
-                        : "bg-orange-500"
-                    )}
-                  />
-                  <div className="flex flex-col w-full">
-                    <span className="font-medium text-slate-700 dark:text-slate-200 truncate">
-                      {chat.title}
-                    </span>
-                    <div className="flex justify-between items-center w-full">
-                      <span className="text-xs text-slate-500 dark:text-slate-400">
-                        {chat.date}
-                      </span>
-                      <span className="text-xs bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded text-slate-500 dark:text-slate-400">
-                        {chat.model === "curo-beat" ? "Beat" : "Flash"}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </Button>
-            );
-            
-            return isMobile ? (
-              <SheetClose key={chat.id} asChild>
-                {ChatItem}
-              </SheetClose>
-            ) : (
-              ChatItem
-            );
-          })}
+      {/* History area */}
+      <ScrollArea className="flex-1 px-3 py-3">
+        <p className="text-[10px] uppercase tracking-widest font-semibold text-slate-400 dark:text-slate-600 px-2 mb-2">
+          Recent
+        </p>
+        <div className="flex flex-col items-center justify-center py-8 gap-2">
+          <div className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+            <Bot className="h-4 w-4 text-slate-400" />
+          </div>
+          <p className="text-xs text-slate-400 dark:text-slate-500 text-center leading-relaxed max-w-[140px]">
+            Your conversation history will appear here
+          </p>
         </div>
       </ScrollArea>
 
-      {/* Footer Settings */}
-      <div className="p-4 border-t border-slate-200 dark:border-slate-700 space-y-2">
-        <Button variant="ghost" className="w-full justify-start">
-          <Settings className="h-4 w-4 mr-2 text-slate-500" />
-          <span>Settings</span>
-        </Button>
-
-        <Button
-          variant="ghost"
-          className="w-full justify-start text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20"
-        >
-          <LogOut className="h-4 w-4 mr-2" />
-          <span>Sign Out</span>
-        </Button>
+      {/* Footer */}
+      <div className="p-3 border-t border-slate-100 dark:border-slate-800 flex-shrink-0">
+        <Link href="/">
+          <button className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+            <Home className="h-4 w-4" />
+            Back to VitalSync
+          </button>
+        </Link>
       </div>
-    </div>
-  );
-
-  // Mobile Sidebar with Sheet
-  const MobileSidebar = () => (
-    <Sheet>
-      <SheetTrigger asChild>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="fixed z-50 top-4 left-4 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-full shadow-md"
-        >
-          <Menu className="h-5 w-5 text-slate-700 dark:text-slate-200" />
-        </Button>
-      </SheetTrigger>
-      <SheetContent side="left" className="p-0 w-72">
-        <SidebarContent isMobile={true} />
-      </SheetContent>
-    </Sheet>
-  );
-
-  // Desktop Sidebar
-  const DesktopSidebar = () => (
-    <div className="fixed top-0 left-0 z-40 h-full w-72 bg-white dark:bg-slate-900 shadow-xl border-r border-slate-200 dark:border-slate-700 flex flex-col">
-      <SidebarContent isMobile={false} />
     </div>
   );
 
   return (
     <>
-      {/* Mobile Sidebar */}
-      <div className="lg:hidden">
-        <MobileSidebar />
-      </div>
+      {/* Mobile toggle */}
+      <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
+        <SheetTrigger asChild>
+          <button
+            className="lg:hidden fixed top-3.5 left-4 z-50 p-1.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm"
+            aria-label="Open sidebar"
+          >
+            <Menu className="h-4 w-4 text-slate-600 dark:text-slate-300" />
+          </button>
+        </SheetTrigger>
+        <SheetContent side="left" className="p-0 w-64 border-r border-slate-200 dark:border-slate-800">
+          <SidebarContent isMobile />
+        </SheetContent>
+      </Sheet>
 
-      {/* Desktop Sidebar */}
-      <div className="hidden lg:block">
-        <DesktopSidebar />
-      </div>
+      {/* Desktop sidebar */}
+      <aside className="hidden lg:block fixed top-0 left-0 h-screen w-72 border-r border-slate-200 dark:border-slate-800 z-30">
+        <SidebarContent />
+      </aside>
     </>
   );
 };

@@ -95,8 +95,9 @@ export default function Component() {
           throw new Error("Failed to fetch feedback data");
         }
         const data = await response.json();
-        setFeedbacks(data.fb);
-        setFilteredFeedbacks(data.fb);
+        const fbData = Array.isArray(data.fb) ? data.fb : [];
+        setFeedbacks(fbData);
+        setFilteredFeedbacks(fbData);
         setIsLoading(false);
       } catch (err) {
         setError("An error occurred while fetching feedback data");
@@ -106,6 +107,7 @@ export default function Component() {
     fetchFeedbacks();
   }, []);
   useEffect(() => {
+    if (!Array.isArray(feedbacks)) return;
     const newFilteredFeedbacks = showAnonymous
       ? feedbacks.filter(
           (feedback) =>
@@ -121,6 +123,7 @@ export default function Component() {
     );
   }, [showAnonymous, feedbacks]);
   useEffect(() => {
+    if (!Array.isArray(feedbacks)) return;
     const newFilteredFeedbacks = feedbacks.filter(
       (feedback) =>
         feedback.name.toLowerCase().includes(searchQuery.toLowerCase()) ||

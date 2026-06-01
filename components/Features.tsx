@@ -1,6 +1,6 @@
+"use client";
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
 import {
   Bell,
   QrCode,
@@ -13,309 +13,228 @@ import {
 import { AnimatedListDemo } from "./magicui/animatedListDemo";
 import HospitalCard from "./magicui/HospitalCardDemo";
 
+const features = [
+  {
+    icon: Bell,
+    title: "Smart Notifications",
+    description:
+      "Receive personalized health alerts based on your appointments, medication schedule, and wellness goals. Our AI-driven system prioritizes what matters most to you.",
+    accent: "#2BB57C",
+    accentLight: "#d1fae5",
+    component: (
+      <AnimatedListDemo className="h-[300px] w-full scale-90 border-none transition-all duration-300 [mask-image:linear-gradient(to_top,transparent_10%,#000_50%)]" />
+    ),
+  },
+  {
+    icon: QrCode,
+    title: "Virtual Queue System",
+    description:
+      "Skip the physical waiting room. Scan, queue up virtually, and get real-time updates on your position. Arrive just when the doctor is ready.",
+    accent: "#0284c7",
+    accentLight: "#e0f2fe",
+    component: null,
+  },
+  {
+    icon: Bed,
+    title: "Smart Bed Allocation",
+    description:
+      "Our predictive algorithm optimizes bed availability across departments. Reserve your space in advance with real-time visibility on care options.",
+    accent: "#059669",
+    accentLight: "#ecfdf5",
+    component: null,
+  },
+  {
+    icon: ClipboardList,
+    title: "Health Timeline",
+    description:
+      "Visualize your complete medical journey on an interactive timeline. Track conditions, treatments, and recovery with detailed visual analytics.",
+    accent: "#d97706",
+    accentLight: "#fef3c7",
+    component: null,
+  },
+  {
+    icon: Search,
+    title: "Care Facility Finder",
+    description:
+      "Find hospitals and clinics with advanced filtering. Compare specialist availability, equipment, reviews, and insurance coverage.",
+    accent: "#dc2626",
+    accentLight: "#fee2e2",
+    component: (
+      <div className="h-[300px] w-full scale-90 [mask-image:linear-gradient(to_top,transparent_10%,#000_50%)]">
+        <HospitalCard />
+      </div>
+    ),
+  },
+  {
+    icon: PillIcon,
+    title: "Medication Management",
+    description:
+      "Track medications, receive dosage reminders, and get low-supply alerts. We'll suggest the nearest pharmacy with your prescriptions in stock.",
+    accent: "#7c3aed",
+    accentLight: "#ede9fe",
+    component: null,
+  },
+];
+
 const Features = () => {
-  const [activeFeature, setActiveFeature] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(false);
+  const [active, setActive] = useState(0);
 
-  const features = [
-    {
-      icon: <Bell className="w-6 h-6" />,
-      title: "Smart Notifications",
-      description:
-        "Receive personalized health alerts based on your appointments, medication schedule, and wellness goals. Our AI-driven system prioritizes what matters most to you.",
-      gradient: "from-violet-600 to-indigo-600",
-      textColor: "text-indigo-600 dark:text-indigo-400",
-      bgColor: "bg-indigo-100 dark:bg-indigo-900/30",
-      borderColor: "border-indigo-200 dark:border-indigo-800",
-      image: "imageFeatureSearchDoctors.png",
-      component: (
-        <AnimatedListDemo className=" h-[300px] w-full scale-75 border-none transition-all duration-300 ease-out [mask-image:linear-gradient(to_top,transparent_10%,#000_50%)] group-hover:scale-90" />
-      ),
-    },
-    {
-      icon: <QrCode className="w-6 h-6" />,
-      title: "Virtual Queue System",
-      description:
-        "Skip the physical waiting room. Scan, queue up virtually, and get real-time updates on your position. Arrive just when the doctor is ready to see you.",
-      gradient: "from-blue-600 to-sky-500",
-      textColor: "text-blue-600 dark:text-blue-400",
-      bgColor: "bg-blue-100 dark:bg-blue-900/30",
-      borderColor: "border-blue-200 dark:border-blue-800",
-      image: "imageFeatureSearchDoctors.png",
-    },
-    {
-      icon: <Bed className="w-6 h-6" />,
-      title: "Smart Bed Allocation",
-      description:
-        "Our predictive algorithm optimizes bed availability across departments. Reserve your space in advance with real-time visibility on amenities and care options.",
-      gradient: "from-emerald-600 to-teal-500",
-      textColor: "text-emerald-600 dark:text-emerald-400",
-      bgColor: "bg-emerald-100 dark:bg-emerald-900/30",
-      borderColor: "border-emerald-200 dark:border-emerald-800",
-      image: "imageFeatureSearchDoctors.png",
-    },
-    {
-      icon: <ClipboardList className="w-6 h-6" />,
-      title: "Interactive Health Timeline",
-      description:
-        "Visualize your complete medical journey on an interactive timeline. Track conditions, treatments, and recovery progress with detailed visual analytics.",
-      gradient: "from-orange-600 to-amber-500",
-      textColor: "text-orange-600 dark:text-orange-400",
-      bgColor: "bg-orange-100 dark:bg-orange-900/30",
-      borderColor: "border-orange-200 dark:border-orange-800",
-      image: "imageFeatureSearchDoctors.png",
-    },
-    {
-      icon: <Search className="w-6 h-6" />,
-      title: "Care Facility Finder",
-      description:
-        "Find the perfect hospital or clinic using our advanced filtering system. Compare by specialist availability, equipment, patient reviews, and insurance coverage.",
-      gradient: "from-rose-600 to-pink-500",
-      textColor: "text-rose-600 dark:text-rose-400",
-      bgColor: "bg-rose-100 dark:bg-rose-900/30",
-      borderColor: "border-rose-200 dark:border-rose-800",
-      image: "imageFeatureSearchDoctors.png",
-      component: (
-        <div className=" h-[300px] w-full scale-75 border-none transition-all duration-300 ease-out [mask-image:linear-gradient(to_top,transparent_10%,#000_50%)] group-hover:scale-90">
-          <HospitalCard />
-        </div>
-      ),
-    },
-    {
-      icon: <PillIcon className="w-6 h-6" />,
-      title: "Medication Management",
-      description:
-        "Track medications, receive dosage reminders, and get low-supply alerts. We'll even suggest the nearest pharmacy with your prescriptions in stock.",
-      gradient: "from-fuchsia-600 to-purple-600",
-      textColor: "text-purple-600 dark:text-purple-400",
-      bgColor: "bg-purple-100 dark:bg-purple-900/30",
-      borderColor: "border-purple-200 dark:border-purple-800",
-      image: "imageFeatureSearchDoctors.png",
-    },
-  ];
-
+  // auto-advance
   useEffect(() => {
-    let interval: any;
-    if (isAutoPlaying) {
-      interval = setInterval(() => {
-        setActiveFeature((current) => (current + 1) % features.length);
-      }, 5000);
-    }
-    return () => clearInterval(interval);
-  }, [isAutoPlaying, features.length]);
+    const id = setInterval(() => setActive((c) => (c + 1) % features.length), 6000);
+    return () => clearInterval(id);
+  }, []);
 
-  const handleFeatureClick = (index: any) => {
-    setActiveFeature(index);
-    setIsAutoPlaying(false);
-  };
+  const feat = features[active];
+  const Icon = feat.icon;
 
   return (
-    <section className="py-16 sm:py-20 md:py-24  relative bg-transparent">
-      <div className="absolute inset-0 -z-10 overflow-hidden">
-        <motion.div
-          className="absolute -top-10 -left-10 w-40 h-40 bg-blue-200 dark:bg-blue-900/40 rounded-full opacity-20"
-          animate={{
-            x: [0, 100, 0],
-            y: [0, 50, 0],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-        <motion.div
-          className="absolute top-1/3 -right-20 w-64 h-64 bg-purple-200 dark:bg-purple-900/40 rounded-full opacity-20"
-          animate={{
-            x: [0, -120, 0],
-            y: [0, 100, 0],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-        <motion.div
-          className="absolute -bottom-20 left-1/3 w-52 h-52 bg-emerald-200 dark:bg-emerald-900/40 rounded-full opacity-20"
-          animate={{
-            x: [0, 80, 0],
-            y: [0, -70, 0],
-          }}
-          transition={{
-            duration: 18,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div className="text-center mb-12 sm:mb-16 relative">
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight mb-4 bg-clip-text text-transparent bg-gradient-to-r from-rose-600 to-orange-500 dark:from-rose-400 dark:to-orange-400 pb-2 inline-block">
-            Healthcare Reimagined
+    <section className="py-20 md:py-28 bg-white dark:bg-[#080e1a] relative overflow-hidden">
+      {/* Section header */}
+      <div className="max-w-7xl mx-auto px-5 sm:px-8">
+        <div className="mb-14">
+          <p className="text-xs font-semibold uppercase tracking-widest text-emerald-600 dark:text-emerald-400 mb-3">
+            Platform features
+          </p>
+          <h2
+            className="text-4xl md:text-5xl font-normal tracking-tight text-slate-900 dark:text-white mb-4"
+            style={{ fontFamily: "'DM Serif Display', Georgia, serif" }}
+          >
+            Built for every role
+            <br />
+            in healthcare.
           </h2>
-          <p className="mt-6 max-w-2xl text-lg sm:text-xl text-slate-600 dark:text-slate-300 mx-auto">
-            Discover how our innovative{" "}
-            <span className="text-rose-600 dark:text-rose-400 font-semibold">
-              features
-            </span>{" "}
-            transform patient experience
+          <p className="text-slate-500 dark:text-slate-400 max-w-xl text-lg leading-relaxed">
+            From front desk to bedside — tools that actually fit the way clinical teams work.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12">
-          <div className="lg:col-span-5 space-y-3">
-            {features.map((feature, index) => (
-              <motion.div
-                key={index}
-                initial={{ x: -50, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={`
-                  p-4 rounded-xl cursor-pointer transition-all duration-300 border-2
-                  ${
-                    activeFeature === index
-                      ? `${feature.borderColor} shadow-lg shadow-${feature.textColor}/10 bg-white dark:bg-slate-800`
-                      : "border-transparent hover:bg-white dark:hover:bg-slate-800 hover:border-slate-200 dark:hover:border-slate-700"
-                  }
-                `}
-                onClick={() => handleFeatureClick(index)}
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <div className="flex items-start gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-[380px_1fr] gap-8 xl:gap-14 items-start">
+          {/* Feature list */}
+          <div className="flex flex-col gap-1">
+            {features.map((f, idx) => {
+              const FIcon = f.icon;
+              const isActive = idx === active;
+              return (
+                <button
+                  key={idx}
+                  onClick={() => setActive(idx)}
+                  className={`group flex items-start gap-4 px-4 py-4 rounded-xl text-left transition-all duration-200 ${
+                    isActive
+                      ? "bg-slate-50 dark:bg-slate-800/60 shadow-sm"
+                      : "hover:bg-slate-50/60 dark:hover:bg-slate-800/30"
+                  }`}
+                >
                   <div
-                    className={`flex-shrink-0 p-3 rounded-lg bg-gradient-to-br ${feature.gradient} text-white`}
+                    className="flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center mt-0.5 transition-all"
+                    style={{
+                      backgroundColor: isActive ? f.accentLight : "transparent",
+                    }}
                   >
-                    <motion.div
-                      animate={{
-                        rotate:
-                          activeFeature === index ? [0, 15, 0, -15, 0] : 0,
-                      }}
-                      transition={{
-                        duration: 0.8,
-                        repeat: activeFeature === index ? Infinity : 0,
-                        repeatDelay: 3,
-                      }}
-                      className="text-xl"
-                    >
-                      {feature.icon}
-                    </motion.div>
+                    <FIcon
+                      className="h-[18px] w-[18px] transition-colors"
+                      style={{ color: isActive ? f.accent : "#94a3b8" }}
+                    />
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-base sm:text-lg font-semibold text-slate-900 dark:text-white">
-                      {feature.title}
-                    </h3>
+                  <div className="flex-1 min-w-0">
+                    <p
+                      className={`text-sm font-semibold mb-0.5 transition-colors ${
+                        isActive
+                          ? "text-slate-900 dark:text-white"
+                          : "text-slate-500 dark:text-slate-400 group-hover:text-slate-700 dark:group-hover:text-slate-300"
+                      }`}
+                    >
+                      {f.title}
+                    </p>
                     <AnimatePresence>
-                      {activeFeature === index && (
+                      {isActive && (
                         <motion.p
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ height: "auto", opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.3 }}
-                          className="mt-2 text-sm text-slate-600 dark:text-slate-400"
+                          transition={{ duration: 0.25 }}
+                          className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed overflow-hidden"
                         >
-                          {feature.description}
+                          {f.description}
                         </motion.p>
                       )}
                     </AnimatePresence>
                   </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                  {isActive && (
+                    <ArrowRight className="flex-shrink-0 h-4 w-4 mt-1" style={{ color: f.accent }} />
+                  )}
+                </button>
+              );
+            })}
 
-          <div className="lg:col-span-7 relative h-[400px] sm:h-[500px] md:h-[600px] lg:h-[650px] hidden lg:block">
-            <div className="sticky top-8 w-full h-full">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeFeature}
-                  initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.95, y: -20 }}
-                  transition={{ duration: 0.5 }}
-                  className="w-full h-full rounded-3xl overflow-hidden shadow-2xl"
-                >
-                  <div
-                    className={`h-full bg-gradient-to-br ${features[activeFeature].gradient} relative p-8 flex flex-col items-center justify-center`}
-                  >
-                    <div className="absolute inset-0 overflow-hidden">
-                      <motion.div
-                        animate={{ rotate: 360 }}
-                        transition={{
-                          duration: 50,
-                          repeat: Infinity,
-                          ease: "linear",
-                        }}
-                        className="absolute -top-32 -right-32 w-96 h-96  bg-white opacity-10 rounded-[4rem]"
-                      />
-                      <motion.div
-                        animate={{ rotate: -360 }}
-                        transition={{
-                          duration: 50,
-                          repeat: Infinity,
-                          ease: "linear",
-                        }}
-                        className="absolute -bottom-32 -left-32 w-64 h-64 bg-white opacity-10 rounded-3xl"
-                      />
-                    </div>
-
-                    <motion.div
-                      initial={{ y: 30, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      transition={{ delay: 0.2, duration: 0.6 }}
-                      className="relative z-10 bg-white/10 backdrop-blur-lg rounded-2xl p-8 w-full max-w-lg border border-white/20 shadow-[0_0_60px_rgba(255,255,255,0.3)]"
-                    >
-                      <div className="flex items-center gap-4 mb-6">
-                        <motion.div
-                          animate={{
-                            rotate: [0, 10, 0, -10, 0],
-                            scale: [1, 1.1, 1, 1.1, 1],
-                          }}
-                          transition={{
-                            duration: 2,
-                            repeat: Infinity,
-                            repeatDelay: 1,
-                          }}
-                          className="text-4xl text-white"
-                        >
-                          {features[activeFeature].icon}
-                        </motion.div>
-                        <h3 className="text-3xl font-bold text-white">
-                          {features[activeFeature].title}
-                        </h3>
-                      </div>
-
-                      {features[activeFeature].component || null}
-
-                      <p className="text-lg text-white/90 leading-relaxed mb-8">
-                        {features[activeFeature].description}
-                      </p>
-                    </motion.div>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
+            {/* Progress dots */}
+            <div className="flex items-center gap-1.5 px-4 pt-2">
+              {features.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setActive(idx)}
+                  className="transition-all duration-300"
+                  style={{
+                    width: idx === active ? 20 : 6,
+                    height: 6,
+                    borderRadius: 3,
+                    backgroundColor: idx === active ? feat.accent : "#cbd5e1",
+                  }}
+                />
+              ))}
             </div>
           </div>
-        </div>
 
-        <div className="flex justify-center mt-8 space-x-2">
-          {features.map((feature, index) => (
-            <button
-              key={index}
-              onClick={() => handleFeatureClick(index)}
-              className={`
-                w-3 h-3 rounded-full transition-all duration-300
-                ${
-                  activeFeature === index
-                    ? `${feature.bgColor} scale-125`
-                    : "bg-slate-300 dark:bg-slate-600 hover:bg-slate-400 dark:hover:bg-slate-500"
-                }
-              `}
-              aria-label={`View feature ${index + 1}`}
-            />
-          ))}
+          {/* Visual panel */}
+          <div className="hidden lg:block sticky top-20">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={active}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -16 }}
+                transition={{ duration: 0.35 }}
+                className="relative rounded-2xl overflow-hidden aspect-[4/3] flex flex-col items-center justify-center p-10 border border-slate-200 dark:border-slate-700"
+                style={{
+                  backgroundColor: feat.accentLight,
+                }}
+              >
+                {/* Background pattern */}
+                <div
+                  className="absolute inset-0 opacity-5"
+                  style={{
+                    backgroundImage: `radial-gradient(circle at 70% 70%, ${feat.accent}, transparent 60%)`,
+                  }}
+                />
+
+                {feat.component ? (
+                  <div className="relative z-10 w-full h-full flex items-center justify-center">
+                    {feat.component}
+                  </div>
+                ) : (
+                  <div className="relative z-10 flex flex-col items-center text-center gap-5">
+                    <div
+                      className="w-20 h-20 rounded-2xl flex items-center justify-center shadow-sm"
+                      style={{ backgroundColor: feat.accent }}
+                    >
+                      <Icon className="h-10 w-10 text-white" />
+                    </div>
+                    <div>
+                      <p
+                        className="text-2xl font-normal mb-2 text-slate-900"
+                        style={{ fontFamily: "'DM Serif Display', serif" }}
+                      >
+                        {feat.title}
+                      </p>
+                      <p className="text-sm text-slate-600 max-w-xs leading-relaxed">
+                        {feat.description}
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
       </div>
     </section>

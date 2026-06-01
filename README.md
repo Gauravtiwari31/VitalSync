@@ -42,8 +42,8 @@
 
 ---
 
-### 🤖 Bhura Ji  AI — Medical Assistant
-![Bhura Ji  AI Assistant](./screenshots/BhuraJi-ai.png)
+### 🤖 HealthBuddy AI — Medical Assistant
+![HealthBuddy AI Assistant](./screenshots/BhuraJi-ai.png)
 
 ---
 
@@ -80,9 +80,9 @@ VitalSync is a comprehensive healthcare platform built with modern web technolog
 
 ## 🤖 AI-Powered Capabilities
 
-### Bhura Ji  AI — Medical Assistant
+### HealthBuddy AI — Medical Assistant
 
-| **Bhura Ji Beat** (Premium) | **Bhura Ji Flash** (Free) |
+| **HealthBuddy Pro** (Premium) | **HealthBuddy Flash** (Free) |
 |---|---|
 | ✅ Structured medical data generation | ✅ Real-time medical information stream |
 | ✅ Personalized health insights | ✅ General health education |

@@ -1,299 +1,163 @@
+"use client";
 import React from "react";
 import { motion } from "framer-motion";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardFooter,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { Check, Sparkles, MessageSquare, Heart, Bell, BarChart2, Users, Brain, Video, Activity, AlertTriangle, Users2, Save, Headphones, Zap, FileText, ClipboardList } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import {
-  Heart,
-  Bell,
-  BarChart2,
-  Users,
-  Smartphone,
-  Zap,
-  Brain,
-  Video,
-  FileText,
-  Headphones,
-  Activity,
-  AlertTriangle,
-  Users2,
-  ClipboardList,
-  Sparkles,
-  Check,
-  Save,
-  MessageSquare,
-} from "lucide-react";
+import Link from "next/link";
 
-const pricingPlans = [
+const plans = [
   {
-    title: "Basic VitalSync",
-    subtitle: "For Patients",
+    name: "Basic",
+    sub: "For Patients",
     price: "₹0",
     billing: "Forever Free",
-    description: "Ideal for those beginning their health journey.",
+    yearlyNote: null,
+    desc: "Essential tools to start your health journey.",
     features: [
-      {
-        text: "Assistant Bhura Chat (3/day)",
-        subtext: "Engage with AI-powered chat for up to 3 sessions daily",
-        icon: MessageSquare,
-      },
-      {
-        text: "Essential Health Monitoring",
-        subtext:
-          "Track vital metrics like heart rate, steps, and sleep patterns",
-        icon: Heart,
-      },
-      {
-        text: "Doctor & Medication Reminders",
-        subtext: "Never miss appointments or medication times",
-        icon: Bell,
-      },
-      {
-        text: "Introductory Analytics",
-        subtext: "Visualize your basic health trends effortlessly",
-        icon: BarChart2,
-      },
-      {
-        text: "Community Support",
-        subtext: "Access patient forums and discuss about self-help resources",
-        icon: Users,
-      },
+      "HealthBuddy Chat (3/day)",
+      "Essential Health Monitoring",
+      "Doctor & Medication Reminders",
+      "Basic Analytics",
+      "Community Support",
     ],
-    buttonText: "Get Started Free",
+    cta: "Get started free",
+    href: "/patient-auth",
     highlight: false,
   },
   {
-    title: "VitalSync Plus",
-    subtitle: "Premium Plan",
+    name: "Plus",
+    sub: "Premium Plan",
     price: "₹299",
     billing: "per month",
-    yearlyPrice: "₹2,999/year",
-    description:
-      "Upgrade for proactive health insights and personalized guidance.",
+    yearlyNote: "₹2,999/year — save 16%",
+    desc: "Proactive insights and personalised guidance.",
     features: [
-      {
-        text: "Includes Basic Features",
-        subtext: "Access all tools from the free plan",
-        icon: Check,
-      },
-      {
-        text: "Enhanced Analytics",
-        subtext: "Gain deeper insights with advanced reporting",
-        icon: Zap,
-      },
-      {
-        text: "Tailored Guidance with Assistant Bhura",
-        subtext: "Receive personalized recommendations powered by AI",
-        icon: Brain,
-      },
-      {
-        text: "Encrypted Medical Storage",
-        subtext: "Securely manage your health records",
-        icon: FileText,
-      },
-      {
-        text: "Priority Support",
-        subtext: "Get faster assistance via chat or email",
-        icon: Headphones,
-      },
+      "Unlimited HealthBuddy Chat",
+      "Advanced Health Analytics",
+      "Symptom Tracking & Reports",
+      "Priority Appointment Booking",
+      "Telehealth Video Calls",
+      "24 / 7 Support",
     ],
-    buttonText: "Upgrade to Plus",
+    cta: "Upgrade to Plus",
+    href: "/patient-auth",
     highlight: true,
   },
   {
-    title: "VitalSync Pro",
-    subtitle: "Chronic Care Management",
+    name: "Pro",
+    sub: "Chronic Care",
     price: "Custom",
     billing: "Tailored Pricing",
-    description:
-      "A comprehensive solution for chronic condition management with advanced features.",
+    yearlyNote: null,
+    desc: "Comprehensive chronic condition management.",
     features: [
-      {
-        text: "All Plus Features",
-        subtext: "Enjoy complete access to premium tools",
-        icon: Sparkles,
-      },
-      {
-        text: "Continuous Remote Monitoring",
-        subtext: "Receive ongoing tracking for chronic conditions",
-        icon: Activity,
-      },
-      {
-        text: "Instant Health Alerts",
-        subtext: "Real-time notifications for critical changes",
-        icon: AlertTriangle,
-      },
-      {
-        text: "Coordinated Care Network",
-        subtext: "Seamlessly collaborate with your healthcare team",
-        icon: Users2,
-      },
-      {
-        text: "Chat Save & Unlimited Assistant Bhura Chat",
-        subtext:
-          "Save your chat history and enjoy unlimited AI-powered interactions",
-        icon: Save, // Assuming Save icon is available
-      },
+      "All Plus features",
+      "Continuous Remote Monitoring",
+      "Instant Health Alerts",
+      "Coordinated Care Network",
+      "Unlimited Chat History",
     ],
-    buttonText: "Contact Sales",
+    cta: "Contact Sales",
+    href: "/contact-us",
     highlight: false,
   },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const cardVariants = {
-  hidden: { y: 20, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      type: "spring",
-      stiffness: 100,
-      damping: 15,
-    },
-  },
-};
-
 export default function PricingSection() {
   return (
-    <section className="py-20 bg-transparent">
-      <div className="container px-4 mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          className="text-center max-w-3xl mx-auto mb-16"
-        >
-          <Badge
-            variant="outline"
-            className="mb-4 px-4 py-2 text-base bg-white dark:bg-gray-800"
-          >
-            Choose Your Health Journey
-          </Badge>
-          <h2 className="text-5xl font-bold tracking-tight bg-gradient-to-r from-teal-800 to-teal-600 dark:from-gray-50 dark:to-teal-300 bg-clip-text text-transparent pb-6">
-            Pricing Plans
-          </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-400">
-            Select the perfect plan to support your healthcare needs and
-            wellness goals
+    <section className="py-20 md:py-28 bg-white dark:bg-[#080e1a]">
+      <div className="max-w-6xl mx-auto px-5 sm:px-8">
+        {/* Header */}
+        <div className="mb-14">
+          <p className="text-xs font-semibold uppercase tracking-widest text-emerald-600 dark:text-emerald-400 mb-3">
+            Pricing
           </p>
-        </motion.div>
+          <h2
+            className="text-4xl md:text-5xl font-normal text-slate-900 dark:text-white mb-4"
+            style={{ fontFamily: "'DM Serif Display', Georgia, serif" }}
+          >
+            Simple, honest pricing.
+          </h2>
+          <p className="text-slate-500 dark:text-slate-400 max-w-md text-lg leading-relaxed">
+            Start free. Upgrade when you need more.
+          </p>
+        </div>
 
         <motion.div
-          variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-center max-w-7xl mx-auto"
+          variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
+          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
         >
-          {pricingPlans.map((plan, index) => (
+          {plans.map((plan, i) => (
             <motion.div
-              key={index}
-              variants={cardVariants}
-              whileHover={{
-                y: -5,
-                transition: { duration: 0.2, ease: "easeOut" },
-              }}
-              className={`h-full will-change-transform max-w-md ${
-                index || "hidden lg:block"
-              }`}
+              key={i}
+              variants={{ hidden: { y: 16, opacity: 0 }, visible: { y: 0, opacity: 1 } }}
+              className={`relative flex flex-col rounded-2xl border transition-shadow hover:shadow-lg ${
+                plan.highlight
+                  ? "border-emerald-400 dark:border-emerald-600 shadow-md"
+                  : "border-slate-200 dark:border-slate-700"
+              } bg-white dark:bg-slate-800/60`}
             >
-              <Card
-                className={`h-full relative bg-white dark:bg-slate-900 transform-gpu hover:scale-105 transition-all duration-500 ease-in-out
-                ${
-                  plan.highlight
-                    ? "border-2 border-blue-500 dark:border-blue-400 shadow-xl dark:shadow-blue-500/20"
-                    : "border border-gray-200 dark:border-gray-700"
-                }`}
-              >
-                {plan.highlight && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                    <Badge className="bg-gradient-to-r from-blue-600 to-blue-400 text-white border-0 px-4 py-1">
-                      Recommended
-                    </Badge>
-                  </div>
-                )}
+              {plan.highlight && (
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                  <span className="inline-flex items-center gap-1 px-3 py-0.5 rounded-full text-xs font-semibold bg-emerald-600 text-white shadow-sm">
+                    <Sparkles className="h-3 w-3" />
+                    Recommended
+                  </span>
+                </div>
+              )}
 
-                <CardHeader className="pb-4">
-                  <div className="mb-2">
-                    <Badge variant="outline" className="text-xs font-normal">
-                      {plan.subtitle}
-                    </Badge>
-                  </div>
-                  <CardTitle className="text-xl font-bold text-gray-900 dark:text-gray-50">
-                    {plan.title}
-                  </CardTitle>
-                  <CardDescription className="text-sm text-gray-600 dark:text-gray-400">
-                    {plan.description}
-                  </CardDescription>
-                  <div className="mt-4 space-y-1">
-                    <div className="text-3xl font-bold text-gray-900 dark:text-gray-50">
-                      {plan.price}
-                    </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">
-                      {plan.billing}
-                    </div>
-                    {plan.yearlyPrice && (
-                      <div className="text-xs text-blue-600 dark:text-blue-400">
-                        Save with yearly: {plan.yearlyPrice}
-                      </div>
-                    )}
-                  </div>
-                </CardHeader>
-
-                <CardContent>
-                  <ul className="space-y-4 mb-8">
-                    {plan.features.map((feature, idx) => (
-                      <motion.li
-                        key={idx}
-                        initial={{ opacity: 0, x: -5 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: idx * 0.1 }}
-                        className="flex gap-3"
-                      >
-                        <feature.icon className="w-4 h-4 text-blue-500 dark:text-blue-400 flex-shrink-0 mt-1" />
-                        <div>
-                          <div className="text-gray-900 dark:text-gray-100 font-medium text-sm">
-                            {feature.text}
-                          </div>
-                          <div className="text-[0.5rem] text-gray-600 dark:text-gray-400">
-                            {feature.subtext}
-                          </div>
-                        </div>
-                      </motion.li>
-                    ))}
-                  </ul>
-
-                </CardContent>
-                <CardFooter>
-                  <Button
-                    className={`w-full h-12 transition-colors duration-200
-                      ${
-                        plan.highlight
-                          ? "bg-gradient-to-r from-blue-600 to-blue-400 hover:from-blue-700 hover:to-blue-500 shadow-lg"
-                          : "bg-gray-900 hover:bg-gray-800 dark:bg-transparent dark:ring-2 dark:ring-blue-500 dark:text-white dark:hover:bg-gray-600"
-                      }`}
+              <div className="p-6 border-b border-slate-100 dark:border-slate-700">
+                <div className="mb-3">
+                  <span className="text-[10px] font-semibold uppercase tracking-widest text-slate-400">
+                    {plan.sub}
+                  </span>
+                </div>
+                <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-1">
+                  {plan.name}
+                </h3>
+                <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">
+                  {plan.desc}
+                </p>
+                <div>
+                  <span
+                    className="text-3xl font-bold text-slate-900 dark:text-white"
+                    style={{ fontFamily: "'DM Serif Display', serif" }}
                   >
-                    {plan.buttonText}
-                  </Button>
+                    {plan.price}
+                  </span>
+                  <span className="text-sm text-slate-400 ml-1.5">{plan.billing}</span>
+                </div>
+                {plan.yearlyNote && (
+                  <p className="text-xs text-emerald-600 dark:text-emerald-400 mt-1">
+                    {plan.yearlyNote}
+                  </p>
+                )}
+              </div>
 
-                </CardFooter>
-              </Card>
+              <div className="p-6 flex-1">
+                <ul className="space-y-3 mb-8">
+                  {plan.features.map((f, j) => (
+                    <li key={j} className="flex items-start gap-2.5 text-sm text-slate-600 dark:text-slate-300">
+                      <Check className="h-4 w-4 text-emerald-500 flex-shrink-0 mt-0.5" />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+
+                <Link href={plan.href}>
+                  <button
+                    className={`w-full h-11 rounded-xl text-sm font-semibold transition-colors ${
+                      plan.highlight
+                        ? "bg-emerald-600 hover:bg-emerald-700 text-white"
+                        : "bg-slate-900 dark:bg-slate-700 hover:bg-slate-800 dark:hover:bg-slate-600 text-white"
+                    }`}
+                  >
+                    {plan.cta}
+                  </button>
+                </Link>
+              </div>
             </motion.div>
           ))}
         </motion.div>

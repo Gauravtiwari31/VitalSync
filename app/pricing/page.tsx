@@ -448,7 +448,7 @@ const pricingPlans = [
     monthlyPrice: "₹0",
     yearlyPrice: "₹0",
     features: [
-      "Assistant Bhura Chat (3/day) - AI-powered health chat support",
+      "HealthBuddy Chat (3/day) - AI-powered health chat support",
       "Health Monitoring - Track heart rate, steps, and sleep",
       "Doctor & Medication Reminders - Stay on top of appointments",
       "Basic Analytics - View simple health trends",
@@ -487,7 +487,7 @@ const pricingPlans = [
 
 const featureComparison = [
   {
-    name: "Assistant Bhura Chat",
+    name: "HealthBuddy Chat",
     basic: "3/day",
     pro: "Unlimited",
     enterprise: "Unlimited + Save History",

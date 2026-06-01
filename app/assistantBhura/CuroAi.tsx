@@ -449,7 +449,7 @@ const AssistantBhura = () => {
             {/* Chat info - can be expanded with current chat details */}
             <div className="hidden md:flex items-center gap-2">
               <div className="px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-sm text-slate-600 dark:text-slate-300">
-                <span className="font-medium">Bhura Beats</span>
+                <span className="font-medium">HealthBuddy Beats</span>
               </div>
             </div>
           </div>
@@ -469,7 +469,7 @@ const AssistantBhura = () => {
                 <Bot className="h-10 w-10 text-white" />
               </motion.div>
               <h2 className="text-2xl md:text-3xl font-bold text-slate-800 dark:text-white mb-4">
-                Welcome to Assistant Bhura Health Assistant
+                Welcome to HealthBuddy Health Assistant
               </h2>
               <p className="text-slate-600 dark:text-slate-300 max-w-xl mb-8">
                 Describe your health concerns, symptoms, or questions, and I'll
@@ -549,7 +549,7 @@ const AssistantBhura = () => {
               </Button>
             </form>
             <div className="text-xs text-center mt-2 text-slate-500 dark:text-slate-400">
-              Assistant Bhura provides general health information. Always consult a
+              HealthBuddy provides general health information. Always consult a
               healthcare professional for medical advice.
             </div>
           </div>

@@ -54,7 +54,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://api.opencagedata.com" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -87,6 +87,30 @@ export default function RootLayout({
               image: "https://i.imghippo.com/files/4OFtW1729338402.jpg",
               screenshot: "https://i.imghippo.com/files/4OFtW1729338402.jpg",
             }),
+          }}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var saved = localStorage.getItem('themeMode');
+                  var isDark = false;
+                  if (saved === 'dark') {
+                    isDark = true;
+                  } else if (saved === 'light') {
+                    isDark = false;
+                  } else {
+                    isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                  }
+                  if (isDark) {
+                    document.documentElement.classList.add('dark');
+                  } else {
+                    document.documentElement.classList.remove('dark');
+                  }
+                } catch(e) {}
+              })();
+            `,
           }}
         />
 

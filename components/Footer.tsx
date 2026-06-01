@@ -4,136 +4,103 @@ import Logo from "./Logo";
 import { BsLinkedin, BsGithub, BsInstagram } from "react-icons/bs";
 import { FiPhoneCall } from "react-icons/fi";
 import { FaRegClock } from "react-icons/fa";
-import { GrLocation } from "react-icons/gr";
 import { MdEmail } from "react-icons/md";
 import Link from "next/link";
 import GoogleTranslate from "./GoogleTranslate";
 
-type Props = {};
-
-const Footer = (props: Props) => {
+const Footer = () => {
   return (
-    <footer className="w-full  bg-rose-950 dark:bg-slate-900 text-rose-50 py-10 px-6 transition-colors duration-300">
+    <footer className="w-full bg-slate-900 dark:bg-[#050b14] text-slate-300 py-12 px-6">
       <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-          <div className="flex flex-col items-center sm:items-start">
-            <Logo />
-            <p className="mt-4 text-sm text-rose-100 dark:text-rose-200 text-center sm:text-left ">
-              Leading the way in Medical and Healthy Life Services
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-10">
+          <div>
+            {/* Logo on dark background — override */}
+            <Link href={"/."}  className="flex items-center gap-2 select-none mb-4">
+              <div className="w-7 h-7 rounded-lg bg-emerald-500 flex items-center justify-center flex-shrink-0">
+                <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4">
+                  <path d="M10 2L4 7v9h4v-5h4v5h4V7L10 2z" fill="white" fillOpacity="0.9" />
+                </svg>
+              </div>
+              <span
+                className="text-lg font-semibold text-white"
+                style={{ fontFamily: "'DM Serif Display', Georgia, serif" }}
+              >
+                Vital<span className="text-emerald-400">Sync</span>
+              </span>
+            </Link>
+            <p className="text-sm text-slate-400 leading-relaxed">
+              Connecting hospitals, doctors, and patients through intelligent healthcare coordination.
             </p>
           </div>
 
           <div>
-            <h2 className="text-rose-300 dark:text-rose-200 font-semibold mb-4">
-              Important Links
-            </h2>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link
-                  href="/discuss"
-                  className="hover:text-rose-300 transition-colors"
-                >
-                  Feedback
-                </Link>
+            <h3 className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-4">
+              Platform
+            </h3>
+            <ul className="space-y-2.5 text-sm">
+              {[
+                { href: "/discuss", label: "Feedback" },
+                { href: "/pricing", label: "Pricing" },
+                { href: "/about-us", label: "About Us" },
+                { href: "/assistantBhura", label: "HealthBuddy AI" },
+              ].map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} className="text-slate-400 hover:text-white transition-colors">
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-4">
+              Contact
+            </h3>
+            <ul className="space-y-2.5 text-sm text-slate-400">
+              <li className="flex items-center gap-2">
+                <FiPhoneCall className="h-3.5 w-3.5 text-emerald-500 flex-shrink-0" />
+                +91-9580561706
               </li>
-              <li>
-                <a href="#" className="hover:text-rose-300 transition-colors">
-                  Doctors
-                </a>
+              <li className="flex items-center gap-2">
+                <MdEmail className="h-3.5 w-3.5 text-emerald-500 flex-shrink-0" />
+                gauravt9431@gmail.com
               </li>
-              <li>
-                <a href="#" className="hover:text-rose-300 transition-colors">
-                  Services
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-rose-300 transition-colors">
-                  About Us
-                </a>
+              <li className="flex items-center gap-2">
+                <FaRegClock className="h-3.5 w-3.5 text-emerald-500 flex-shrink-0" />
+                24 / 7 Available
               </li>
             </ul>
           </div>
 
           <div>
-            <h2 className="text-rose-300 dark:text-rose-200 font-semibold mb-4">
-              Contact Us
-            </h2>
-            <ul className="space-y-2 text-sm">
-              <li className="flex items-center">
-                <FiPhoneCall className="text-rose-400 dark:text-rose-300 h-4 w-4 mr-2" />
-                <span>+91-9580561706</span>
-              </li>
-              <li className="flex items-center">
-                <MdEmail className="text-rose-400 dark:text-rose-300 h-4 w-4 mr-2" />
-                <span>gauravt9431@gmail.com</span>
-              </li>
-              {/* <li className="flex items-center">
-                <GrLocation className="text-rose-400 dark:text-rose-300 h-4 w-4 mr-2" />
-                <span>On your phone</span>
-              </li> */}
-              <li className="flex items-center text-sm ">
-                <FaRegClock className="text-rose-400 dark:text-rose-300 h-4 w-4 mr-2" />
-                <span>24/7 Available</span>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h2 className="text-rose-300 dark:text-rose-200 font-semibold mb-4">
-              Translate Page
-            </h2>
+            <h3 className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-4">
+              Language
+            </h3>
             <GoogleTranslate />
           </div>
         </div>
 
-        <div className="border-t text-sm border-slate-700 dark:border-slate-600 pt-8 flex flex-col sm:flex-row justify-between items-center">
-          <p className="text-rose-100 dark:text-rose-200 mb-4 sm:mb-0">
-            © 2026 Gaurav Tiwari. All rights reserved.
-          </p>
-          <a
-            href="#"
-            className="text-rose-100 dark:text-rose-200 hover:text-rose-300 hover:underline transition-colors"
-          >
-            Terms & Conditions
-          </a>
-          <a
-            href="#"
-            className="text-rose-100 dark:text-rose-200 hover:text-rose-300 hover:underline transition-colors"
-          >
-            Privacy Policy
-          </a>
-          <div className="flex gap-4">
-          <a
-          href="https://www.linkedin.com/in/gaurav-tiwari-66012831b/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-rose-300 dark:text-rose-200 hover:text-rose-400 transition-colors"
-        >
-        <BsLinkedin className="h-5 w-5" />
-        </a>
-
-        <a
-        href="https://github.com/Gauravtiwari31"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-rose-300 dark:text-rose-200 hover:text-rose-400 transition-colors"
-      >
-    <BsGithub className="h-5 w-5" />
-  </a>
-
-  <a
-    href="https://www.instagram.com/gau.ravtiwari01?utm_source=qr&igsh=MWNidTl3NHR3YmliYQ=="
-    target="_blank"
-    rel="noopener noreferrer"
-    className="text-rose-300 dark:text-rose-200 hover:text-rose-400 transition-colors"
-  >
-    <BsInstagram className="h-5 w-5" />
-  </a>
-</div>
+        <div className="border-t border-slate-800 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+          <p>© 2026 Gaurav Tiwari · VitalSync. All rights reserved.</p>
+          <div className="flex items-center gap-5">
+            <a href="#" className="hover:text-slate-300 transition-colors">Terms</a>
+            <a href="#" className="hover:text-slate-300 transition-colors">Privacy</a>
+            <div className="flex items-center gap-3">
+              <a href="https://www.linkedin.com/in/gaurav-tiwari-66012831b/" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400 transition-colors">
+                <BsLinkedin className="h-4 w-4" />
+              </a>
+              <a href="https://github.com/Gauravtiwari31" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400 transition-colors">
+                <BsGithub className="h-4 w-4" />
+              </a>
+              <a href="https://www.instagram.com/gau.ravtiwari01" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400 transition-colors">
+                <BsInstagram className="h-4 w-4" />
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
-    //  <></>
   );
 };
 

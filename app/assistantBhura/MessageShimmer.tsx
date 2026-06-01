@@ -19,7 +19,7 @@ const MessageLoadingShimmer = () => {
           <Bot className="h-4 w-4 text-white" />
         </div>
         <div className="text-sm text-slate-500 dark:text-slate-400">
-          Assistant Bhura Assistant
+          HealthBuddy Assistant
         </div>
       </div>
       <div className="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl shadow-lg">
