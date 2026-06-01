@@ -8,9 +8,11 @@ export const pusherServer = new PusherServer({
   cluster: process.env.NEXT_PUBLIC_PUSHER_CLUSTER!,
 });
 
-export const pusherClient = new Pusher(
-  process.env.NEXT_PUBLIC_PUSHER_PUBLISHABLE_KEY!,
-  {
-    cluster: process.env.NEXT_PUBLIC_PUSHER_CLUSTER!,
-  }
-);
+export const pusherClient = typeof window !== "undefined"
+  ? new Pusher(
+      process.env.NEXT_PUBLIC_PUSHER_PUBLISHABLE_KEY!,
+      {
+        cluster: process.env.NEXT_PUBLIC_PUSHER_CLUSTER!,
+      }
+    )
+  : ({} as any);

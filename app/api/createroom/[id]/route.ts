@@ -3,8 +3,6 @@ import { getHospital, verifyHospitalDetails } from "@/lib/hospitallucia";
 import { pusherServer } from "@/lib/pusher";
 import { redirect } from "next/navigation";
 import { NextRequest } from "next/server";
-import { text } from "stream/consumers";
-import { number } from "zod";
 
 export async function POST(
   req: NextRequest,
