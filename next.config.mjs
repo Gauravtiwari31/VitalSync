@@ -1,9 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  webpack: (config) => {
-    config.externals.push("@node-rs/argon2", "@node-rs/bcrypt");
-    return config;
-  },
+  // oslo/password pulls in @node-rs/argon2 native bindings — these must stay
+  // outside the bundle. Replaces the old webpack `externals` push, which
+  // Turbopack (the default builder since Next 16) does not read.
+  serverExternalPackages: ["oslo", "@node-rs/argon2", "@node-rs/bcrypt"],
   images: {
     remotePatterns: [
       {

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
 import {
   Bot,
@@ -79,7 +79,7 @@ const LoadingDots = () => {
       {[1, 2].map((_, index) => (
         <motion.div
           key={index}
-          className="h-4 w-full rounded"
+          className="h-4 w-full rounded-sm"
           style={{
             background:
               "linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%)",
@@ -115,7 +115,7 @@ const ResponseSection = ({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
       className={cn(
-        "bg-white/90 dark:bg-slate-800/90 rounded-xl shadow-lg p-6 backdrop-blur-sm border border-slate-100 dark:border-slate-700",
+        "bg-white/90 dark:bg-slate-800/90 rounded-xl shadow-lg p-6 backdrop-blur-xs border border-slate-100 dark:border-slate-700",
         className
       )}
     >
@@ -126,7 +126,7 @@ const ResponseSection = ({
         )}
         onClick={() => expandable && setIsExpanded(!isExpanded)}
       >
-        <div className="p-2 rounded-lg bg-gradient-to-tr from-amber-500 to-orange-500">
+        <div className="p-2 rounded-lg bg-linear-to-tr from-amber-500 to-orange-500">
           <Icon className="h-5 w-5 text-white" />
         </div>
         <h2 className="text-xl font-semibold text-slate-800 dark:text-white flex-1">
@@ -167,11 +167,11 @@ const Message = ({ message, isLast }: any) => {
       >
         <div className="flex items-center gap-3">
           <div className="text-sm text-slate-500 dark:text-slate-400">You</div>
-          <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-amber-500 to-orange-500 flex items-center justify-center">
+          <div className="w-8 h-8 rounded-full bg-linear-to-tr from-amber-500 to-orange-500 flex items-center justify-center">
             <User className="h-4 w-4 text-white" />
           </div>
         </div>
-        <div className="max-w-[80%] bg-gradient-to-tr from-amber-500 to-orange-500 text-white p-4 rounded-xl shadow-lg">
+        <div className="max-w-[80%] bg-linear-to-tr from-amber-500 to-orange-500 text-white p-4 rounded-xl shadow-lg">
           {message.content}
         </div>
       </motion.div>
@@ -185,14 +185,14 @@ const Message = ({ message, isLast }: any) => {
       className="flex flex-col space-y-2 mb-8"
     >
       <div className="flex items-center gap-3">
-        <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-amber-500 to-orange-500 flex items-center justify-center">
+        <div className="w-8 h-8 rounded-full bg-linear-to-tr from-amber-500 to-orange-500 flex items-center justify-center">
           <Bot className="h-4 w-4 text-white" />
         </div>
         <div className="text-sm text-slate-500 dark:text-slate-400">
           Assistant Bhura Assistant
         </div>
       </div>
-      <div className="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-slate-100 dark:border-slate-700">
+      <div className="bg-white/50 dark:bg-slate-800/50 backdrop-blur-xs p-6 rounded-xl shadow-lg border border-slate-100 dark:border-slate-700">
         {isLast && !message.content ? (
           <LoadingDots />
         ) : (
@@ -287,7 +287,7 @@ const renderBotResponse = (content: any) => {
                 transition={{ delay: index * 0.1 }}
                 className="flex items-start gap-3 text-slate-600 dark:text-slate-300"
               >
-                <div className="h-2 w-2 rounded-full bg-yellow-500 mt-2 flex-shrink-0" />
+                <div className="h-2 w-2 rounded-full bg-yellow-500 mt-2 shrink-0" />
                 <span>{precaution}</span>
               </motion.li>
             )
@@ -317,7 +317,7 @@ const renderBotResponse = (content: any) => {
                   transition={{ delay: index * 0.1 }}
                   className="flex items-start gap-3 text-slate-600 dark:text-slate-300"
                 >
-                  <div className="h-2 w-2 rounded-full bg-red-500 mt-2 flex-shrink-0" />
+                  <div className="h-2 w-2 rounded-full bg-red-500 mt-2 shrink-0" />
                   <span>{flag}</span>
                 </motion.li>
               )
@@ -338,7 +338,7 @@ const renderBotResponse = (content: any) => {
                   transition={{ delay: index * 0.1 }}
                   className="flex items-start gap-3 text-slate-600 dark:text-slate-300"
                 >
-                  <div className="h-2 w-2 rounded-full bg-red-500 mt-2 flex-shrink-0" />
+                  <div className="h-2 w-2 rounded-full bg-red-500 mt-2 shrink-0" />
                   <span>{processText(flag)}</span>
                 </motion.li>
               )
@@ -355,7 +355,7 @@ const renderBotResponse = (content: any) => {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: index * 0.1 }}
-              className="bg-gradient-to-tr from-slate-50 to-white dark:from-slate-700/50 dark:to-slate-800/50 p-4 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700/80"
+              className="bg-linear-to-tr from-slate-50 to-white dark:from-slate-700/50 dark:to-slate-800/50 p-4 rounded-xl shadow-xs border border-slate-100 dark:border-slate-700/80"
             >
               <h3 className="font-medium text-amber-700 dark:text-amber-400 mb-2">
                 {dept.department}
@@ -433,7 +433,7 @@ const AssistantBhura = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-amber-50 to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
+    <div className="min-h-screen bg-linear-to-br from-slate-50 via-amber-50 to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
       {/* Sidebar */}
       <SidebarComponent />
 
@@ -442,7 +442,7 @@ const AssistantBhura = () => {
         {/* Header */}
         <header className="fixed top-0 right-0 left-0 lg:left-72 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md z-40 border-b border-slate-200 dark:border-slate-700">
           <div className="max-w-5xl mx-auto px-4 md:px-6 py-4 flex items-center justify-between">
-            <h1 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent ml-12 lg:ml-0">
+            <h1 className="text-xl md:text-2xl font-bold bg-linear-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent ml-12 lg:ml-0">
               Health Assistant
             </h1>
 
@@ -464,7 +464,7 @@ const AssistantBhura = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="w-20 h-20 rounded-full bg-gradient-to-tr from-amber-500 to-orange-500 flex items-center justify-center mb-6"
+                className="w-20 h-20 rounded-full bg-linear-to-tr from-amber-500 to-orange-500 flex items-center justify-center mb-6"
               >
                 <Bot className="h-10 w-10 text-white" />
               </motion.div>
@@ -543,7 +543,7 @@ const AssistantBhura = () => {
               <Button
                 type="submit"
                 disabled={loading || !input.trim()}
-                className="bg-gradient-to-tr from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600"
+                className="bg-linear-to-tr from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600"
               >
                 <Send className="h-4 w-4" />
               </Button>

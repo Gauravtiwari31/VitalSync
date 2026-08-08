@@ -18,7 +18,7 @@ const Documents = () => {
         {documents.map((doc) => (
           <li
             key={doc.id}
-            className="flex items-center space-x-2 p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded"
+            className="flex items-center space-x-2 p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-sm"
           >
             <FileText size={20} className="text-blue-500" />
             <div>

@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
 const SignInSignUpTabswitcher = ({
@@ -21,7 +21,7 @@ const SignInSignUpTabswitcher = ({
       opacity: 1,
       y: 0,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 300,
         damping: 30,
         duration: 0.5,
@@ -77,7 +77,7 @@ const SignInSignUpTabswitcher = ({
                 value="signin"
                 className={`rounded-full text-sm font-medium transition-all duration-300 ${
                   activeTab === "signin"
-                    ? "bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm"
+                    ? "bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-xs"
                     : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200"
                 }`}
               >
@@ -87,7 +87,7 @@ const SignInSignUpTabswitcher = ({
                 value="signup"
                 className={`rounded-full text-sm font-medium transition-all duration-300 ${
                   activeTab === "signup"
-                    ? "bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm"
+                    ? "bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-xs"
                     : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200"
                 }`}
               >

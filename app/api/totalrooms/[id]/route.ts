@@ -1,10 +1,8 @@
 import prisma from "@/lib/db";
 import { getHospital } from "@/lib/hospitallucia";
 
-export async function GET(
-  req: Request,
-  { params }: { params: { id: string } }
-) {
+export async function GET(req: Request, props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const id = params.id;
 
   try {

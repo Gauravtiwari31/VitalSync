@@ -40,7 +40,7 @@ export const signup = async (values: any) => {
     
     const session = await lucia.createSession(patient.id, {});
     const sessionCookie = await lucia.createSessionCookie(session.id);
-    cookies().set(
+    (await cookies()).set(
       sessionCookie.name,
       sessionCookie.value,
       sessionCookie.attributes
@@ -71,14 +71,14 @@ export const signIn = async (values: z.infer<typeof SigninSchema>) => {
       return { success: false, error: "Invalid Credentials!" };
     }
     //For existing sessions
-    const sessionId = cookies().get(lucia.sessionCookieName)?.value || null;
+    const sessionId = (await cookies()).get(lucia.sessionCookieName)?.value || null;
     if (sessionId) {
       console.log("Logout session ID", sessionId);
       await lucia.invalidateSession(sessionId);
     }
     const session = await lucia.createSession(patient.id, {});
     const sessionCookie = await lucia.createSessionCookie(session.id);
-    cookies().set(
+    (await cookies()).set(
       sessionCookie.name,
       sessionCookie.value,
       sessionCookie.attributes
@@ -108,7 +108,7 @@ export async function invalidateUserSessions(userId: string): Promise<void> {
 
 export const logout=async()=>{
    try {
-      const sessionId = cookies().get(lucia.sessionCookieName)?.value || null;
+      const sessionId = (await cookies()).get(lucia.sessionCookieName)?.value || null;
       if (!sessionId) {
         return null;
       }
@@ -116,7 +116,7 @@ export const logout=async()=>{
 
       await lucia.invalidateSession(sessionId);
       const sessionCookie =  lucia.createBlankSessionCookie();
-      cookies().set(
+      (await cookies()).set(
         sessionCookie.name,
         sessionCookie.value,
         sessionCookie.attributes
@@ -133,7 +133,7 @@ export const logout=async()=>{
 
 export const logoutFromAllDevices = async () => {
   try {
-    const sessionId = cookies().get(lucia.sessionCookieName)?.value || null;
+    const sessionId = (await cookies()).get(lucia.sessionCookieName)?.value || null;
     if (!sessionId) {
       return null;
     }
@@ -143,7 +143,7 @@ export const logoutFromAllDevices = async () => {
 
     await lucia.invalidateUserSessions(user?.id!!);
     const sessionCookie = lucia.createBlankSessionCookie();
-    cookies().set(
+    (await cookies()).set(
       sessionCookie.name,
       sessionCookie.value,
       sessionCookie.attributes

@@ -28,7 +28,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Link from "next/link";
@@ -127,7 +127,7 @@ const DoctorProfile = () => {
   const InfoCard = ({ icon: Icon, title, content }: any) => (
     <motion.div
       whileHover={{ scale: 1.02 }}
-      className="flex items-center gap-3 bg-white/50 dark:bg-gray-800/50 p-4 rounded-lg shadow-sm hover:shadow-md transition-all duration-300"
+      className="flex items-center gap-3 bg-white/50 dark:bg-gray-800/50 p-4 rounded-lg shadow-xs hover:shadow-md transition-all duration-300"
     >
       <Icon className="text-primary" size={24} />
       <div>
@@ -148,7 +148,7 @@ const DoctorProfile = () => {
       <div className="min-h-screen bg-gray-50 dark:bg-[#1A202C] py-8">
         <div className="container mx-auto px-4 max-w-7xl space-y-8">
           {/* Header Section */}
-          <Card className="border-none shadow-xl bg-white dark:bg-gray-800/50 overflow-hidden backdrop-blur-sm">
+          <Card className="border-none shadow-xl bg-white dark:bg-gray-800/50 overflow-hidden backdrop-blur-xs">
             <CardContent className="p-6">
               <div className="flex flex-col lg:flex-row gap-6 lg:gap-10 items-start">
                 {/* Left Column - Avatar and Stats */}
@@ -318,7 +318,7 @@ const DoctorProfile = () => {
                             </Button>
                             <Button
                               variant="outline"
-                              className="w-full border-primary text-primary hover:bg-primary/10 h-14 text-lg shadow-sm"
+                              className="w-full border-primary text-primary hover:bg-primary/10 h-14 text-lg shadow-xs"
                             >
                               <Calendar className="mr-3 h-6 w-6" />
                               In-person Visit (₹{profileData.fees.offline})
@@ -648,7 +648,7 @@ const DoctorProfile = () => {
                         <motion.div
                           key={time}
                           whileHover={{ scale: 1.05 }}
-                          className="text-center p-3 border border-primary/20 rounded-lg bg-white dark:bg-gray-800/50 text-gray-600 dark:text-gray-300 text-lg shadow-sm hover:shadow-md transition-shadow hover:bg-primary/5"
+                          className="text-center p-3 border border-primary/20 rounded-lg bg-white dark:bg-gray-800/50 text-gray-600 dark:text-gray-300 text-lg shadow-xs hover:shadow-md transition-shadow hover:bg-primary/5"
                         >
                           {time}
                         </motion.div>

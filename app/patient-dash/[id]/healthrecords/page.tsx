@@ -184,7 +184,7 @@ const HealthRecordsTimeline = () => {
             <input
               type="text"
               placeholder="Search records..."
-              className="pl-10 pr-4 py-2 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-800 dark:text-white w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="pl-10 pr-4 py-2 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-800 dark:text-white w-full focus:outline-hidden focus:ring-2 focus:ring-blue-500"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -195,7 +195,7 @@ const HealthRecordsTimeline = () => {
           </div>
 
           <select
-            className="px-3 py-2 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-800 dark:text-white appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="px-3 py-2 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-800 dark:text-white appearance-none focus:outline-hidden focus:ring-2 focus:ring-blue-500"
             value={selectedType}
             onChange={(e) => setSelectedType(e.target.value)}
           >
@@ -313,7 +313,7 @@ const HealthRecordsTimeline = () => {
                         <h4 className="font-medium text-slate-700 dark:text-slate-300 mb-1">
                           Clinical Notes
                         </h4>
-                        <p className="text-sm text-gray-600 dark:text-gray-400 bg-white dark:bg-slate-800 p-3 rounded border border-gray-200 dark:border-slate-600">
+                        <p className="text-sm text-gray-600 dark:text-gray-400 bg-white dark:bg-slate-800 p-3 rounded-sm border border-gray-200 dark:border-slate-600">
                           {record.notes}
                         </p>
                       </div>
@@ -327,7 +327,7 @@ const HealthRecordsTimeline = () => {
                             {record.prescriptions.map((prescription, idx) => (
                               <div
                                 key={idx}
-                                className="flex items-start bg-white dark:bg-slate-800 p-3 rounded border border-gray-200 dark:border-slate-600"
+                                className="flex items-start bg-white dark:bg-slate-800 p-3 rounded-sm border border-gray-200 dark:border-slate-600"
                               >
                                 <Pill className="mr-2 mt-0.5 w-4 h-4 text-blue-500" />
                                 <div>
@@ -354,7 +354,7 @@ const HealthRecordsTimeline = () => {
                             {record.attachments.map((attachment) => (
                               <div
                                 key={attachment.id}
-                                className="flex justify-between items-center bg-white dark:bg-slate-800 p-3 rounded border border-gray-200 dark:border-slate-600"
+                                className="flex justify-between items-center bg-white dark:bg-slate-800 p-3 rounded-sm border border-gray-200 dark:border-slate-600"
                               >
                                 <div className="flex items-center">
                                   <FileText className="mr-2 w-4 h-4 text-blue-500" />

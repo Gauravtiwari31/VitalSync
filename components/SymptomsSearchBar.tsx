@@ -8,7 +8,7 @@ import {
   Frown,
   Stethoscope,
 } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import useDebounce from "@/hooks/use-debounce";
@@ -199,7 +199,7 @@ const SymptomSearchBar = ({
                       onClick={() => handleSymptomSelect(symptom)}
                     >
                       <div className="flex items-center gap-3">
-                        <div className="bg-white dark:bg-slate-900 rounded-full p-2 shadow-sm">
+                        <div className="bg-white dark:bg-slate-900 rounded-full p-2 shadow-xs">
                           {symptom.icon}
                         </div>
                         <span className="text-sm font-medium text-slate-900 dark:text-slate-100">
@@ -223,7 +223,7 @@ const SymptomSearchBar = ({
             onClick={handleLocalSubmit}
             size="lg"
             className={cn(
-              "h-14 bg-gradient-to-r from-emerald-500 to-teal-600 dark:from-emerald-600 dark:to-teal-700 hover:from-emerald-600 hover:to-teal-700 text-white text-lg rounded-e-full rounded-tl-2xl shadow-lg hover:shadow-xl transition-all duration-300",
+              "h-14 bg-linear-to-r from-emerald-500 to-teal-600 dark:from-emerald-600 dark:to-teal-700 hover:from-emerald-600 hover:to-teal-700 text-white text-lg rounded-e-full rounded-tl-2xl shadow-lg hover:shadow-xl transition-all duration-300",
               searchButtonClassName
             )}
           >
@@ -252,7 +252,7 @@ const SymptomSearchBar = ({
             onFocus={() => setIsFocused(true)}
             onBlur={() => setTimeout(() => setIsFocused(false), 200)}
             className={cn(
-              "bg-white dark:bg-slate-800 dark:text-teal-50 rounded-md px-2 py-1 outline-none focus:ring-2 focus:ring-teal-500 m-1",
+              "bg-white dark:bg-slate-800 dark:text-teal-50 rounded-md px-2 py-1 outline-hidden focus:ring-2 focus:ring-teal-500 m-1",
               inputClassName
             )}
           />

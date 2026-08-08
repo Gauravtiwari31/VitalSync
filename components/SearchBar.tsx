@@ -14,7 +14,7 @@ const SearchBar = () => {
             relative z-10 p-2 
             hover:bg-slate-200 dark:hover:bg-slate-700 
             rounded-full transition-colors duration-200 
-            focus:outline-none
+            focus:outline-hidden
             ${isExpanded ? "opacity-0 pointer-events-none" : "opacity-100"}
           `}
           aria-label="Toggle search"
@@ -44,7 +44,7 @@ const SearchBar = () => {
                 rounded-full
                 text-sm text-slate-900 dark:text-slate-100
                 placeholder:text-slate-400 dark:placeholder:text-slate-500
-                focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent
+                focus:outline-hidden focus:ring-2 focus:ring-teal-500 focus:border-transparent
               "
               autoFocus
             />
@@ -93,7 +93,7 @@ const SearchBar = () => {
             rounded-full
             text-sm text-slate-900 dark:text-slate-100
             placeholder:text-slate-400 dark:placeholder:text-slate-500
-            focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent
+            focus:outline-hidden focus:ring-2 focus:ring-teal-500 focus:border-transparent
             transition-all duration-200
           "
         />

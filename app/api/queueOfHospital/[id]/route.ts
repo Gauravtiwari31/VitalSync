@@ -3,8 +3,9 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string; deptId: string } }
+  props: { params: Promise<{ id: string }> }
 ) {
+  const params = await props.params;
   const id = params.id;
   const hospitals=await prisma.hospital.findUnique({
      where: {
@@ -31,7 +32,7 @@ export async function GET(
     },
   });
 
- 
+
 
   const perHourQueue: Record<string, any[]> = {};
 

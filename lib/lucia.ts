@@ -15,7 +15,7 @@ export const lucia = new Lucia(adapter, {
 });
 
 export const getUser = async () => {
-  const sessionId = cookies().get(lucia.sessionCookieName)?.value || null;
+  const sessionId = (await cookies()).get(lucia.sessionCookieName)?.value || null;
   if (!sessionId) {
     return null;
   }
@@ -24,7 +24,7 @@ export const getUser = async () => {
   try {
     if (session && session.fresh) {
       const sessionCookie = await lucia.createSessionCookie(session.id);
-      cookies().set(
+      (await cookies()).set(
         sessionCookie.name,
         sessionCookie.value,
         sessionCookie.attributes
@@ -32,7 +32,7 @@ export const getUser = async () => {
     }
     if (!session) {
       const sessionCookie = await lucia.createBlankSessionCookie();
-      cookies().set(
+      (await cookies()).set(
         sessionCookie.name,
         sessionCookie.value,
         sessionCookie.attributes
@@ -70,7 +70,7 @@ export const getUser = async () => {
 
 
 export const verifyUser = async () => {
-  const sessionId = cookies().get(lucia.sessionCookieName)?.value || null;
+  const sessionId = (await cookies()).get(lucia.sessionCookieName)?.value || null;
   if (!sessionId) {
     return null;
   }
@@ -78,7 +78,7 @@ export const verifyUser = async () => {
   try {
     if (session && session.fresh) {
       const sessionCookie = await lucia.createSessionCookie(session.id);
-      cookies().set(
+      (await cookies()).set(
         sessionCookie.name,
         sessionCookie.value,
         sessionCookie.attributes
@@ -86,7 +86,7 @@ export const verifyUser = async () => {
     }
     if (!session) {
       const sessionCookie = await lucia.createBlankSessionCookie();
-      cookies().set(
+      (await cookies()).set(
         sessionCookie.name,
         sessionCookie.value,
         sessionCookie.attributes

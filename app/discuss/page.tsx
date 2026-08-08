@@ -485,7 +485,7 @@ export default function Component() {
                                   <>
                                     <div
                                       key={reply.id}
-                                      className="bg-muted p-2 rounded flex flex-col space-y-2"
+                                      className="bg-muted p-2 rounded-sm flex flex-col space-y-2"
                                     >
                                       <div className="text-sm flex gap-2 ">
                                         <Avatar className="h-5 w-5  sm:block">

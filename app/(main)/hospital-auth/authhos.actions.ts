@@ -48,7 +48,7 @@ export const hospitalsignup = async (
     });
     const session = await hospitallucia.createSession(hospital.id, {});
     const sessionCookie = await hospitallucia.createSessionCookie(session.id);
-    cookies().set(
+    (await cookies()).set(
       sessionCookie.name,
       sessionCookie.value,
       sessionCookie.attributes
@@ -82,14 +82,14 @@ export const hospitalSignIn = async (
 
 
     //For existing sessions
-    const sessionId = cookies().get(hospitallucia.sessionCookieName)?.value || null;
+    const sessionId = (await cookies()).get(hospitallucia.sessionCookieName)?.value || null;
     if (sessionId) {
       console.log("Logout session ID", sessionId);
       await hospitallucia.invalidateSession(sessionId);
     }
     const session = await hospitallucia.createSession(hospital.id, {});
     const sessionCookie = await hospitallucia.createSessionCookie(session.id);
-    cookies().set(
+    (await cookies()).set(
       sessionCookie.name,
       sessionCookie.value,
       sessionCookie.attributes
@@ -103,7 +103,7 @@ export const hospitalSignIn = async (
 
 export const hospitalLogout = async () => {
   try {
-    const sessionId = cookies().get(hospitallucia.sessionCookieName)?.value || null;
+    const sessionId = (await cookies()).get(hospitallucia.sessionCookieName)?.value || null;
     if (!sessionId) {
       return null;
     }
@@ -112,7 +112,7 @@ export const hospitalLogout = async () => {
     await hospitallucia.invalidateSession(sessionId);
 
     const sessionCookie = await hospitallucia.createBlankSessionCookie();
-    cookies().set(
+    (await cookies()).set(
       sessionCookie.name,
       sessionCookie.value,
       sessionCookie.attributes
@@ -130,7 +130,7 @@ export const hospitalLogout = async () => {
 export const hospitalLogoutFromAllDevices = async () => {
   try {
 
-    const sessionId = cookies().get(hospitallucia.sessionCookieName)?.value || null;
+    const sessionId = (await cookies()).get(hospitallucia.sessionCookieName)?.value || null;
     if (!sessionId) {
       return null;
     }
@@ -141,7 +141,7 @@ export const hospitalLogoutFromAllDevices = async () => {
     await hospitallucia.invalidateUserSessions(user?.id!!);
 
     const sessionCookie = await hospitallucia.createBlankSessionCookie();
-    cookies().set(
+    (await cookies()).set(
       sessionCookie.name,
       sessionCookie.value,
       sessionCookie.attributes

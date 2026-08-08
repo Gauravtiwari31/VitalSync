@@ -186,7 +186,7 @@ export default function HospitalProfilePage({
                   alt={tempHospital.name}
                   className="object-cover"
                 />
-                <AvatarFallback className="text-2xl bg-gradient-to-br from-teal-500 to-blue-500 text-white">
+                <AvatarFallback className="text-2xl bg-linear-to-br from-teal-500 to-blue-500 text-white">
                   {tempHospital.name[0]}
                 </AvatarFallback>
               </Avatar>

@@ -2,12 +2,10 @@ import prisma from "@/lib/db";
 import { verifyHospitalDetails } from "@/lib/hospitallucia";
 import { NextRequest } from "next/server";
 
-export async function POST(
-  req: NextRequest,
-  { params }: { params: { did: string } }
-) {
+export async function POST(req: NextRequest, props: { params: Promise<{ did: string }> }) {
+  const params = await props.params;
   const id = params.did;
-  
+
   try {
     const values = await req.json();
     const isDoctorAvailable = await prisma.doctor.findUnique({
@@ -41,12 +39,10 @@ export async function POST(
   }
 }
 
-export async function GET(
-  req: NextRequest,
-  { params }: { params: { did: string } }
-) {
+export async function GET(req: NextRequest, props: { params: Promise<{ did: string }> }) {
+  const params = await props.params;
   const id = params.did;
-  
+
   try {
     const doctor = await prisma.doctorinDept.findMany({
       where: {

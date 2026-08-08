@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, use } from "react";
 import { CalendarClock, Mail, Phone, Stethoscope } from "lucide-react";
 import { format, parseISO } from "date-fns";
 
@@ -45,7 +45,16 @@ declare global {
   }
 }
 
-export default function DoctorBillingPage({searchParams:{hospitalKey,hospitalName}}:any) {
+export default function DoctorBillingPage(props: {
+  searchParams: Promise<{ hospitalKey?: string; hospitalName?: string }>;
+}) {
+  const searchParams = use(props.searchParams);
+
+  const {
+    hospitalKey,
+    hospitalName
+  } = searchParams;
+
   const [date, setDate] = useState<Date>();
   const [timeSlot, setTimeSlot] = useState<{
     start: string;
@@ -249,7 +258,7 @@ export default function DoctorBillingPage({searchParams:{hospitalKey,hospitalNam
 
   if (doctor == null) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-100 to-indigo-100 p-4 md:p-8 flex items-center justify-center">
+      <div className="min-h-screen bg-linear-to-br from-blue-100 to-indigo-100 p-4 md:p-8 flex items-center justify-center">
         <Card className="w-full max-w-3xl shadow-lg">
           <CardHeader className="text-center">
             <CardTitle className="text-3xl font-bold text-primary">
@@ -277,7 +286,7 @@ export default function DoctorBillingPage({searchParams:{hospitalKey,hospitalNam
 
   if (patient == null) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-100 to-indigo-100 p-4 md:p-8 flex items-center justify-center">
+      <div className="min-h-screen bg-linear-to-br from-blue-100 to-indigo-100 p-4 md:p-8 flex items-center justify-center">
         <Card className="w-full max-w-3xl shadow-lg">
           <CardHeader className="text-center">
             <CardTitle className="text-3xl font-bold text-primary">
@@ -291,7 +300,7 @@ export default function DoctorBillingPage({searchParams:{hospitalKey,hospitalNam
             <div className="flex flex-col md:flex-row gap-6">
               <div className="flex-1 space-y-16">
                 <div className="text-center space-y-6 pt-4">
-                  <h2 className="text-3xl font-semibold font-ubuntu-font text-primary p-4">
+                  <h2 className="text-3xl font-semibold font-display text-primary p-4">
                     Seems like you are not logged in!!!
                   </h2>
                   <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -323,7 +332,7 @@ export default function DoctorBillingPage({searchParams:{hospitalKey,hospitalNam
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 p-4 md:p-8 flex items-center justify-center">
+    <div className="min-h-screen bg-linear-to-br from-blue-50 to-indigo-50 p-4 md:p-8 flex items-center justify-center">
       <Script
         id="razorpay-checkout-js"
         src="https://checkout.razorpay.com/v1/checkout.js"

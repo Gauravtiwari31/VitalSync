@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, use } from "react";
 import { toast } from "sonner";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -32,9 +32,9 @@ import { pusherClient } from "@/lib/pusher";
 import BeatLoader from "@/components/BeatLoader";
 
 interface HospitalDashboardProps {
-  params?: {
+  params: Promise<{
     id?: string;
-  };
+  }>;
 }
 
 const COLORS = ["#06b6d4", "#8b5cf6", "#f59e0b", "#ec4899", "#10b981"];
@@ -58,7 +58,8 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   return null;
 };
 
-export default function HospitalDashboard({ params }: HospitalDashboardProps) {
+export default function HospitalDashboard(props: HospitalDashboardProps) {
+  const params = use(props.params);
   const [userExists, setUserExists] = useState<boolean | null>(null);
   const router = useRouter();
   const id = params?.id;
@@ -146,7 +147,7 @@ export default function HospitalDashboard({ params }: HospitalDashboardProps) {
 
   if (!id || userExists === null || !userData || !totalRoom) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-r dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
+      <div className="min-h-screen flex items-center justify-center bg-linear-to-r dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
         <BeatLoader className="w-[200px] h-[80px]" />
       </div>
     );
@@ -227,7 +228,7 @@ export default function HospitalDashboard({ params }: HospitalDashboardProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Stats Overview */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <Card className="relative overflow-hidden backdrop-blur-xl bg-gradient-to-br from-blue-500 to-blue-600 dark:from-blue-500/20 dark:to-blue-600/20 border border-white/10 shadow-lg">
+          <Card className="relative overflow-hidden backdrop-blur-xl bg-linear-to-br from-blue-500 to-blue-600 dark:from-blue-500/20 dark:to-blue-600/20 border border-white/10 shadow-lg">
             <div className="absolute inset-0 bg-white/5 dark:bg-black/5 backdrop-blur-xl" />
             <CardHeader className="relative flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-lg font-medium text-white">
@@ -243,10 +244,10 @@ export default function HospitalDashboard({ params }: HospitalDashboardProps) {
               <div className="absolute -top-6 -right-6 h-12 w-12 rounded-full bg-blue-500/20 blur-xl" />
               <div className="absolute -bottom-4 -left-4 h-12 w-12 rounded-full bg-blue-400/20 blur-xl" />
             </CardContent>
-            <div className="absolute inset-px rounded-lg bg-gradient-to-br from-white/10 to-transparent pointer-events-none" />
+            <div className="absolute inset-px rounded-lg bg-linear-to-br from-white/10 to-transparent pointer-events-none" />
           </Card>
 
-          <Card className="relative overflow-hidden backdrop-blur-xl bg-gradient-to-br from-purple-500 to-purple-600 text-white dark:from-purple-500/20 dark:to-purple-600/20 border border-white/10 shadow-lg">
+          <Card className="relative overflow-hidden backdrop-blur-xl bg-linear-to-br from-purple-500 to-purple-600 text-white dark:from-purple-500/20 dark:to-purple-600/20 border border-white/10 shadow-lg">
             <div className="absolute inset-0 bg-white/5 dark:bg-black/5 backdrop-blur-xl" />
             <CardHeader className=" relative flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-lg font-medium">
@@ -260,10 +261,10 @@ export default function HospitalDashboard({ params }: HospitalDashboardProps) {
               <div className="absolute -top-6 -right-6 h-12 w-12 rounded-full bg-purple-500/20 blur-xl" />
               <div className="absolute -bottom-4 -left-4 h-12 w-12 rounded-full bg-purple-400/20 blur-xl" />
             </CardContent>
-            <div className="absolute inset-px rounded-lg bg-gradient-to-br from-white/10 to-transparent pointer-events-none" />
+            <div className="absolute inset-px rounded-lg bg-linear-to-br from-white/10 to-transparent pointer-events-none" />
           </Card>
 
-          <Card className="relative overflow-hidden backdrop-blur-xl bg-gradient-to-br from-emerald-500 to-emerald-600 text-white dark:from-emerald-500/20 dark:to-emerald-600/20 border border-white/10 shadow-lg">
+          <Card className="relative overflow-hidden backdrop-blur-xl bg-linear-to-br from-emerald-500 to-emerald-600 text-white dark:from-emerald-500/20 dark:to-emerald-600/20 border border-white/10 shadow-lg">
             <div className="absolute inset-0 bg-white/5 dark:bg-black/5 backdrop-blur-xl" />
             <CardHeader className="relative flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-lg font-medium">
@@ -280,7 +281,7 @@ export default function HospitalDashboard({ params }: HospitalDashboardProps) {
               <div className="absolute -bottom-4 -left-4 h-12 w-12 rounded-full bg-emerald-400/20 blur-xl" />
             </CardContent>
 
-            <div className="absolute inset-px rounded-lg bg-gradient-to-br from-white/10 to-transparent pointer-events-none" />
+            <div className="absolute inset-px rounded-lg bg-linear-to-br from-white/10 to-transparent pointer-events-none" />
           </Card>
         </div>
 
@@ -406,8 +407,8 @@ export default function HospitalDashboard({ params }: HospitalDashboardProps) {
                       dataKey="total"
                       label={({ name, percent }) =>
                         window.innerWidth < 768
-                          ? `${(percent * 100).toFixed(0)}%`
-                          : `${name} (${(percent * 100).toFixed(0)}%)`
+                          ? `${((percent ?? 0) * 100).toFixed(0)}%`
+                          : `${name} (${((percent ?? 0) * 100).toFixed(0)}%)`
                       }
                     >
                       {chartData.map((entry, index) => (

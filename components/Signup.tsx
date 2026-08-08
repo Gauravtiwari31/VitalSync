@@ -49,7 +49,7 @@ import {
 import { Calendar as CalendarComponent } from "./ui/calendar";
 import { cn } from "@/lib/utils";
 import { signup } from "@/app/(main)/patient-auth/auth.actions";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 export const SignUpSchema = z
   .object({
@@ -149,19 +149,19 @@ const PatientSignUp = () => {
 
   const itemVariants = {
     hidden: { opacity: 0, y: 10 },
-    show: { opacity: 1, y: 0, transition: { type: "tween", duration: 0.3 } },
+    show: { opacity: 1, y: 0, transition: { type: "tween" as const, duration: 0.3 } },
   };
 
   const stepVariants = {
     hidden: { x: 30, opacity: 0 },
-    visible: { x: 0, opacity: 1, transition: { type: "tween", duration: 0.3 } },
+    visible: { x: 0, opacity: 1, transition: { type: "tween" as const, duration: 0.3 } },
     exit: { x: -30, opacity: 0, transition: { duration: 0.2 } },
   };
 
   return (
     <Card className="w-[300px] sm:w-[430px] md:w-[720px] lg:w-[800px] dark:bg-[rgba(31,41,55,0.5)] backdrop-blur-3xl relative overflow-hidden border border-slate-200 dark:border-slate-700 shadow-lg">
       <motion.div
-        className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 to-cyan-600 dark:from-green-500 dark:to-cyan-700"
+        className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-green-400 to-cyan-600 dark:from-green-500 dark:to-cyan-700"
         initial={{ scaleX: 0 }}
         animate={{ scaleX: (activeStep + 1) / steps.length }}
         transition={{ duration: 0.4, ease: "easeInOut" }}
@@ -175,7 +175,7 @@ const PatientSignUp = () => {
           className="flex items-center gap-2"
         >
           <Heart className="h-6 w-6 text-cyan-500 dark:text-cyan-400" />
-          <CardTitle className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-500 to-cyan-600 dark:from-green-400 dark:to-cyan-500">
+          <CardTitle className="text-2xl font-bold bg-clip-text text-transparent bg-linear-to-r from-green-500 to-cyan-600 dark:from-green-400 dark:to-cyan-500">
             Register Patient
           </CardTitle>
         </motion.div>
@@ -194,7 +194,7 @@ const PatientSignUp = () => {
             {/* Progress line */}
             <div className="absolute top-4 left-0 h-1 bg-slate-200 dark:bg-slate-700 w-full -z-10"></div>
             <div
-              className="absolute top-4 left-0 h-1 bg-gradient-to-r from-green-400 to-cyan-600 dark:from-green-500 dark:to-cyan-700 -z-10 transition-all duration-300"
+              className="absolute top-4 left-0 h-1 bg-linear-to-r from-green-400 to-cyan-600 dark:from-green-500 dark:to-cyan-700 -z-10 transition-all duration-300"
               style={{ width: `${(activeStep / (steps.length - 1)) * 100}%` }}
             ></div>
 
@@ -207,7 +207,7 @@ const PatientSignUp = () => {
                 <motion.div
                   className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium z-10 ${
                     idx <= activeStep
-                      ? "bg-gradient-to-r from-green-500 to-cyan-600 dark:from-green-400 dark:to-cyan-500 text-white"
+                      ? "bg-linear-to-r from-green-500 to-cyan-600 dark:from-green-400 dark:to-cyan-500 text-white"
                       : "bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-400"
                   }`}
                   whileHover={{ scale: 1.05 }}
@@ -765,7 +765,7 @@ const PatientSignUp = () => {
                   <Button
                     type="button"
                     onClick={goToNextStep}
-                    className="bg-gradient-to-r from-green-500 to-cyan-600 dark:from-green-600 dark:to-cyan-700 hover:from-green-600 hover:to-cyan-700 text-white shadow-md hover:shadow-lg transition-all duration-200"
+                    className="bg-linear-to-r from-green-500 to-cyan-600 dark:from-green-600 dark:to-cyan-700 hover:from-green-600 hover:to-cyan-700 text-white shadow-md hover:shadow-lg transition-all duration-200"
                   >
                     Continue
                   </Button>
@@ -773,7 +773,7 @@ const PatientSignUp = () => {
                   <Button
                     disabled={isPending}
                     type="submit"
-                    className="bg-gradient-to-r from-green-500 to-cyan-600 dark:from-green-600 dark:to-cyan-700 hover:from-green-600 hover:to-cyan-700 text-white shadow-md hover:shadow-lg transition-all duration-200"
+                    className="bg-linear-to-r from-green-500 to-cyan-600 dark:from-green-600 dark:to-cyan-700 hover:from-green-600 hover:to-cyan-700 text-white shadow-md hover:shadow-lg transition-all duration-200"
                   >
                     {isPending && (
                       <Loader2 className="animate-spin mr-2 h-4 w-4" />

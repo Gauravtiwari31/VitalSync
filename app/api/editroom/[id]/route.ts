@@ -7,10 +7,8 @@ import { text } from "stream/consumers";
 import { number } from "zod";
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
-export async function POST(
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function POST(req: NextRequest, props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const id = params.id;
   let user = await verifyHospitalDetails();
   if(!user || user.id===undefined){

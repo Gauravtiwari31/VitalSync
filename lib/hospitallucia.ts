@@ -32,7 +32,7 @@ declare module "lucia" {
 
 
 export const verifyhospital = async () => {
-  const sessionId = cookies().get(hospitallucia.sessionCookieName)?.value || null;
+  const sessionId = (await cookies()).get(hospitallucia.sessionCookieName)?.value || null;
   if (!sessionId) {
     return null;
   }
@@ -40,7 +40,7 @@ export const verifyhospital = async () => {
   try {
     if (session && session.fresh) {
       const sessionCookie = await hospitallucia.createSessionCookie(session.id);
-      cookies().set(
+      (await cookies()).set(
         sessionCookie.name,
         sessionCookie.value,
         sessionCookie.attributes
@@ -48,7 +48,7 @@ export const verifyhospital = async () => {
     }
     if (!session) {
       const sessionCookie = await hospitallucia.createBlankSessionCookie();
-      cookies().set(
+      (await cookies()).set(
         sessionCookie.name,
         sessionCookie.value,
         sessionCookie.attributes
@@ -64,7 +64,7 @@ export const verifyhospital = async () => {
 
 
 export const getHospital = async () => {
-  const sessionId = cookies().get(hospitallucia.sessionCookieName)?.value || null;
+  const sessionId = (await cookies()).get(hospitallucia.sessionCookieName)?.value || null;
   if (!sessionId) {
     return null;
   }
@@ -72,7 +72,7 @@ export const getHospital = async () => {
   try {
     if (session && session.fresh) {
       const sessionCookie = await hospitallucia.createSessionCookie(session.id);
-      cookies().set(
+      (await cookies()).set(
         sessionCookie.name,
         sessionCookie.value,
         sessionCookie.attributes
@@ -80,7 +80,7 @@ export const getHospital = async () => {
     }
     if (!session) {
       const sessionCookie = await hospitallucia.createBlankSessionCookie();
-      cookies().set(
+      (await cookies()).set(
         sessionCookie.name,
         sessionCookie.value,
         sessionCookie.attributes
@@ -136,7 +136,7 @@ export const getHospital = async () => {
 
 
 export const getEssentialHospitalDetails = async () => {
-  const sessionId = cookies().get(hospitallucia.sessionCookieName)?.value || null;
+  const sessionId = (await cookies()).get(hospitallucia.sessionCookieName)?.value || null;
   if (!sessionId) {
     return null;
   }
@@ -144,7 +144,7 @@ export const getEssentialHospitalDetails = async () => {
   try {
     if (session && session.fresh) {
       const sessionCookie = await hospitallucia.createSessionCookie(session.id);
-      cookies().set(
+      (await cookies()).set(
         sessionCookie.name,
         sessionCookie.value,
         sessionCookie.attributes
@@ -152,7 +152,7 @@ export const getEssentialHospitalDetails = async () => {
     }
     if (!session) {
       const sessionCookie = await hospitallucia.createBlankSessionCookie();
-      cookies().set(
+      (await cookies()).set(
         sessionCookie.name,
         sessionCookie.value,
         sessionCookie.attributes
@@ -193,7 +193,7 @@ export const getEssentialHospitalDetails = async () => {
 
 
 export const verifyHospitalDetails = async () => {
-  const sessionId = cookies().get(hospitallucia.sessionCookieName)?.value || null;
+  const sessionId = (await cookies()).get(hospitallucia.sessionCookieName)?.value || null;
   if (!sessionId) {
     return null;
   }
@@ -201,7 +201,7 @@ export const verifyHospitalDetails = async () => {
   try {
     if (session && session.fresh) {
       const sessionCookie = await hospitallucia.createSessionCookie(session.id);
-      cookies().set(
+      (await cookies()).set(
         sessionCookie.name,
         sessionCookie.value,
         sessionCookie.attributes
@@ -209,7 +209,7 @@ export const verifyHospitalDetails = async () => {
     }
     if (!session) {
       const sessionCookie = await hospitallucia.createBlankSessionCookie();
-      cookies().set(
+      (await cookies()).set(
         sessionCookie.name,
         sessionCookie.value,
         sessionCookie.attributes

@@ -257,7 +257,7 @@ export const PatientComponent = () => {
 
   if (userExists === null) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-r dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
+      <div className="min-h-screen flex items-center justify-center bg-linear-to-r dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
         <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
       </div>
     );

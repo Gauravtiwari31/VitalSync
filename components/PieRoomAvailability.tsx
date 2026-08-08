@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { Label, Pie, PieChart, Sector } from "recharts";
-import { PieSectorDataItem } from "recharts/types/polar/Pie";
+import { PieSectorShapeProps } from "recharts/types/polar/Pie";
 
 import {
   Card,
@@ -125,7 +125,7 @@ export default function Interactive({ data }: InteractiveProps) {
       className="flex flex-col shadow-lg hover:shadow-xl transition-shadow duration-300 dark:bg-slate-900 dark:text-slate-100"
     >
       <ChartStyle id={id} config={chartConfig} />
-      <CardHeader className="bg-gradient-to-r from-teal-500 to-blue-500 text-white dark:from-blue-950 dark:to-slate-800  rounded-t-lg pb-4">
+      <CardHeader className="bg-linear-to-r from-teal-500 to-blue-500 text-white dark:from-blue-950 dark:to-slate-800  rounded-t-lg pb-4">
         <div className="grid gap-1">
           <CardTitle className="flex items-center gap-2">
             <Activity className="h-6 w-6" />
@@ -158,7 +158,7 @@ export default function Interactive({ data }: InteractiveProps) {
                 >
                   <div className="flex items-center gap-2 text-xs">
                     <span
-                      className="flex h-3 w-3 shrink-0 rounded-sm"
+                      className="flex h-3 w-3 shrink-0 rounded-xs"
                       style={{
                         backgroundColor: `var(--color-${key})`,
                       }}
@@ -188,20 +188,22 @@ export default function Interactive({ data }: InteractiveProps) {
               nameKey="month"
               innerRadius={60}
               strokeWidth={5}
-              activeIndex={activeIndex}
-              activeShape={({
-                outerRadius = 0,
-                ...props
-              }: PieSectorDataItem) => (
-                <g>
-                  <Sector {...props} outerRadius={outerRadius + 10} />
-                  <Sector
-                    {...props}
-                    outerRadius={outerRadius + 25}
-                    innerRadius={outerRadius + 12}
-                  />
-                </g>
-              )}
+              // Recharts 3 dropped Pie's activeIndex prop; the highlighted sector
+              // is now decided inside shape, from the index it receives.
+              shape={({ outerRadius = 0, index, ...props }: PieSectorShapeProps) =>
+                index === activeIndex ? (
+                  <g>
+                    <Sector {...props} outerRadius={outerRadius + 10} />
+                    <Sector
+                      {...props}
+                      outerRadius={outerRadius + 25}
+                      innerRadius={outerRadius + 12}
+                    />
+                  </g>
+                ) : (
+                  <Sector {...props} outerRadius={outerRadius} />
+                )
+              }
             >
               <Label
                 content={({ viewBox }) => {

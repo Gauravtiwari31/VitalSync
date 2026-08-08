@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from "motion/react";
 import {
   ArrowRight,
   Calendar,
@@ -82,7 +82,7 @@ const PromoBanner = () => {
 
   const CountdownUnit = ({ value, label }: any) => (
     <div className="flex flex-col items-center">
-      <div className="bg-white/10 rounded-lg px-3 py-2 backdrop-blur-sm">
+      <div className="bg-white/10 rounded-lg px-3 py-2 backdrop-blur-xs">
         <span className="text-xl md:text-2xl font-bold text-white tabular-nums">
           {formatNumber(value)}
         </span>
@@ -98,13 +98,13 @@ const PromoBanner = () => {
           initial={{ opacity: 0, y: -100 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -100 }}
-          transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
+          transition={{ duration: 0.5, type: "spring" as const, stiffness: 100 }}
           className="fixed top-0 left-0 right-0 z-50"
         >
           <div className="relative overflow-hidden">
             {/* Enhanced gradient background */}
-            <div className="absolute inset-0 bg-gradient-to-r from-teal-600 via-blue-600 to-teal-600 animate-gradient bg-[length:200%_100%]" />
-            <div className="absolute inset-0 bg-white/5 backdrop-blur-sm" />
+            <div className="absolute inset-0 bg-linear-to-r from-teal-600 via-blue-600 to-teal-600 animate-gradient bg-size-[200%_100%]" />
+            <div className="absolute inset-0 bg-white/5 backdrop-blur-xs" />
 
             {/* Simplified background effect */}
             <div className="absolute inset-0">
@@ -120,7 +120,7 @@ const PromoBanner = () => {
                   <div className="flex items-center justify-center space-x-6 w-full md:w-auto">
                     <motion.div
                       whileHover={{ scale: 1.05 }}
-                      className="hidden sm:flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-white/20 to-white/5 shadow-lg"
+                      className="hidden sm:flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-linear-to-br from-white/20 to-white/5 shadow-lg"
                     >
                       <Gift className="h-8 w-8 text-white" />
                     </motion.div>
@@ -186,7 +186,7 @@ const PromoBanner = () => {
                       >
                         <span className="relative z-10">Book Your Slot</span>
                         <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1 relative z-10" />
-                        <div className="absolute inset-0 bg-gradient-to-r from-teal-50 to-blue-50 transform transition-transform group-hover:scale-x-100 scale-x-0 origin-left" />
+                        <div className="absolute inset-0 bg-linear-to-r from-teal-50 to-blue-50 transform transition-transform group-hover:scale-x-100 scale-x-0 origin-left" />
                       </Button>
                     </motion.div>
                     <motion.button
@@ -204,7 +204,7 @@ const PromoBanner = () => {
             </div>
 
             {/* Enhanced bottom border */}
-            <div className="h-1 bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+            <div className="h-1 bg-linear-to-r from-transparent via-white/30 to-transparent" />
           </div>
 
           <style jsx>{`
@@ -237,7 +237,7 @@ export default function ProfessionalPricingPage() {
   return (
     <>
       <Header2 />
-      <div className=" bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
+      <div className=" bg-linear-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
         <div className="container mx-auto px-4 py-16">
           <motion.header
             className="text-center mb-16"
@@ -293,7 +293,7 @@ export default function ProfessionalPricingPage() {
                   </CardTitle>
                   <CardDescription>{plan.description}</CardDescription>
                 </CardHeader>
-                <CardContent className="flex-grow">
+                <CardContent className="grow">
                   <p className="text-3xl font-bold mb-4">
                     {isYearly ? plan.yearlyPrice : plan.monthlyPrice}
                     <span className="text-sm font-normal text-gray-500 dark:text-gray-400">

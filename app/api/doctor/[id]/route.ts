@@ -1,8 +1,6 @@
 import { getDoctor } from "@/lib/doctorlucia";
-export async function GET(
-  req: Request,
-  { params }: { params: { id: string } }
-) {
+export async function GET(req: Request, props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const id = params.id;
   let user = await getDoctor();
   if(!user || user.id===undefined){

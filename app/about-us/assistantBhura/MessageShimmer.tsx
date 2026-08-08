@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Bot } from "lucide-react";
 
 const MessageLoadingShimmer = () => {
@@ -15,14 +15,14 @@ const MessageLoadingShimmer = () => {
   return (
     <div className="flex flex-col space-y-2 mb-8">
       <div className="flex items-center gap-3">
-        <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-violet-500 to-fuchsia-500 flex items-center justify-center">
+        <div className="w-8 h-8 rounded-full bg-linear-to-tr from-violet-500 to-fuchsia-500 flex items-center justify-center">
           <Bot className="h-4 w-4 text-white" />
         </div>
         <div className="text-sm text-slate-500 dark:text-slate-400">
           HealthBuddy Assistant
         </div>
       </div>
-      <div className="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl shadow-lg">
+      <div className="bg-white/50 dark:bg-slate-800/50 backdrop-blur-xs p-6 rounded-xl shadow-lg">
         <div className="space-y-4">
           {/* Loading Dots */}
           <div className="flex space-x-2 mb-4">
@@ -47,7 +47,7 @@ const MessageLoadingShimmer = () => {
           {[1, 2].map((_, index) => (
             <motion.div
               key={index}
-              className="h-4 w-full rounded"
+              className="h-4 w-full rounded-sm"
               style={{
                 background:
                   "linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%)",

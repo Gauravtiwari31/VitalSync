@@ -104,7 +104,7 @@ export default function DoctorDetails() {
         <input
           type="text"
           placeholder="Search doctors..."
-          className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-teal-500 focus:outline-none"
+          className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-teal-500 focus:outline-hidden"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
@@ -153,7 +153,7 @@ export default function DoctorDetails() {
             filteredDoctors.map((doctor: any) => (
               <div
                 key={doctor.id}
-                className="p-4 border border-gray-200 rounded-lg shadow-sm flex items-center space-x-4"
+                className="p-4 border border-gray-200 rounded-lg shadow-xs flex items-center space-x-4"
               >
                 <Avatar className="w-24 h-24 rounded-lg border-4 border-teal-100 dark:border-slate-700">
                   <AvatarImage
@@ -161,7 +161,7 @@ export default function DoctorDetails() {
                     alt={doctor.doctor.name}
                     className="object-cover"
                   />
-                  <AvatarFallback className="text-lg bg-gradient-to-br from-teal-500 to-blue-500 text-white">
+                  <AvatarFallback className="text-lg bg-linear-to-br from-teal-500 to-blue-500 text-white">
                     {doctor.doctor.name
                       .split(" ")
                       .map((n: any) => n[0])

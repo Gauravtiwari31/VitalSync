@@ -1,4 +1,4 @@
-import { GoogleGenerativeAI, SchemaType } from "@google/generative-ai";
+import { GoogleGenerativeAI, Schema, SchemaType } from "@google/generative-ai";
 
 export async function triage(userInput: string) {
   try {
@@ -6,7 +6,7 @@ export async function triage(userInput: string) {
       process.env.GEMINI_API_KEY || process.env.NEXT_PUBLIC_GEMINI_API_KEY!
     );
 
-    const schema = {
+    const schema: Schema = {
       description: "Medical triage response",
       type: SchemaType.OBJECT,
       properties: {
@@ -196,7 +196,7 @@ export async function curoAIResponse(userInput: string) {
       process.env.GEMINI_API_KEY || process.env.NEXT_PUBLIC_GEMINI_API_KEY!
     );
 
-    const schema = {
+    const schema: Schema = {
       description: "HealthBuddy Response",
       type: SchemaType.OBJECT,
       properties: {

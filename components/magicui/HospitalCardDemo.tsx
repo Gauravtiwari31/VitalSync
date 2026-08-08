@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import {
   Card,
   CardHeader,
@@ -145,8 +145,8 @@ const HospitalCard = () => {
                       "linear-gradient(to bottom, white 50%, transparent 100%)",
                   }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-60% to-white dark:to-slate-950" />
-                <div className="absolute inset-0 bg-gradient-to-l from-transparent to-white dark:to-slate-950" />
+                <div className="absolute inset-0 bg-linear-to-b from-transparent to-60% to-white dark:to-slate-950" />
+                <div className="absolute inset-0 bg-linear-to-l from-transparent to-white dark:to-slate-950" />
               </div>
             )}
 
@@ -184,7 +184,7 @@ const HospitalCard = () => {
                       transition={{ delay: 0.3, duration: 0.4 }}
                     >
                       <div className="flex items-center text-muted-foreground font-semibold">
-                        <MapPin className="w-4 h-4 mr-2 flex-shrink-0" />
+                        <MapPin className="w-4 h-4 mr-2 shrink-0" />
                         <span className="truncate">
                           {hospital.hospitalInfo.City},{" "}
                           {hospital.hospitalInfo.State}
@@ -243,14 +243,14 @@ const HospitalCard = () => {
                     className="space-y-2"
                   >
                     <div className="flex items-center text-sm text-muted-foreground">
-                      <Users className="w-4 h-4 mr-2 flex-shrink-0" />
+                      <Users className="w-4 h-4 mr-2 shrink-0" />
                       <span className="truncate">
                         {hospital.statistics.totalRelevantDoctors} Doctors
                         Available
                       </span>
                     </div>
                     <div className="flex items-center text-sm text-muted-foreground">
-                      <Phone className="w-4 h-4 mr-2 flex-shrink-0" />
+                      <Phone className="w-4 h-4 mr-2 shrink-0" />
                       <span className="truncate">
                         {hospital.hospitalInfo.contactno}
                       </span>
@@ -266,7 +266,7 @@ const HospitalCard = () => {
                       <Tooltip>
                         <TooltipTrigger asChild>
                           <div className="flex items-center text-sm text-muted-foreground">
-                            <Mail className="w-4 h-4 mr-2 flex-shrink-0" />
+                            <Mail className="w-4 h-4 mr-2 shrink-0" />
                             <span className="truncate">
                               {hospital.hospitalInfo.email}
                             </span>
@@ -281,7 +281,7 @@ const HospitalCard = () => {
                       <Tooltip>
                         <TooltipTrigger asChild>
                           <div className="flex items-center text-sm text-muted-foreground">
-                            <Globe className="w-4 h-4 mr-2 flex-shrink-0" />
+                            <Globe className="w-4 h-4 mr-2 shrink-0" />
                             <span className="truncate">
                               {hospital.hospitalInfo.Website}
                             </span>

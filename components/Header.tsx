@@ -132,11 +132,11 @@ const Header = ({ onSearchStateChange, input, lat, long }: Props) => {
       >
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
           {/* Left: Logo */}
-          <div className="flex items-center gap-3 flex-shrink-0">
+          <div className="flex items-center gap-3 shrink-0">
             {/* Mobile: hamburger */}
             <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
               <SheetTrigger asChild>
-                <button className="md:hidden focus:outline-none" aria-label="Open menu">
+                <button className="md:hidden focus:outline-hidden" aria-label="Open menu">
                   <IoMenu className="h-6 w-6 text-slate-700 dark:text-slate-200" />
                 </button>
               </SheetTrigger>
@@ -144,7 +144,7 @@ const Header = ({ onSearchStateChange, input, lat, long }: Props) => {
                 <SheetHeader className="px-5 pt-5 pb-3 border-b border-slate-100 dark:border-slate-800">
                   <Logo />
                 </SheetHeader>
-                <div className="flex-grow overflow-y-auto px-4 py-4">
+                <div className="grow overflow-y-auto px-4 py-4">
                   <ul className="flex flex-col gap-1 text-sm font-medium">
                     {NAV_LINKS.map((link) => (
                       <SheetClose asChild key={link.href}>
@@ -204,7 +204,7 @@ const Header = ({ onSearchStateChange, input, lat, long }: Props) => {
           </nav>
 
           {/* Right: actions */}
-          <div className="flex items-center gap-2 flex-shrink-0">
+          <div className="flex items-center gap-2 shrink-0">
             {/* Mobile search toggle */}
             <div ref={searchRef} className="md:hidden">
               <button

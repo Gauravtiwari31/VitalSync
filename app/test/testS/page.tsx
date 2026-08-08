@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import {
   Users,
   RefreshCw,
@@ -370,7 +370,7 @@ const OPDQueuePage: React.FC = () => {
                                       doctorQueue.patientCount
                                     ),
                                   }}
-                                  className="p-2 rounded-md dark:bg-opacity-90 transition-all"
+                                  className="p-2 rounded-md transition-all"
                                   initial={{ x: -20, opacity: 0 }}
                                   animate={{ x: 0, opacity: 1 }}
                                   transition={{ duration: 0.3 }}

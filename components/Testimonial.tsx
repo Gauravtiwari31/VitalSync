@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import {
   Carousel,
   CarouselContent,
@@ -150,7 +150,7 @@ const TestimonialCarousel = () => {
           {/* Header */}
           <div className="text-center space-y-3 max-w-2xl mx-auto">
             <motion.h2
-              className="text-4xl md:text-5xl pb-2 font-bold bg-gradient-to-r from-teal-600 to-cyan-500 dark:from-teal-400 dark:to-cyan-300 inline-block text-transparent bg-clip-text"
+              className="text-4xl md:text-5xl pb-2 font-bold bg-linear-to-r from-teal-600 to-cyan-500 dark:from-teal-400 dark:to-cyan-300 inline-block text-transparent bg-clip-text"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}

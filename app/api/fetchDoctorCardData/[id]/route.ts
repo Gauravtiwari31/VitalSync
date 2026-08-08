@@ -1,9 +1,7 @@
 import prisma from "@/lib/db";
 import { getDoctor } from "@/lib/doctorlucia";
-export async function GET(
-  req: Request,
-  { params }: { params: { id: string } }
-) {
+export async function GET(req: Request, props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const id = params.id;
   const user=await prisma.doctor.findUnique({
      where: {
@@ -14,7 +12,7 @@ export async function GET(
 
      },
   })
-  
+
   let onlineFee = user?.departments[0]?.consulatationFees;
 
   if (onlineFee) {
@@ -33,7 +31,7 @@ export async function GET(
    onlineConsultationFees:onlineFee,
    isAvailable:user?.departments[0]?.isAvailable,
   }
-  
+
   if (data) {
     return new Response(JSON.stringify({ data, success: true }), {
       headers: { "Content-Type": "application/json" },

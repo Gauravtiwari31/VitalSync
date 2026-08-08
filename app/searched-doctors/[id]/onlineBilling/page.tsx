@@ -202,7 +202,7 @@ export default function DoctorBillingPage() {
 
   if (doctor == null) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-100 to-indigo-100 p-4 md:p-8 flex items-center justify-center">
+      <div className="min-h-screen bg-linear-to-br from-blue-100 to-indigo-100 p-4 md:p-8 flex items-center justify-center">
         <Card className="w-full max-w-3xl shadow-lg">
           <CardHeader className="text-center">
             <CardTitle className="text-3xl font-bold text-primary">
@@ -230,7 +230,7 @@ export default function DoctorBillingPage() {
 
   if (patient == null) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-100 to-indigo-100 p-4 md:p-8 flex items-center justify-center">
+      <div className="min-h-screen bg-linear-to-br from-blue-100 to-indigo-100 p-4 md:p-8 flex items-center justify-center">
         <Card className="w-full max-w-3xl shadow-lg">
           <CardHeader className="text-center">
             <CardTitle className="text-3xl font-bold text-primary">
@@ -244,7 +244,7 @@ export default function DoctorBillingPage() {
             <div className="flex flex-col md:flex-row gap-6">
               <div className="flex-1 space-y-16">
                 <div className="text-center space-y-6 pt-4">
-                  <h2 className="text-3xl font-semibold font-ubuntu-font text-primary p-4">
+                  <h2 className="text-3xl font-semibold font-display text-primary p-4">
                     Seems like you are not logged in!!!
                   </h2>
                   <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -264,7 +264,7 @@ export default function DoctorBillingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 p-4 md:p-8 flex items-center justify-center">
+    <div className="min-h-screen bg-linear-to-br from-blue-50 to-indigo-50 p-4 md:p-8 flex items-center justify-center">
       <Script
         id="razorpay-checkout-js"
         src="https://checkout.razorpay.com/v1/checkout.js"

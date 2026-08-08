@@ -24,7 +24,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Loader2, Building2, Key, LogIn, PlusCircle } from "lucide-react";
 import { hospitalSignIn } from "@/app/(main)/hospital-auth/authhos.actions";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 export const HospitalSigninSchema = z.object({
   uniqueIdToLogin: z.string(),
@@ -69,7 +69,7 @@ const Hospitalsignin = ({ onRegisterClick }: any) => {
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300 } },
+    show: { opacity: 1, y: 0, transition: { type: "spring" as const, stiffness: 300 } },
   };
 
   return (
@@ -80,7 +80,7 @@ const Hospitalsignin = ({ onRegisterClick }: any) => {
     >
       <Card className="w-[300px] sm:w-[430px] md:w-[540px] dark:bg-[rgba(31,41,55,0.5)] backdrop-blur-3xl border border-slate-200 dark:border-slate-700 shadow-lg relative overflow-hidden">
         <motion.div
-          className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-sky-400 to-blue-600 dark:from-sky-500 dark:to-blue-700"
+          className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-sky-400 to-blue-600 dark:from-sky-500 dark:to-blue-700"
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: 0.8, ease: "easeInOut", delay: 0.2 }}
@@ -94,7 +94,7 @@ const Hospitalsignin = ({ onRegisterClick }: any) => {
             className="flex items-center gap-2"
           >
             <PlusCircle className="h-6 w-6 text-sky-500 dark:text-sky-400" />
-            <CardTitle className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-sky-500 to-blue-600 dark:from-sky-400 dark:to-blue-500">
+            <CardTitle className="text-2xl font-bold bg-clip-text text-transparent bg-linear-to-r from-sky-500 to-blue-600 dark:from-sky-400 dark:to-blue-500">
               Hospital Login
             </CardTitle>
           </motion.div>
@@ -114,9 +114,9 @@ const Hospitalsignin = ({ onRegisterClick }: any) => {
             >
               <motion.div variants={itemVariants}>
                 <motion.div
-                  className="mx-auto mb-6 w-20 h-20 rounded-full bg-gradient-to-r from-sky-400/10 to-blue-500/10 flex items-center justify-center"
+                  className="mx-auto mb-6 w-20 h-20 rounded-full bg-linear-to-r from-sky-400/10 to-blue-500/10 flex items-center justify-center"
                   whileHover={{ scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 400 }}
+                  transition={{ type: "spring" as const, stiffness: 400 }}
                 >
                   <Building2 className="h-10 w-10 text-sky-500 dark:text-sky-400" />
                 </motion.div>
@@ -182,7 +182,7 @@ const Hospitalsignin = ({ onRegisterClick }: any) => {
                   <Button
                     disabled={isPending}
                     type="submit"
-                    className="w-full bg-gradient-to-r from-sky-500 to-blue-600 dark:from-sky-600 dark:to-blue-700 hover:from-sky-600 hover:to-blue-700 text-white shadow-md hover:shadow-lg transition-all duration-200 h-11"
+                    className="w-full bg-linear-to-r from-sky-500 to-blue-600 dark:from-sky-600 dark:to-blue-700 hover:from-sky-600 hover:to-blue-700 text-white shadow-md hover:shadow-lg transition-all duration-200 h-11"
                   >
                     {isPending ? (
                       <Loader2 className="animate-spin mr-2 h-5 w-5" />

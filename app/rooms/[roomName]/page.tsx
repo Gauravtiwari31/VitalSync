@@ -4,17 +4,18 @@ import { isVideoCodec } from '@/lib/types';
 import "../../../styles/main.module.css";
 import "@livekit/components-styles";
 import "@livekit/components-styles/prefabs";
-export default function Page({
-  params,
-  searchParams,
-}: {
-  params: { roomName: string };
-  searchParams: {
-    region?: string;
-    hq?: string;
-    codec?: string;
-  };
-}) {
+export default async function Page(
+  props: {
+    params: Promise<{ roomName: string }>;
+    searchParams: Promise<{
+      region?: string;
+      hq?: string;
+      codec?: string;
+    }>;
+  }
+) {
+  const searchParams = await props.searchParams;
+  const params = await props.params;
   const codec =
     typeof searchParams.codec === 'string' && isVideoCodec(searchParams.codec)
       ? searchParams.codec

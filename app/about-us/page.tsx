@@ -100,7 +100,7 @@ const AboutUs: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <main className="flex-grow bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
+      <main className="grow bg-linear-to-br from-blue-50 to-indigo-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
         <div className="container mx-auto px-4 py-16">
           <nav className="flex justify-between items-center mb-12">
             <Link
@@ -162,7 +162,7 @@ const AboutUs: React.FC = () => {
                       ]
                   ).map((item, idx) => (
                     <li key={idx} className="flex items-start">
-                      <IoShieldCheckmark className="w-5 h-5 sm:w-6 sm:h-6 text-green-500 mr-2 flex-shrink-0 mt-1" />
+                      <IoShieldCheckmark className="w-5 h-5 sm:w-6 sm:h-6 text-green-500 mr-2 shrink-0 mt-1" />
                       <span>{item}</span>
                     </li>
                   ))}
