@@ -218,14 +218,14 @@ export const columns: ColumnDef<BedRooms>[] = [
       const amount = String(row.getValue("bookedby"));
       if (amount === "Unbooked") {
         return (
-          <div className="flex  gap-2 font-semibold items-center  text-blue-600 bg-blue-100 px-4  py-1 rounded-full drop-shadow-sm">
+          <div className="flex  gap-2 font-semibold items-center  text-blue-600 bg-blue-100 px-4  py-1 rounded-full drop-shadow-xs">
             <LockOpen className="h-5 w-5"></LockOpen>
             Unbooked 
           </div>
         );
       }
       return (
-        <div className=" font-medium  flex gap-1 items-center drop-shadow-sm">
+        <div className=" font-medium  flex gap-1 items-center drop-shadow-xs">
           <User></User>
           {amount}
         </div>
@@ -291,7 +291,7 @@ export const columns: ColumnDef<BedRooms>[] = [
       };
       
       
-      const { id } = useParams();
+      const { id } = useParams<{ id: string }>();
       const amount: string = String(row.getValue("aadhar"));
       const isAvailable = String(row.getValue("isAvailabel"));
       // useEffect(() => {
@@ -616,7 +616,7 @@ export const columns: ColumnDef<BedRooms>[] = [
       }
       if (isAvailable === "true" || amount === "null") {
         return (
-          <div className="flex  gap-2 font-semibold items-center  text-yellow-600 bg-yellow-100 px-4  py-1 rounded-full drop-shadow-sm cursor-pointer">
+          <div className="flex  gap-2 font-semibold items-center  text-yellow-600 bg-yellow-100 px-4  py-1 rounded-full drop-shadow-xs cursor-pointer">
             <TriangleAlert className="h-5 w-5"></TriangleAlert>
             Data Unavailable
           </div>
@@ -625,7 +625,7 @@ export const columns: ColumnDef<BedRooms>[] = [
       const values: { amount: string; id: string | string[] } = { amount, id };
       return (
         <div
-          className=" font-medium  flex gap-1 items-center drop-shadow-sm cursor-pointer"
+          className=" font-medium  flex gap-1 items-center drop-shadow-xs cursor-pointer"
           onClick={() => fetchPatient(values)}
         >
           {amount}

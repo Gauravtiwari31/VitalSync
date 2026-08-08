@@ -24,7 +24,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Loader2, User, Key, LogIn, LucideSmile } from "lucide-react";
 import { doctorSignIn } from "@/app/(main)/doctor-auth/authdoc.action";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 export const DoctorSigninSchema = z.object({
   userId: z.string(),
@@ -69,7 +69,7 @@ const Doctorsignin = ({ onRegisterClick }: any) => {
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300 } },
+    show: { opacity: 1, y: 0, transition: { type: "spring" as const, stiffness: 300 } },
   };
 
   return (
@@ -80,7 +80,7 @@ const Doctorsignin = ({ onRegisterClick }: any) => {
     >
       <Card className="w-[300px] sm:w-[430px] md:w-[540px] dark:bg-[rgba(31,41,55,0.5)] backdrop-blur-3xl border border-slate-200 dark:border-slate-700 shadow-lg relative overflow-hidden">
         <motion.div
-          className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-teal-600 dark:from-blue-500 dark:to-teal-700"
+          className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-blue-400 to-teal-600 dark:from-blue-500 dark:to-teal-700"
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: 0.8, ease: "easeInOut", delay: 0.2 }}
@@ -94,7 +94,7 @@ const Doctorsignin = ({ onRegisterClick }: any) => {
             className="flex items-center gap-2"
           >
             <LucideSmile className="h-6 w-6 text-blue-500 dark:text-blue-400" />
-            <CardTitle className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-600 dark:from-blue-400 dark:to-teal-500">
+            <CardTitle className="text-2xl font-bold bg-clip-text text-transparent bg-linear-to-r from-blue-500 to-teal-600 dark:from-blue-400 dark:to-teal-500">
               Doctor Login
             </CardTitle>
           </motion.div>
@@ -114,9 +114,9 @@ const Doctorsignin = ({ onRegisterClick }: any) => {
             >
               <motion.div variants={itemVariants}>
                 <motion.div
-                  className="mx-auto mb-6 w-20 h-20 rounded-full bg-gradient-to-r from-blue-400/10 to-teal-500/10 flex items-center justify-center"
+                  className="mx-auto mb-6 w-20 h-20 rounded-full bg-linear-to-r from-blue-400/10 to-teal-500/10 flex items-center justify-center"
                   whileHover={{ scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 400 }}
+                  transition={{ type: "spring" as const, stiffness: 400 }}
                 >
                   <User className="h-10 w-10 text-blue-500 dark:text-blue-400" />
                 </motion.div>
@@ -182,7 +182,7 @@ const Doctorsignin = ({ onRegisterClick }: any) => {
                   <Button
                     disabled={isPending}
                     type="submit"
-                    className="w-full bg-gradient-to-r from-blue-500 to-teal-600 dark:from-blue-600 dark:to-teal-700 hover:from-blue-600 hover:to-teal-700 text-white shadow-md hover:shadow-lg transition-all duration-200 h-11"
+                    className="w-full bg-linear-to-r from-blue-500 to-teal-600 dark:from-blue-600 dark:to-teal-700 hover:from-blue-600 hover:to-teal-700 text-white shadow-md hover:shadow-lg transition-all duration-200 h-11"
                   >
                     {isPending ? (
                       <Loader2 className="animate-spin mr-2 h-5 w-5" />

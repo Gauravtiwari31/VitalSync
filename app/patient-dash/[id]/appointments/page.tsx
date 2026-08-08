@@ -139,7 +139,7 @@ const AppointmentList = () => {
           Appointments
         </h2>
 
-        <div className="inline-flex rounded-md shadow-sm">
+        <div className="inline-flex rounded-md shadow-xs">
           <button
             type="button"
             className={`px-4 py-2 text-sm font-medium rounded-l-lg border ${
@@ -183,7 +183,7 @@ const AppointmentList = () => {
               key={apt.id}
               className="flex flex-col md:flex-row md:items-center bg-slate-50 dark:bg-slate-700 rounded-lg p-4 hover:bg-slate-100 dark:hover:bg-slate-600 transition-colors duration-150 border border-transparent hover:border-slate-200 dark:hover:border-slate-600"
             >
-              <div className="flex-grow mb-4 md:mb-0 md:mr-6">
+              <div className="grow mb-4 md:mb-0 md:mr-6">
                 <div className="flex items-start md:items-center justify-between mb-2">
                   <div>
                     <h3 className="font-semibold text-slate-800 dark:text-white">

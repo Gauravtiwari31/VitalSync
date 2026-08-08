@@ -24,7 +24,7 @@ const doctorData1: Doctor = {
 };
 
 export default function Page() {
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
   const [doctorData, setDoctorData] = useState<Doctor>();
   useEffect(() => {
     const fetchDoctorData = async () => {

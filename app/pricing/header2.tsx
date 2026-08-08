@@ -38,7 +38,7 @@ import DarkModeToggle from "@/components/DarkModeToggle";
 import Logo from "@/components/Logo";
 import SearchResults from "@/components/SearchResults";
 import SymptomSearchBar from "@/components/SymptomsSearchBar";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from "motion/react";
 import { Button } from "@/components/ui/button";
 
 type Props = {
@@ -92,7 +92,7 @@ const PromoBanner = () => {
 
   const CountdownUnit = ({ value, label }: any) => (
     <div className="flex flex-col items-center">
-      <div className="bg-white/10 rounded-lg px-3 py-2 backdrop-blur-sm">
+      <div className="bg-white/10 rounded-lg px-3 py-2 backdrop-blur-xs">
         <span className="text-xl md:text-2xl font-bold text-white tabular-nums">
           {formatNumber(value)}
         </span>
@@ -108,13 +108,13 @@ const PromoBanner = () => {
           initial={{ opacity: 0, y: -100 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -100 }}
-          transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
+          transition={{ duration: 0.5, type: "spring" as const, stiffness: 100 }}
           className="z-50"
         >
           <div className="relative overflow-hidden">
             {/* Enhanced gradient background */}
-            <div className="absolute inset-0 bg-gradient-to-r from-teal-600 via-blue-600 to-teal-600 animate-gradient bg-[length:200%_100%]" />
-            <div className="absolute inset-0 bg-white/5 backdrop-blur-sm" />
+            <div className="absolute inset-0 bg-linear-to-r from-teal-600 via-blue-600 to-teal-600 animate-gradient bg-size-[200%_100%]" />
+            <div className="absolute inset-0 bg-white/5 backdrop-blur-xs" />
 
             {/* Simplified background effect */}
             <div className="absolute inset-0">
@@ -130,7 +130,7 @@ const PromoBanner = () => {
                   <div className="flex items-center justify-center space-x-6 w-full md:w-auto">
                     <motion.div
                       whileHover={{ scale: 1.05 }}
-                      className="hidden sm:flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-white/20 to-white/5 shadow-lg"
+                      className="hidden sm:flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-linear-to-br from-white/20 to-white/5 shadow-lg"
                     >
                       <Gift className="h-8 w-8 text-white" />
                     </motion.div>
@@ -196,7 +196,7 @@ const PromoBanner = () => {
                       >
                         <span className="relative z-10">Book Your Slot</span>
                         <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1 relative z-10" />
-                        <div className="absolute inset-0 bg-gradient-to-r from-teal-50 to-blue-50 transform transition-transform group-hover:scale-x-100 scale-x-0 origin-left" />
+                        <div className="absolute inset-0 bg-linear-to-r from-teal-50 to-blue-50 transform transition-transform group-hover:scale-x-100 scale-x-0 origin-left" />
                       </Button>
                     </motion.div>
                     <motion.button
@@ -214,7 +214,7 @@ const PromoBanner = () => {
             </div>
 
             {/* Enhanced bottom border */}
-            <div className="h-1 bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+            <div className="h-1 bg-linear-to-r from-transparent via-white/30 to-transparent" />
           </div>
 
           <style jsx>{`
@@ -554,7 +554,7 @@ const Header2 = ({ onSearchStateChange, input, lat, long }: Props) => {
             </li>
 
             <li>
-              <div className="fixed top-5 right-5 z-[100]">
+              <div className="fixed top-5 right-5 z-100">
                 <DarkModeToggle />
               </div>
             </li>
@@ -562,13 +562,13 @@ const Header2 = ({ onSearchStateChange, input, lat, long }: Props) => {
         </section>
         <PromoBanner />
         {/* Main navigation */}
-        <nav className="text-teal-950 dark:text-teal-50 flex flex-col md:flex-row justify-around items-center h-auto md:h-16 py-4 md:py-0 px-3 sm:px-6 transition-colors duration-300 z-[1000]">
+        <nav className="text-teal-950 dark:text-teal-50 flex flex-col md:flex-row justify-around items-center h-auto md:h-16 py-4 md:py-0 px-3 sm:px-6 transition-colors duration-300 z-1000">
           <div className="md:bg-transparent backdrop-blur-2xl md:backdrop-blur-none flex justify-between items-center w-full md:w-auto md:hidden rounded-full sm:px-4 gap-2">
             {/* Mobile menu trigger using shadcn/ui Sheet */}
             <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
               <SheetTrigger asChild>
                 <button
-                  className="md:hidden focus:outline-none z-50"
+                  className="md:hidden focus:outline-hidden z-50"
                   aria-label={isMenuOpen ? "Close menu" : "Open menu"}
                 >
                   <IoMenu className="text-teal-800 dark:text-teal-200 h-8 w-8" />
@@ -588,7 +588,7 @@ const Header2 = ({ onSearchStateChange, input, lat, long }: Props) => {
                 {/* Location display for mobile */}
                 <div className="px-6 flex flex-col justify-start items-start w-full gap-2 bg-blue-50 dark:bg-slate-900">
                   <p className="text-teal-800 dark:text-teal-300 text-sm font-medium flex items-center gap-1">
-                    <GrLocation className="text-teal-800 dark:text-teal-300 h-5 w-5 flex-shrink-0" />
+                    <GrLocation className="text-teal-800 dark:text-teal-300 h-5 w-5 shrink-0" />
                     <span>Location:</span>
                   </p>
                   <span className="text-teal-600 dark:text-teal-400 font-light text-xs">
@@ -596,10 +596,10 @@ const Header2 = ({ onSearchStateChange, input, lat, long }: Props) => {
                   </span>
                 </div>
 
-                <div className="h-px bg-gradient-to-r from-transparent via-teal-400 to-transparent"></div>
+                <div className="h-px bg-linear-to-r from-transparent via-teal-400 to-transparent"></div>
 
                 {/* Navigation links */}
-                <div className="flex-grow overflow-y-auto">
+                <div className="grow overflow-y-auto">
                   <ul className="nav-links bg-blue-50 dark:bg-slate-900 flex flex-col justify-start w-full px-6 text-md">
                     <SheetClose asChild>
                       <Link
@@ -721,7 +721,7 @@ const Header2 = ({ onSearchStateChange, input, lat, long }: Props) => {
                       </div>
                     </div>
 
-                    <div className="h-px bg-gradient-to-r from-transparent via-teal-400 to-transparent"></div>
+                    <div className="h-px bg-linear-to-r from-transparent via-teal-400 to-transparent"></div>
 
                     <p className="text-teal-800 dark:text-teal-300 text-xs text-center">
                       © 2026 VitalSync. All rights reserved.
@@ -737,7 +737,7 @@ const Header2 = ({ onSearchStateChange, input, lat, long }: Props) => {
                 <>
                   <button
                     onClick={toggleSearch}
-                    className="focus:outline-none mr-2"
+                    className="focus:outline-hidden mr-2"
                     aria-label={isSearchOpen ? "Close search" : "Open search"}
                   >
                     {isSearchOpen ? (
@@ -770,7 +770,7 @@ const Header2 = ({ onSearchStateChange, input, lat, long }: Props) => {
                             handleSearchSubmit(e);
                           }
                         }}
-                        className="bg-white ring-1 dark:bg-slate-800 dark:text-teal-50 rounded-md px-2 py-1 outline-none focus:ring-2 focus:ring-teal-500 w-44 m-1 sm:w-56 md:w-64"
+                        className="bg-white ring-1 dark:bg-slate-800 dark:text-teal-50 rounded-md px-2 py-1 outline-hidden focus:ring-2 focus:ring-teal-500 w-44 m-1 sm:w-56 md:w-64"
                         placeholder="Search..."
                       />
                     </form>
@@ -791,7 +791,7 @@ const Header2 = ({ onSearchStateChange, input, lat, long }: Props) => {
                           handleSearchSubmit(e);
                         }
                       }}
-                      className="bg-blue-800 dark:bg-slate-800 text-teal-50 rounded-md px-2 py-1 outline-none focus:ring-2 focus:ring-teal-500 w-44 sm:w-56 md:w-64"
+                      className="bg-blue-800 dark:bg-slate-800 text-teal-50 rounded-md px-2 py-1 outline-hidden focus:ring-2 focus:ring-teal-500 w-44 sm:w-56 md:w-64"
                       placeholder="Search..."
                     />
                   </form>

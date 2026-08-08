@@ -11,7 +11,7 @@ const DoctorAuth = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <AuthHeader name="Doctor" />
-      <div className="flex-grow flex items-center justify-center w-full relative overflow-hidden py-10 px-4 bg-transparent">
+      <div className="grow flex items-center justify-center w-full relative overflow-hidden py-10 px-4 bg-transparent">
         {/* Background design elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-blue-100 dark:bg-blue-900/20 blur-3xl opacity-50"></div>
@@ -38,7 +38,7 @@ const DoctorAuth = () => {
             <rect width="100%" height="100%" fill="url(#grid)" />
           </svg>
         </div>
-        <div className="relative max-w-screen-2xl w-full z-10 pt-10">
+        <div className="relative max-w-[theme(screens.2xl)] w-full z-10 pt-10">
           <SignInSignUpTabswitcher
             name="Doctor"
             signinTab={<Doctorsignin />}

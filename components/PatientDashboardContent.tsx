@@ -46,9 +46,9 @@ const PatientDashboardContent: React.FC<PatientDashboardContentProps> = ({
   if (!userData) return null;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4 sm:p-6 md:p-8 dark:bg-gradient-to-r dark:from-gray-950 dark:via-gray-900 dark:to-slate-950">
+    <div className="min-h-screen bg-linear-to-br from-blue-50 to-indigo-100 p-4 sm:p-6 md:p-8 dark:bg-linear-to-r dark:from-gray-950 dark:via-gray-900 dark:to-slate-950">
       <div className="max-w-6xl mx-auto bg-white dark:bg-gray-900 shadow-2xl rounded-3xl overflow-hidden transition-all duration-300">
-        <div className="bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-gray-900/20 dark:to-slate-900/20 text-white p-8">
+        <div className="bg-linear-to-r from-blue-600 to-indigo-600 dark:from-gray-900/20 dark:to-slate-900/20 text-white p-8">
           <h1 className="text-4xl font-bold">Patient Dashboard</h1>
         </div>
         <div className="p-8 bg-gray-50 dark:bg-gray-800">

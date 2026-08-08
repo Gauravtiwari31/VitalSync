@@ -111,7 +111,7 @@ const Documents = () => {
             <input
               type="text"
               placeholder="Search documents..."
-              className="pl-10 pr-4 py-2 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-800 dark:text-white w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="pl-10 pr-4 py-2 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-800 dark:text-white w-full focus:outline-hidden focus:ring-2 focus:ring-blue-500"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -122,7 +122,7 @@ const Documents = () => {
           </div>
 
           <select
-            className="px-3 py-2 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-800 dark:text-white appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="px-3 py-2 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-800 dark:text-white appearance-none focus:outline-hidden focus:ring-2 focus:ring-blue-500"
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
           >
@@ -193,7 +193,7 @@ const Documents = () => {
                 className="flex flex-col p-4 bg-slate-50 dark:bg-slate-700 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-600 transition duration-150 border border-transparent hover:border-blue-200 dark:hover:border-blue-800"
               >
                 <div className="flex items-center mb-3">
-                  <div className="p-3 mr-3 bg-white dark:bg-slate-800 rounded-lg shadow-sm">
+                  <div className="p-3 mr-3 bg-white dark:bg-slate-800 rounded-lg shadow-xs">
                     {getFileIcon(doc.type)}
                   </div>
                   <div className="flex-1 truncate">
@@ -231,7 +231,7 @@ const Documents = () => {
                 className="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-700 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-600 transition duration-150"
               >
                 <div className="flex items-center space-x-3">
-                  <div className="p-2 bg-white dark:bg-slate-800 rounded-lg shadow-sm">
+                  <div className="p-2 bg-white dark:bg-slate-800 rounded-lg shadow-xs">
                     {getFileIcon(doc.type)}
                   </div>
                   <div>

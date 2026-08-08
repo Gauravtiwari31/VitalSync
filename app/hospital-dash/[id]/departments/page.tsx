@@ -37,7 +37,7 @@ export default function Departments() {
   const [departments, setDepartments] = useState<Department[] | null>(null);
   const [isPending, startTransition] = useTransition();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -106,7 +106,7 @@ export default function Departments() {
           placeholder="Search departments..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="border border-gray-300 p-3 rounded-lg w-full shadow-sm"
+          className="border border-gray-300 p-3 rounded-lg w-full shadow-xs"
         />
       </div>
 

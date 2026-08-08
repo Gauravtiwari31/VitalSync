@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
 import {
   Bot,
@@ -79,7 +79,7 @@ const LoadingDots = () => {
       {[1, 2].map((_, index) => (
         <motion.div
           key={index}
-          className="h-4 w-full rounded"
+          className="h-4 w-full rounded-sm"
           style={{
             background:
               "linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%)",
@@ -115,7 +115,7 @@ const ResponseSection = ({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
       className={cn(
-        "bg-white dark:bg-slate-800 rounded-xl shadow-lg p-6 backdrop-blur-sm",
+        "bg-white dark:bg-slate-800 rounded-xl shadow-lg p-6 backdrop-blur-xs",
         className
       )}
     >
@@ -126,7 +126,7 @@ const ResponseSection = ({
         )}
         onClick={() => expandable && setIsExpanded(!isExpanded)}
       >
-        <div className="p-2 rounded-lg bg-gradient-to-tr from-violet-500 to-fuchsia-500">
+        <div className="p-2 rounded-lg bg-linear-to-tr from-violet-500 to-fuchsia-500">
           <Icon className="h-5 w-5 text-white" />
         </div>
         <h2 className="text-xl font-semibold text-slate-800 dark:text-white flex-1">
@@ -167,11 +167,11 @@ const Message = ({ message, isLast }: any) => {
       >
         <div className="flex items-center gap-3">
           <div className="text-sm text-slate-500 dark:text-slate-400">You</div>
-          <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-violet-500 to-fuchsia-500 flex items-center justify-center">
+          <div className="w-8 h-8 rounded-full bg-linear-to-tr from-violet-500 to-fuchsia-500 flex items-center justify-center">
             <User className="h-4 w-4 text-white" />
           </div>
         </div>
-        <div className="max-w-[80%] bg-gradient-to-tr from-violet-500 to-fuchsia-500 text-white p-4 rounded-xl shadow-lg">
+        <div className="max-w-[80%] bg-linear-to-tr from-violet-500 to-fuchsia-500 text-white p-4 rounded-xl shadow-lg">
           {message.content}
         </div>
       </motion.div>
@@ -185,14 +185,14 @@ const Message = ({ message, isLast }: any) => {
       className="flex flex-col space-y-2 mb-8"
     >
       <div className="flex items-center gap-3">
-        <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-violet-500 to-fuchsia-500 flex items-center justify-center">
+        <div className="w-8 h-8 rounded-full bg-linear-to-tr from-violet-500 to-fuchsia-500 flex items-center justify-center">
           <Bot className="h-4 w-4 text-white" />
         </div>
         <div className="text-sm text-slate-500 dark:text-slate-400">
           HealthBuddy Assistant
         </div>
       </div>
-      <div className=" bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl shadow-lg">
+      <div className=" bg-white/50 dark:bg-slate-800/50 backdrop-blur-xs p-6 rounded-xl shadow-lg">
         {isLast && !message.content ? (
           <LoadingDots />
         ) : (
@@ -287,7 +287,7 @@ const renderBotResponse = (content: any) => {
                 transition={{ delay: index * 0.1 }}
                 className="flex items-start gap-3 text-slate-600 dark:text-slate-300"
               >
-                <div className="h-2 w-2 rounded-full bg-yellow-500 mt-2 flex-shrink-0" />
+                <div className="h-2 w-2 rounded-full bg-yellow-500 mt-2 shrink-0" />
                 <span>{precaution}</span>
               </motion.li>
             )
@@ -317,7 +317,7 @@ const renderBotResponse = (content: any) => {
                   transition={{ delay: index * 0.1 }}
                   className="flex items-start gap-3 text-slate-600 dark:text-slate-300"
                 >
-                  <div className="h-2 w-2 rounded-full bg-red-500 mt-2 flex-shrink-0" />
+                  <div className="h-2 w-2 rounded-full bg-red-500 mt-2 shrink-0" />
                   <span>{flag}</span>
                 </motion.li>
               )
@@ -338,7 +338,7 @@ const renderBotResponse = (content: any) => {
                   transition={{ delay: index * 0.1 }}
                   className="flex items-start gap-3 text-slate-600 dark:text-slate-300"
                 >
-                  <div className="h-2 w-2 rounded-full bg-red-500 mt-2 flex-shrink-0" />
+                  <div className="h-2 w-2 rounded-full bg-red-500 mt-2 shrink-0" />
                   <span>{processText(flag)}</span>
                 </motion.li>
               )
@@ -355,7 +355,7 @@ const renderBotResponse = (content: any) => {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: index * 0.1 }}
-              className="bg-gradient-to-tr from-slate-50 to-white dark:from-slate-700/50 dark:to-slate-800/50 p-4 rounded-xl shadow-sm"
+              className="bg-linear-to-tr from-slate-50 to-white dark:from-slate-700/50 dark:to-slate-800/50 p-4 rounded-xl shadow-xs"
             >
               <h3 className="font-medium text-violet-600 dark:text-violet-400 mb-2">
                 {dept.department}
@@ -433,15 +433,15 @@ const AssistantBhura = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-violet-50 to-slate-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+    <div className="min-h-screen bg-linear-to-br from-slate-50 via-violet-50 to-slate-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
       {/* Header */}
       <header className="fixed top-0 w-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-md z-50 border-b border-slate-200 dark:border-slate-700">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-violet-500 to-fuchsia-500 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-xl bg-linear-to-tr from-violet-500 to-fuchsia-500 flex items-center justify-center">
               <Bot className="h-6 w-6 text-white" />
             </div>
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
+            <h1 className="text-2xl font-bold bg-linear-to-r from-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
               HealthBuddy
             </h1>
           </div>
@@ -472,12 +472,12 @@ const AssistantBhura = () => {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Type your health concern..."
-              className="flex-grow bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-xl shadow-sm focus:ring-2 focus:ring-violet-500 dark:focus:ring-violet-400"
+              className="grow bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-xl shadow-xs focus:ring-2 focus:ring-violet-500 dark:focus:ring-violet-400"
             />
             <Button
               type="submit"
               disabled={loading}
-              className="bg-gradient-to-tr from-violet-500 to-fuchsia-500 hover:from-violet-600 hover:to-fuchsia-600 text-white rounded-xl px-6 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+              className="bg-linear-to-tr from-violet-500 to-fuchsia-500 hover:from-violet-600 hover:to-fuchsia-600 text-white rounded-xl px-6 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
             >
               {loading ? (
                 <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -497,7 +497,7 @@ const AssistantBhura = () => {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0 }}
             onClick={scrollToTop}
-            className="fixed bottom-24 right-4 bg-gradient-to-tr from-violet-500 to-fuchsia-500 hover:from-violet-600 hover:to-fuchsia-600 text-white p-3 rounded-xl shadow-lg transition-all duration-200"
+            className="fixed bottom-24 right-4 bg-linear-to-tr from-violet-500 to-fuchsia-500 hover:from-violet-600 hover:to-fuchsia-600 text-white p-3 rounded-xl shadow-lg transition-all duration-200"
           >
             <ArrowUp className="h-5 w-5" />
           </motion.button>

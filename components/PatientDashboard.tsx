@@ -42,7 +42,7 @@ const Dashboard = ({ samplePatientData = {} }) => {
             <Activity className="mr-2 text-blue-500" size={24} />
             Health Metrics
           </h2>
-          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm">
+          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-xs">
             <div className="grid grid-cols-3 gap-4 mb-4">
               <div>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
@@ -99,7 +99,7 @@ const Dashboard = ({ samplePatientData = {} }) => {
             <FileText className="mr-2 text-green-500" size={24} />
             Upcoming Appointments
           </h2>
-          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm">
+          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-xs">
             <AppointmentList appointments={appointments} />
           </div>
         </div>
@@ -110,7 +110,7 @@ const Dashboard = ({ samplePatientData = {} }) => {
             <Brain className="mr-2 text-purple-500" size={24} />
             Health Insights
           </h2>
-          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm">
+          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-xs">
             <HealthInsights insights={healthInsights} />
           </div>
         </div>
@@ -121,7 +121,7 @@ const Dashboard = ({ samplePatientData = {} }) => {
             <Brain className="mr-2 text-indigo-500" size={24} />
             Mental Wellbeing
           </h2>
-          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm">
+          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-xs">
             <MentalWellbeing wellbeing={mentalWellbeing} />
           </div>
         </div>
@@ -132,7 +132,7 @@ const Dashboard = ({ samplePatientData = {} }) => {
             <FileText className="mr-2 text-yellow-500" size={24} />
             Health Records
           </h2>
-          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm">
+          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-xs">
             <HealthRecords records={healthRecords} />
           </div>
         </div>
@@ -143,7 +143,7 @@ const Dashboard = ({ samplePatientData = {} }) => {
             <DollarSign className="mr-2 text-green-500" size={24} />
             Billing & Insurance
           </h2>
-          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm">
+          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-xs">
             <BillingInsurance billing={billingInsurance} />
           </div>
         </div>
@@ -154,7 +154,7 @@ const Dashboard = ({ samplePatientData = {} }) => {
             <PhoneCall className="mr-2 text-red-500" size={24} />
             Emergency Contacts
           </h2>
-          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm">
+          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-xs">
             <EmergencyContacts contacts={emergencyContacts} />
           </div>
         </div>

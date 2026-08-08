@@ -1770,7 +1770,7 @@ const page = (props: Props) => {
     )
   }
   return (
-    <div className="min-h-screen flex items-center text-center justify-center bg-gradient-to-r dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
+    <div className="min-h-screen flex items-center text-center justify-center bg-linear-to-r dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
       {/* <BeatLoader className="w-[50px] h-[20px]"></BeatLoader> */}
       Test Page
       {/* <Button onClick={handleAddDepartment}>Handle Add Doc to Dept</Button> */}

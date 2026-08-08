@@ -34,7 +34,7 @@ const SidebarComponent = ({ setSelectedModel, selectedModel }: any) => {
   const SidebarContent = ({ isMobile = false }) => (
     <div className="flex flex-col h-full bg-white dark:bg-[#080e1a]">
       {/* Header */}
-      <div className="px-4 h-14 flex items-center justify-between border-b border-slate-200 dark:border-slate-800 flex-shrink-0">
+      <div className="px-4 h-14 flex items-center justify-between border-b border-slate-200 dark:border-slate-800 shrink-0">
         <div className="flex items-center gap-2.5">
           <div className="w-7 h-7 rounded-lg bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center">
             <Bot className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
@@ -50,7 +50,7 @@ const SidebarComponent = ({ setSelectedModel, selectedModel }: any) => {
       </div>
 
       {/* Actions */}
-      <div className="p-3 space-y-2 border-b border-slate-100 dark:border-slate-800 flex-shrink-0">
+      <div className="p-3 space-y-2 border-b border-slate-100 dark:border-slate-800 shrink-0">
         {/* Model picker */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -71,7 +71,7 @@ const SidebarComponent = ({ setSelectedModel, selectedModel }: any) => {
               className="gap-3 cursor-pointer"
               onClick={() => setSelectedModel("curo-beat")}
             >
-              <div className="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0" />
+              <div className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" />
               <div>
                 <p className="text-sm font-medium">HealthBuddy Pro</p>
                 <p className="text-xs text-slate-500">Deep health analysis</p>
@@ -81,7 +81,7 @@ const SidebarComponent = ({ setSelectedModel, selectedModel }: any) => {
               className="gap-3 cursor-pointer"
               onClick={() => setSelectedModel("curo-flash")}
             >
-              <div className="w-2 h-2 rounded-full bg-sky-400 flex-shrink-0" />
+              <div className="w-2 h-2 rounded-full bg-sky-400 shrink-0" />
               <div>
                 <p className="text-sm font-medium">HealthBuddy Flash</p>
                 <p className="text-xs text-slate-500">Quick responses</p>
@@ -116,7 +116,7 @@ const SidebarComponent = ({ setSelectedModel, selectedModel }: any) => {
       </ScrollArea>
 
       {/* Footer */}
-      <div className="p-3 border-t border-slate-100 dark:border-slate-800 flex-shrink-0">
+      <div className="p-3 border-t border-slate-100 dark:border-slate-800 shrink-0">
         <Link href="/">
           <button className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
             <Home className="h-4 w-4" />
@@ -133,7 +133,7 @@ const SidebarComponent = ({ setSelectedModel, selectedModel }: any) => {
       <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
         <SheetTrigger asChild>
           <button
-            className="lg:hidden fixed top-3.5 left-4 z-50 p-1.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm"
+            className="lg:hidden fixed top-3.5 left-4 z-50 p-1.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-xs"
             aria-label="Open sidebar"
           >
             <Menu className="h-4 w-4 text-slate-600 dark:text-slate-300" />

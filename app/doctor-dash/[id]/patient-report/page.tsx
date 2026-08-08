@@ -2,7 +2,7 @@
 
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import {
   Tabs,
   TabsContent,
@@ -171,7 +171,7 @@ export default function Page() {
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -50 }}
-            className="mb-4 p-4 bg-green-100 text-green-800 rounded-lg shadow flex items-center justify-between"
+            className="mb-4 p-4 bg-green-100 text-green-800 rounded-lg shadow-sm flex items-center justify-between"
           >
             <span className="flex items-center gap-2">
               <FileText size={18} />
@@ -181,7 +181,7 @@ export default function Page() {
         )}
         
         <Card className="mb-8 overflow-hidden">
-          <CardHeader className="bg-gradient-to-r from-blue-700 to-indigo-800 dark:from-blue-900 dark:to-indigo-950 text-white p-6">
+          <CardHeader className="bg-linear-to-r from-blue-700 to-indigo-800 dark:from-blue-900 dark:to-indigo-950 text-white p-6">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
               <div className="flex items-center gap-3">
                 <Hospital className="h-8 w-8" />
@@ -207,7 +207,7 @@ export default function Page() {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.1 }}
-            className="m-6 p-4 bg-blue-50 dark:bg-gray-800 rounded-lg shadow-sm"
+            className="m-6 p-4 bg-blue-50 dark:bg-gray-800 rounded-lg shadow-xs"
           >
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>

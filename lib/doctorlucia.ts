@@ -27,7 +27,7 @@ declare module "lucia" {
   }
 }
 export const getDoctor = async () => {
-  const sessionId = cookies().get(doctorlucia.sessionCookieName)?.value || null;
+  const sessionId = (await cookies()).get(doctorlucia.sessionCookieName)?.value || null;
   if (!sessionId) {
     return null;
   }
@@ -35,7 +35,7 @@ export const getDoctor = async () => {
   try {
     if (session && session.fresh) {
       const sessionCookie = await doctorlucia.createSessionCookie(session.id);
-      cookies().set(
+      (await cookies()).set(
         sessionCookie.name,
         sessionCookie.value,
         sessionCookie.attributes
@@ -43,7 +43,7 @@ export const getDoctor = async () => {
     }
     if (!session) {
       const sessionCookie = await doctorlucia.createBlankSessionCookie();
-      cookies().set(
+      (await cookies()).set(
         sessionCookie.name,
         sessionCookie.value,
         sessionCookie.attributes
@@ -78,7 +78,7 @@ export const getDoctor = async () => {
 
 };
 export const verifyDoctorDetails = async () => {
-  const sessionId = cookies().get(doctorlucia.sessionCookieName)?.value || null;
+  const sessionId = (await cookies()).get(doctorlucia.sessionCookieName)?.value || null;
   if (!sessionId) {
     return null;
   }
@@ -86,7 +86,7 @@ export const verifyDoctorDetails = async () => {
   try {
     if (session && session.fresh) {
       const sessionCookie = await doctorlucia.createSessionCookie(session.id);
-      cookies().set(
+      (await cookies()).set(
         sessionCookie.name,
         sessionCookie.value,
         sessionCookie.attributes
@@ -94,7 +94,7 @@ export const verifyDoctorDetails = async () => {
     }
     if (!session) {
       const sessionCookie = await doctorlucia.createBlankSessionCookie();
-      cookies().set(
+      (await cookies()).set(
         sessionCookie.name,
         sessionCookie.value,
         sessionCookie.attributes
@@ -106,7 +106,7 @@ export const verifyDoctorDetails = async () => {
 
 
 export const verifydoctor = async () => {
-  const sessionId = cookies().get(doctorlucia.sessionCookieName)?.value || null;
+  const sessionId = (await cookies()).get(doctorlucia.sessionCookieName)?.value || null;
   if (!sessionId) {
     return null;
   }
@@ -114,7 +114,7 @@ export const verifydoctor = async () => {
   try {
     if (session && session.fresh) {
       const sessionCookie = await doctorlucia.createSessionCookie(session.id);
-      cookies().set(
+      (await cookies()).set(
         sessionCookie.name,
         sessionCookie.value,
         sessionCookie.attributes
@@ -122,7 +122,7 @@ export const verifydoctor = async () => {
     }
     if (!session) {
       const sessionCookie = await doctorlucia.createBlankSessionCookie();
-      cookies().set(
+      (await cookies()).set(
         sessionCookie.name,
         sessionCookie.value,
         sessionCookie.attributes

@@ -89,7 +89,7 @@ export default function Chartstats() {
   if (chartData.length === 0)
     return (
       <div className="w-11/12 space-y-5 md:space-y-0 md:w-5/6 md:max-w-[1100px] mx-auto md:grid grid-cols-2 gap-10 pt-10 md:pt-20 relative">
-        <div className="col-span-2 flex justify-center text-2xl md:text-4xl font-poppins-font font-extrabold text-center text-teal-500 relative overflow-hidden">
+        <div className="col-span-2 flex justify-center text-2xl md:text-4xl font-display font-extrabold text-center text-teal-500 relative overflow-hidden">
           {/* <div className="absolute w-full h-full bg-transparent blur-[70px]">
             <div className="absolute hidden md:block bg-teal-600 h-10 w-32 top-0 left-20"></div>
             <div className="absolute hidden md:block bg-sky-500 h-6 w-64 bottom-0 right-20"></div>
@@ -125,7 +125,7 @@ export default function Chartstats() {
 
   return (
     <div className="w-11/12 space-y-8 md:space-y-0 md:w-5/6 md:max-w-[1100px] mx-auto md:grid grid-cols-2 gap-10 pt-10 md:pt-20 relative">
-      <div className="col-span-2 flex justify-center text-2xl md:text-4xl font-poppins-font font-extrabold text-center text-teal-500 relative overflow-hidden">
+      <div className="col-span-2 flex justify-center text-2xl md:text-4xl font-display font-extrabold text-center text-teal-500 relative overflow-hidden">
         {/* <div className="absolute w-full h-full bg-transparent blur-[70px]">
           <div className="absolute hidden md:block bg-teal-600 h-10 w-32 top-0 left-20"></div>
           <div className="absolute hidden md:block bg-sky-500 h-6 w-64 bottom-0 right-20"></div>
@@ -137,7 +137,7 @@ export default function Chartstats() {
       </div>
       <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 dark:bg-slate-900 flex flex-col">
         <CardHeader
-          className="bg-gradient-to-r 
+          className="bg-linear-to-r 
         from-teal-500 to-blue-500 dark:from-blue-950 dark:to-slate-800 text-white rounded-t-lg"
         >
           <CardTitle className="flex items-center gap-2">
@@ -149,7 +149,7 @@ export default function Chartstats() {
             {new Date().getFullYear()}
           </CardDescription>
         </CardHeader>
-        <CardContent className="pt-6 flex-grow">
+        <CardContent className="pt-6 grow">
           <ChartContainer config={chartConfig} className="h-full w-full">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart

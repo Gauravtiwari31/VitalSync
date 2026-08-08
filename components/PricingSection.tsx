@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Check, Sparkles, MessageSquare, Heart, Bell, BarChart2, Users, Brain, Video, Activity, AlertTriangle, Users2, Save, Headphones, Zap, FileText, ClipboardList } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
@@ -101,7 +101,7 @@ export default function PricingSection() {
             >
               {plan.highlight && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                  <span className="inline-flex items-center gap-1 px-3 py-0.5 rounded-full text-xs font-semibold bg-emerald-600 text-white shadow-sm">
+                  <span className="inline-flex items-center gap-1 px-3 py-0.5 rounded-full text-xs font-semibold bg-emerald-600 text-white shadow-xs">
                     <Sparkles className="h-3 w-3" />
                     Recommended
                   </span>
@@ -140,7 +140,7 @@ export default function PricingSection() {
                 <ul className="space-y-3 mb-8">
                   {plan.features.map((f, j) => (
                     <li key={j} className="flex items-start gap-2.5 text-sm text-slate-600 dark:text-slate-300">
-                      <Check className="h-4 w-4 text-emerald-500 flex-shrink-0 mt-0.5" />
+                      <Check className="h-4 w-4 text-emerald-500 shrink-0 mt-0.5" />
                       {f}
                     </li>
                   ))}

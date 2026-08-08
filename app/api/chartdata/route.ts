@@ -6,10 +6,8 @@ type Chart = {
   count: number;
 };
 
-export async function GET(
-  req: Request,
-  { params }: { params: { id: string } }
-) {
+// /api/chartdata has no dynamic segment, so there are no route params.
+export async function GET(req: Request) {
   try {
     const currDate = new Date();
     let chartData: Chart[] = [];

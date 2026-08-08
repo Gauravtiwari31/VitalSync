@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
 import {
   Bot,
@@ -162,7 +162,7 @@ const renderBotResponse = (content: any) => {
               className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-3 border border-slate-200 dark:border-slate-700"
             >
               <p className="text-xs font-semibold text-emerald-700 dark:text-emerald-400 mb-1 flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 flex-shrink-0" />
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
                 {r.name}
               </p>
               <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
@@ -180,7 +180,7 @@ const renderBotResponse = (content: any) => {
         <ul className="space-y-2">
           {content.precautions?.precaution_list?.map((p: any, i: number) => (
             <li key={i} className="flex items-start gap-2.5 text-sm text-slate-600 dark:text-slate-300">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-500 flex-shrink-0 mt-1.5" />
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0 mt-1.5" />
               {p}
             </li>
           ))}
@@ -205,7 +205,7 @@ const renderBotResponse = (content: any) => {
               key={i}
               className="flex items-start gap-2.5 text-sm text-slate-600 dark:text-slate-300 bg-red-50 dark:bg-red-900/10 rounded-lg px-3 py-2"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-red-500 flex-shrink-0 mt-1.5" />
+              <span className="w-1.5 h-1.5 rounded-full bg-red-500 shrink-0 mt-1.5" />
               {f}
             </li>
           ))}
@@ -216,7 +216,7 @@ const renderBotResponse = (content: any) => {
         <ul className="space-y-2">
           {content.when_to_see_doctor?.after_how_many_days?.map((f: any, i: number) => (
             <li key={i} className="flex items-start gap-2.5 text-sm text-slate-600 dark:text-slate-300">
-              <span className="w-1.5 h-1.5 rounded-full bg-red-400 flex-shrink-0 mt-1.5" />
+              <span className="w-1.5 h-1.5 rounded-full bg-red-400 shrink-0 mt-1.5" />
               {f}
             </li>
           ))}
@@ -289,7 +289,7 @@ const MessageItem = ({ message, isLast, loading, thinkingTime }: any) => {
         <div className="max-w-[78%] bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 rounded-2xl rounded-tr-sm px-4 py-3 text-sm leading-relaxed">
           {message.content}
         </div>
-        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center">
+        <div className="shrink-0 w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center">
           <User className="h-4 w-4 text-slate-600 dark:text-slate-300" />
         </div>
       </motion.div>
@@ -302,7 +302,7 @@ const MessageItem = ({ message, isLast, loading, thinkingTime }: any) => {
       animate={{ opacity: 1, y: 0 }}
       className="flex gap-3 mb-6"
     >
-      <div className="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-100 dark:bg-emerald-900/40 flex items-center justify-center mt-0.5">
+      <div className="shrink-0 w-8 h-8 rounded-full bg-emerald-100 dark:bg-emerald-900/40 flex items-center justify-center mt-0.5">
         <Bot className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
       </div>
       <div className="flex-1 min-w-0">
@@ -328,7 +328,7 @@ const MessageItem = ({ message, isLast, loading, thinkingTime }: any) => {
               <div className="border-t border-slate-100 dark:border-slate-700 px-4 py-2 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                 <button
                   onClick={() => setLiked(!liked)}
-                  className={`p-1 rounded hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors ${liked ? "text-emerald-500" : "text-slate-400"}`}
+                  className={`p-1 rounded-sm hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors ${liked ? "text-emerald-500" : "text-slate-400"}`}
                 >
                   <ThumbsUp className="h-3.5 w-3.5" />
                 </button>
@@ -351,7 +351,7 @@ const FlashMessageItem = ({ message, isLast, loading, thinkingTime }: any) => {
   return (
     <div className={`mb-5 flex gap-3 ${isUser ? "flex-row-reverse" : ""}`}>
       <div
-        className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${
+        className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${
           isUser
             ? "bg-slate-200 dark:bg-slate-700"
             : "bg-sky-100 dark:bg-sky-900/40"
@@ -665,7 +665,7 @@ const AssistantBhura = () => {
               <Button
                 type="submit"
                 disabled={loading || !input.trim()}
-                className="h-11 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white disabled:opacity-50 flex-shrink-0"
+                className="h-11 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white disabled:opacity-50 shrink-0"
               >
                 {loading ? (
                   <RefreshCw className="h-4 w-4 animate-spin" />

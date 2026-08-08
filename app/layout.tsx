@@ -1,17 +1,23 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Plus_Jakarta_Sans, Sora } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/Header";
 import { Toaster } from "sonner";
-import Hero from "@/components/Hero";
-import Footer from "@/components/Footer";
-import { EdgeStoreProvider } from "@/lib/edgestore";
-import { usePathname } from "next/navigation";
-import { headers } from "next/headers";
-import { Bot } from "lucide-react";
-import Link from "next/link";
 
-const inter = Inter({ subsets: ["latin"] });
+// Body face: warm geometric humanist — legible at small sizes in dense tables.
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-jakarta",
+  display: "swap",
+  weight: ["400", "500", "600", "700", "800"],
+});
+
+// Display face: used for headings and every numeric vitals readout.
+const sora = Sora({
+  subsets: ["latin"],
+  variable: "--font-sora",
+  display: "swap",
+  weight: ["500", "600", "700"],
+});
 export const metadata: Metadata = {
   title:
     "VitalSync | Advanced Real-Time Healthcare Solution for Hospitals, Patients, Doctors, and Pharmacies",
@@ -54,15 +60,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${jakarta.variable} ${sora.variable}`}
+    >
       <head>
         <link rel="preconnect" href="https://api.opencagedata.com" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
         <link
           rel="shortcut icon"
           href="https://i.imghippo.com/files/4OFtW1729338402.jpg"
@@ -115,54 +119,29 @@ export default function RootLayout({
         />
 
       </head>
-      <body className={inter.className}>
-        <div className="relative w-full bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
-          {/* Background Elements */}
-          <div className="absolute inset-0 overflow-hidden">
-            {/* Primary Background Elements */}
-            <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-teal-200/30 dark:bg-teal-900/20 blur-3xl" />
-            <div className="absolute top-1/3 right-0 w-80 h-80 rounded-full bg-amber-200/30 dark:bg-amber-900/20 blur-3xl" />
+      <body className="font-sans antialiased">
+        <div className="relative w-full bg-background">
+          {/*
+            Clinical backdrop: a faint chart grid with a single teal wash,
+            instead of scattered pastel blobs. Reads as instrument paper.
+          */}
+          <div
+            className="pointer-events-none absolute inset-0 overflow-hidden"
+            aria-hidden="true"
+          >
+            <div className="clinical-grid absolute inset-0 opacity-60 dark:opacity-30" />
 
-            {/* Centered Bottom Glow - Light Mode */}
-            <div
-              className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[40rem] h-[20rem] 
-                          bg-gradient-to-t from-teal-300/50 to-teal-200/10 
-                          blur-3xl rounded-t-full 
-                          dark:opacity-0"
-            />
+            {/* Fades the grid out toward the bottom so it never fights content */}
+            <div className="absolute inset-0 bg-linear-to-b from-transparent via-background/70 to-background" />
 
-            {/* Centered Bottom Glow - Dark Mode */}
-            <div
-              className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[40rem] h-[20rem] 
-                          bg-gradient-to-t from-teal-800/60 to-teal-700/5
-                          blur-3xl rounded-t-full opacity-0 
-                          dark:opacity-100"
-            />
-
-            {/* Additional Background Elements */}
-            <div className="absolute -bottom-32 left-1/4 w-64 h-64 rounded-full bg-emerald-200/30 dark:bg-emerald-900/20 blur-3xl" />
-
-            {/* Light Mode Particles */}
-            <div className="absolute bottom-24 left-1/4 w-4 h-4 rounded-full bg-teal-400/40 blur-sm dark:opacity-0" />
-            <div className="absolute bottom-36 left-2/3 w-3 h-3 rounded-full bg-teal-400/40 blur-sm dark:opacity-0" />
-            <div className="absolute bottom-48 left-1/3 w-2 h-2 rounded-full bg-teal-400/40 blur-sm dark:opacity-0" />
-
-            {/* Dark Mode Particles */}
-            <div className="absolute bottom-24 left-1/4 w-4 h-4 rounded-full bg-teal-600/40 blur-sm opacity-0 dark:opacity-100" />
-            <div className="absolute bottom-36 left-2/3 w-3 h-3 rounded-full bg-teal-600/40 blur-sm opacity-0 dark:opacity-100" />
-            <div className="absolute bottom-48 left-1/3 w-2 h-2 rounded-full bg-teal-600/40 blur-sm opacity-0 dark:opacity-100" />
-
-            {/* Repeated Pattern for Longer Pages */}
-            <div className="absolute top-[60%] -left-32 w-96 h-96 rounded-full bg-teal-200/30 dark:bg-teal-900/20 blur-3xl" />
-            <div className="absolute top-[90%] right-0 w-80 h-80 rounded-full bg-amber-200/30 dark:bg-amber-900/20 blur-3xl" />
-            <div className="absolute top-[120%] left-1/4 w-64 h-64 rounded-full bg-emerald-200/30 dark:bg-emerald-900/20 blur-3xl" />
+            {/* Vital-sign wash, anchored top-left and bottom-centre */}
+            <div className="absolute -top-40 -left-32 h-[28rem] w-[28rem] rounded-full bg-primary/10 blur-3xl dark:bg-primary/15" />
+            <div className="absolute bottom-0 left-1/2 h-[18rem] w-[42rem] -translate-x-1/2 rounded-t-full bg-linear-to-t from-primary/15 to-transparent blur-3xl" />
+            <div className="absolute top-[60%] right-0 h-[22rem] w-[22rem] rounded-full bg-vital-low/8 blur-3xl dark:bg-vital-low/10" />
           </div>
 
-          {/* Main Content Container */}
-          
           <div className="relative z-10">{children}</div>
-          <Toaster richColors></Toaster>
-
+          <Toaster richColors closeButton position="top-center" />
         </div>
       </body>
     </html>

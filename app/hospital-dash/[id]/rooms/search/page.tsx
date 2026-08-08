@@ -56,7 +56,7 @@ export default function SearchPage() {
       </Card>
     );
   }
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
@@ -148,7 +148,7 @@ export default function SearchPage() {
           </CardHeader>
           <CardContent>
             <div className="flex w-full justify-center items-center space-x-2 p-10 pt-2">
-              <div className="relative flex-grow w-full max-w-4xl ">
+              <div className="relative grow w-full max-w-4xl ">
                 <Search className="absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500 dark:text-gray-400" />
                 <Input
                   type="search"
@@ -194,7 +194,7 @@ export default function SearchPage() {
                         <CardTitle className="text-sm font-medium text-muted-foreground mb-2">
                           {item}
                         </CardTitle>
-                        <div className="h-4 bg-muted rounded"></div>
+                        <div className="h-4 bg-muted rounded-sm"></div>
                       </Card>
                     ))}
                   </div>
@@ -209,7 +209,7 @@ export default function SearchPage() {
                         {[1, 2, 3].map((i) => (
                           <div
                             key={i}
-                            className="h-4 bg-muted rounded w-full"
+                            className="h-4 bg-muted rounded-sm w-full"
                           ></div>
                         ))}
                       </div>
@@ -223,7 +223,7 @@ export default function SearchPage() {
                         <CardTitle>Recent Visit</CardTitle>
                       </CardHeader>
                       <CardContent>
-                        <div className="h-4 bg-muted rounded w-3/4"></div>
+                        <div className="h-4 bg-muted rounded-sm w-3/4"></div>
                       </CardContent>
                     </Card>
                     <Card>
@@ -231,7 +231,7 @@ export default function SearchPage() {
                         <CardTitle>Upcoming Appointment</CardTitle>
                       </CardHeader>
                       <CardContent>
-                        <div className="h-4 bg-muted rounded w-1/2"></div>
+                        <div className="h-4 bg-muted rounded-sm w-1/2"></div>
                       </CardContent>
                     </Card>
                   </div>
@@ -255,16 +255,16 @@ export default function SearchPage() {
                           {[1, 2].map((i) => (
                             <TableRow key={i}>
                               <TableCell className="font-medium">
-                                <div className="h-4 bg-muted rounded w-12"></div>
+                                <div className="h-4 bg-muted rounded-sm w-12"></div>
                               </TableCell>
                               <TableCell>
-                                <div className="h-4 bg-muted rounded w-20"></div>
+                                <div className="h-4 bg-muted rounded-sm w-20"></div>
                               </TableCell>
                               <TableCell>
-                                <div className="h-4 bg-muted rounded w-32"></div>
+                                <div className="h-4 bg-muted rounded-sm w-32"></div>
                               </TableCell>
                               <TableCell>
-                                <div className="h-4 bg-muted rounded w-16"></div>
+                                <div className="h-4 bg-muted rounded-sm w-16"></div>
                               </TableCell>
                             </TableRow>
                           ))}
@@ -299,7 +299,7 @@ export default function SearchPage() {
           </CardHeader>
           <CardContent>
             <div className="flex w-full justify-center items-center space-x-2 p-10 pt-2">
-              <div className="relative flex-grow w-full max-w-4xl ">
+              <div className="relative grow w-full max-w-4xl ">
                 <Search className="absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500 dark:text-gray-400" />
                 <Input
                   type="search"

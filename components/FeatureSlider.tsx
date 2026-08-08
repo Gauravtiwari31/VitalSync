@@ -72,7 +72,7 @@ const FeatureCard = ({
   title: any;
   description: any;
 }) => (
-  // <div className="bg-white bg-opacity-90 dark:bg-slate-900 dark:bg-opacity-80 rounded-lg shadow-md p-6 flex flex-col items-center text-center transition-all duration-300 hover:shadow-lg hover:-translate-y-1 backdrop-blur-sm">
+  // <div className="bg-white bg-opacity-90 dark:bg-slate-900 dark:bg-opacity-80 rounded-lg shadow-md p-6 flex flex-col items-center text-center transition-all duration-300 hover:shadow-lg hover:-translate-y-1 backdrop-blur-xs">
   //   <div className="text-teal-600 dark:text-teal-400 mb-4">{icon}</div>
   //   <h3 className="text-xl font-semibold text-blue-900 dark:text-slate-100 mb-2">
   //     {title}
@@ -80,7 +80,7 @@ const FeatureCard = ({
   //   <p className="text-gray-700 dark:text-slate-300">{description}</p>
   <CarouselItem className="basis-1/2 lg:basis-1/3 h-full">
     <div className="p-1 w-full h-full">
-      <div className="bg-blue-950 bg-opacity-90 rounded-lg shadow-md p-4 sm:p-6 flex flex-col items-center text-center transition-all duration-300 hover:shadow-lg hover:-translate-y-1 backdrop-blur-sm h-full min-h[80px] sm:min-h-[250px] ">
+      <div className="bg-blue-950/90 rounded-lg shadow-md p-4 sm:p-6 flex flex-col items-center text-center transition-all duration-300 hover:shadow-lg hover:-translate-y-1 backdrop-blur-xs h-full min-h[80px] sm:min-h-[250px] ">
         <div className="text-teal-400 mb-4">{icon}</div> {/* Icon section */}
         <h3 className="text-sm sm:text-xl font-semibold text-slate-100 mb-2">
           {title}

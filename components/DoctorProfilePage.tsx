@@ -81,9 +81,9 @@ export default function DoctorProfilePage({
   ];
 
   return (
-    <div className="max-w-6xl mx-auto p-4 md:p-6 space-y-6 bg-gradient-to-b from-gray-50 to-white dark:from-slate-900 dark:to-slate-800/90">
+    <div className="max-w-6xl mx-auto p-4 md:p-6 space-y-6 bg-linear-to-b from-gray-50 to-white dark:from-slate-900 dark:to-slate-800/90">
       {/* Header Section */}
-      <div className="relative rounded-xl bg-gradient-to-r from-cyan-600/90 to-teal-500/90 p-6 overflow-hidden shadow-lg">
+      <div className="relative rounded-xl bg-linear-to-r from-cyan-600/90 to-teal-500/90 p-6 overflow-hidden shadow-lg">
         <div className="absolute inset-0 bg-grid-white/10 opacity-10"></div>
         <div className="flex flex-col md:flex-row items-center md:items-start gap-6 relative z-10">
           <div className="flex flex-col items-center">
@@ -93,7 +93,7 @@ export default function DoctorProfilePage({
                 alt={safeDoctor.name}
                 className="object-cover"
               />
-              <AvatarFallback className="text-2xl bg-gradient-to-br from-teal-500 to-blue-500 text-white">
+              <AvatarFallback className="text-2xl bg-linear-to-br from-teal-500 to-blue-500 text-white">
                 {safeDoctor.name
                   .split(" ")
                   .map((n) => n[0])
@@ -150,7 +150,7 @@ export default function DoctorProfilePage({
 
       {/* Control Bar */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <Card className="md:col-span-1 dark:bg-slate-800/80 shadow-sm border-0 dark:border-slate-700/50">
+        <Card className="md:col-span-1 dark:bg-slate-800/80 shadow-xs border-0 dark:border-slate-700/50">
           <CardContent className="p-4 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse" />
@@ -162,7 +162,7 @@ export default function DoctorProfilePage({
           </CardContent>
         </Card>
 
-        <Card className="md:col-span-3 dark:bg-slate-800/80 shadow-sm border-0 dark:border-slate-700/50">
+        <Card className="md:col-span-3 dark:bg-slate-800/80 shadow-xs border-0 dark:border-slate-700/50">
           <CardContent className="p-4">
             <div className="grid grid-cols-4 gap-4">
               {[
@@ -216,8 +216,8 @@ export default function DoctorProfilePage({
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left Column */}
         <div className="lg:col-span-1 space-y-6">
-          <Card className="border-0 shadow-sm dark:bg-slate-800/80 dark:border-slate-700/50 overflow-hidden">
-            <CardHeader className="bg-gradient-to-r from-gray-50 to-gray-100 dark:from-slate-800 dark:to-slate-700 p-4 pb-3">
+          <Card className="border-0 shadow-xs dark:bg-slate-800/80 dark:border-slate-700/50 overflow-hidden">
+            <CardHeader className="bg-linear-to-r from-gray-50 to-gray-100 dark:from-slate-800 dark:to-slate-700 p-4 pb-3">
               <CardTitle className="text-lg font-semibold flex items-center gap-2">
                 <User className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
                 Personal Information
@@ -278,8 +278,8 @@ export default function DoctorProfilePage({
             </CardContent>
           </Card>
 
-          <Card className="border-0 shadow-sm dark:bg-slate-800/80 dark:border-slate-700/50 overflow-hidden">
-            <CardHeader className="bg-gradient-to-r from-gray-50 to-gray-100 dark:from-slate-800 dark:to-slate-700 p-4 pb-3">
+          <Card className="border-0 shadow-xs dark:bg-slate-800/80 dark:border-slate-700/50 overflow-hidden">
+            <CardHeader className="bg-linear-to-r from-gray-50 to-gray-100 dark:from-slate-800 dark:to-slate-700 p-4 pb-3">
               <CardTitle className="text-lg font-semibold flex items-center gap-2">
                 <Clock className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
                 Working Hours
@@ -352,10 +352,10 @@ export default function DoctorProfilePage({
               <Button
                 key={i}
                 variant="outline"
-                className="h-24 flex flex-col items-center justify-center gap-2 border-0 bg-white hover:bg-gray-50 shadow-sm dark:bg-slate-800/80 dark:hover:bg-slate-700/80"
+                className="h-24 flex flex-col items-center justify-center gap-2 border-0 bg-white hover:bg-gray-50 shadow-xs dark:bg-slate-800/80 dark:hover:bg-slate-700/80"
               >
                 <div
-                  className={`w-10 h-10 rounded-full bg-gradient-to-br ${action.color} flex items-center justify-center text-white`}
+                  className={`w-10 h-10 rounded-full bg-linear-to-br ${action.color} flex items-center justify-center text-white`}
                 >
                   <action.icon className="w-5 h-5" />
                 </div>
@@ -392,7 +392,7 @@ export default function DoctorProfilePage({
             </TabsList>
 
             <TabsContent value="schedule">
-              <Card className="mt-4 border-0 shadow-sm dark:bg-slate-800/80 dark:border-slate-700/50">
+              <Card className="mt-4 border-0 shadow-xs dark:bg-slate-800/80 dark:border-slate-700/50">
                 <CardHeader className="pb-2 flex flex-row items-center justify-between">
                   <CardTitle className="text-lg font-semibold flex items-center gap-2">
                     <CalendarIcon className="w-5 h-5 text-cyan-600 dark:text-cyan-400" />
@@ -453,7 +453,7 @@ export default function DoctorProfilePage({
             </TabsContent>
 
             <TabsContent value="details">
-              <Card className="mt-4 border-0 shadow-sm dark:bg-slate-800/80 dark:border-slate-700/50">
+              <Card className="mt-4 border-0 shadow-xs dark:bg-slate-800/80 dark:border-slate-700/50">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-lg font-semibold flex items-center gap-2">
                     <User className="w-5 h-5 text-cyan-600 dark:text-cyan-400" />
@@ -518,7 +518,7 @@ export default function DoctorProfilePage({
                     ].map((item, i) => (
                       <div
                         key={i}
-                        className="flex items-center gap-4 p-4 rounded-lg bg-white dark:bg-slate-700/30 border border-gray-100 dark:border-slate-700 shadow-sm"
+                        className="flex items-center gap-4 p-4 rounded-lg bg-white dark:bg-slate-700/30 border border-gray-100 dark:border-slate-700 shadow-xs"
                       >
                         <div
                           className={`w-12 h-12 rounded-full ${item.color} flex items-center justify-center`}
@@ -541,7 +541,7 @@ export default function DoctorProfilePage({
             </TabsContent>
 
             <TabsContent value="documents">
-              <Card className="mt-4 border-0 shadow-sm dark:bg-slate-800/80 dark:border-slate-700/50">
+              <Card className="mt-4 border-0 shadow-xs dark:bg-slate-800/80 dark:border-slate-700/50">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-lg font-semibold flex items-center gap-2">
                     <FileText className="w-5 h-5 text-cyan-600 dark:text-cyan-400" />

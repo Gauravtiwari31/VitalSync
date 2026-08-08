@@ -1,10 +1,8 @@
 import prisma from "@/lib/db";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(
-  req: NextRequest,
-  { params }: { params: { id: string,deptId:string } }
-) {
+export async function GET(req: NextRequest, props: { params: Promise<{ id: string,deptId:string }> }) {
+  const params = await props.params;
   const id = params.id;
   const deptId=params.deptId;
   const queue = await prisma.offlineMeet.findMany({
@@ -16,7 +14,7 @@ export async function GET(
       createdAt: "desc",
     },
   });
-  
+
   const perHourQueue: Record<string, any[]> = {};
 
   queue.forEach((patient) => {

@@ -3,10 +3,8 @@ import { getEssentialHospitalDetails, getHospital, verifyHospitalDetails } from 
 import { pusherServer } from "@/lib/pusher";
 import { NextRequest } from "next/server";
 
-export async function POST(
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function POST(req: NextRequest, props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const id = params.id;
 
   // Fetch the current hospital/user

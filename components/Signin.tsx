@@ -24,7 +24,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Loader2, CreditCard, Key, LogIn, Heart, Globe } from "lucide-react";
 import { signIn } from "@/app/(main)/patient-auth/auth.actions";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 export const SigninSchema = z.object({
   aadharno: z.string().length(12, "This is not a valid Aadhar no"),
@@ -69,7 +69,7 @@ const Signin = ({ onRegisterClick }: any) => {
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300 } },
+    show: { opacity: 1, y: 0, transition: { type: "spring" as const, stiffness: 300 } },
   };
 
   return (
@@ -80,7 +80,7 @@ const Signin = ({ onRegisterClick }: any) => {
     >
       <Card className="w-[300px] sm:w-[430px] md:w-[540px] dark:bg-[rgba(31,41,55,0.5)] backdrop-blur-3xl border border-slate-200 dark:border-slate-700 shadow-lg relative overflow-hidden">
         <motion.div
-          className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 to-cyan-600 dark:from-green-500 dark:to-cyan-700"
+          className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-green-400 to-cyan-600 dark:from-green-500 dark:to-cyan-700"
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: 0.8, ease: "easeInOut", delay: 0.2 }}
@@ -94,7 +94,7 @@ const Signin = ({ onRegisterClick }: any) => {
             className="flex items-center gap-2"
           >
             <Heart className="h-6 w-6 text-green-500 dark:text-green-400" />
-            <CardTitle className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-500 to-cyan-600 dark:from-green-400 dark:to-cyan-500">
+            <CardTitle className="text-2xl font-bold bg-clip-text text-transparent bg-linear-to-r from-green-500 to-cyan-600 dark:from-green-400 dark:to-cyan-500">
               Patient Login
             </CardTitle>
           </motion.div>
@@ -114,9 +114,9 @@ const Signin = ({ onRegisterClick }: any) => {
             >
               <motion.div variants={itemVariants}>
                 <motion.div
-                  className="mx-auto mb-6 w-20 h-20 rounded-full bg-gradient-to-r from-green-400/10 to-cyan-500/10 flex items-center justify-center"
+                  className="mx-auto mb-6 w-20 h-20 rounded-full bg-linear-to-r from-green-400/10 to-cyan-500/10 flex items-center justify-center"
                   whileHover={{ scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 400 }}
+                  transition={{ type: "spring" as const, stiffness: 400 }}
                 >
                   <CreditCard className="h-10 w-10 text-green-500 dark:text-green-400" />
                 </motion.div>
@@ -182,7 +182,7 @@ const Signin = ({ onRegisterClick }: any) => {
                   <Button
                     disabled={isPending}
                     type="submit"
-                    className="w-full bg-gradient-to-r from-green-500 to-cyan-600 dark:from-green-600 dark:to-cyan-700 hover:from-green-600 hover:to-cyan-700 text-white shadow-md hover:shadow-lg transition-all duration-200 h-11"
+                    className="w-full bg-linear-to-r from-green-500 to-cyan-600 dark:from-green-600 dark:to-cyan-700 hover:from-green-600 hover:to-cyan-700 text-white shadow-md hover:shadow-lg transition-all duration-200 h-11"
                   >
                     {isPending ? (
                       <Loader2 className="animate-spin mr-2 h-5 w-5" />

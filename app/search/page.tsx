@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { use } from "react";
 
 import { useState, useEffect } from "react";
 import {
@@ -154,7 +154,15 @@ interface SearchResultsProps {
   longitude: number;
 }
 
-const page = ({ searchParams: { searchQuery, latitude, longitude } }: {searchParams:SearchResultsProps}) => {
+const page = (props: {searchParams:Promise<SearchResultsProps>}) => {
+  const searchParams = use(props.searchParams);
+
+  const {
+    searchQuery,
+    latitude,
+    longitude
+  } = searchParams;
+
   return (
     <>
       <Header input={searchQuery} lat={latitude} long={longitude} />
@@ -473,21 +481,21 @@ const SearchResults: React.FC<SearchResultsProps> = ({
 
           <div className="space-y-3">
             <div className="flex items-center text-sm text-muted-foreground">
-              <Building className="w-4 h-4 mr-2 flex-shrink-0" />
+              <Building className="w-4 h-4 mr-2 shrink-0" />
               <span className="truncate" title={doctor.hospitalName}>
                 {doctor.hospitalName}
               </span>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
               <div className="flex items-center text-muted-foreground">
-                <Phone className="w-4 h-4 mr-2 flex-shrink-0" />
+                <Phone className="w-4 h-4 mr-2 shrink-0" />
                 <span className="truncate">{doctor.contactno}</span>
               </div>
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <div className="flex items-center text-muted-foreground">
-                      <Mail className="w-4 h-4 mr-2 flex-shrink-0" />
+                      <Mail className="w-4 h-4 mr-2 shrink-0" />
                       <span className="truncate">{doctor.email}</span>
                     </div>
                   </TooltipTrigger>
@@ -559,8 +567,8 @@ const SearchResults: React.FC<SearchResultsProps> = ({
                   "linear-gradient(to bottom, white 50%, transparent 100%)",
               }}
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-60% to-white dark:to-slate-950" />
-            <div className="absolute inset-0 bg-gradient-to-l from-transparent to-white dark:to-slate-950" />
+            <div className="absolute inset-0 bg-linear-to-b from-transparent to-60% to-white dark:to-slate-950" />
+            <div className="absolute inset-0 bg-linear-to-l from-transparent to-white dark:to-slate-950" />
           </div>
         )}
 
@@ -581,7 +589,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
                   )}
                 </div>
                 <div className="flex items-center text-muted-foreground font-semibold">
-                  <MapPin className="w-4 h-4 mr-2 flex-shrink-0" />
+                  <MapPin className="w-4 h-4 mr-2 shrink-0" />
                   <span className="truncate">
                     {hospital.hospitalInfo.City}, {hospital.hospitalInfo.State}
                   </span>
@@ -616,13 +624,13 @@ const SearchResults: React.FC<SearchResultsProps> = ({
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <div className="flex items-center text-sm text-muted-foreground">
-                  <Users className="w-4 h-4 mr-2 flex-shrink-0" />
+                  <Users className="w-4 h-4 mr-2 shrink-0" />
                   <span className="truncate">
                     {hospital.statistics.totalRelevantDoctors} Doctors Available
                   </span>
                 </div>
                 <div className="flex items-center text-sm text-muted-foreground">
-                  <Phone className="w-4 h-4 mr-2 flex-shrink-0" />
+                  <Phone className="w-4 h-4 mr-2 shrink-0" />
                   <span className="truncate">
                     {hospital.hospitalInfo.contactno}
                   </span>
@@ -633,7 +641,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <div className="flex items-center text-sm text-muted-foreground">
-                        <Mail className="w-4 h-4 mr-2 flex-shrink-0" />
+                        <Mail className="w-4 h-4 mr-2 shrink-0" />
                         <span className="truncate">
                           {hospital.hospitalInfo.email}
                         </span>
@@ -648,7 +656,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <div className="flex items-center text-sm text-muted-foreground">
-                        <Globe className="w-4 h-4 mr-2 flex-shrink-0" />
+                        <Globe className="w-4 h-4 mr-2 shrink-0" />
                         <span className="truncate">
                           {hospital.hospitalInfo.Website}
                         </span>
@@ -808,7 +816,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
         {/* Main Content Layout */}
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Desktop Sidebar */}
-          <div className="hidden lg:block w-72 flex-shrink-0">
+          <div className="hidden lg:block w-72 shrink-0">
             <div className="sticky top-4">
               <FilterSidebar />
             </div>

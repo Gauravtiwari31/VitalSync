@@ -39,7 +39,7 @@ export default function DepartmentCard({
     >
       <div
         className={cn(
-          "bg-gradient-to-r from-teal-800 to-teal-700 p-4",
+          "bg-linear-to-r from-teal-800 to-teal-700 p-4",
           "flex items-center justify-between"
         )}
       >

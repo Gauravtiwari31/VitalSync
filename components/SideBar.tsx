@@ -69,7 +69,7 @@ const Sidebar = ({
   );
 
   return (
-    <div className="bg-white dark:bg-slate-800 w-64 flex-shrink-0 flex-col shadow-lg">
+    <div className="bg-white dark:bg-slate-800 w-64 shrink-0 flex-col shadow-lg">
       <div className="flex flex-col h-full">
         <SidebarContent />
         <div className="p-4 border-t border-gray-200 dark:border-gray-700 mt-auto">

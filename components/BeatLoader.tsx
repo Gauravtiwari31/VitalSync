@@ -7,7 +7,7 @@ const BeatLoader = ({ className }: { className?: string }) => {
     >
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 80">
         <path
-          className="stroke-green-600 stroke-[3] fill-none animate-draw"
+          className="stroke-green-600 stroke-3 fill-none animate-draw"
           d="M0.5,40 L15,40 L18,28 L23,62 L29,5 L35,50 L41,40 L45,40 
              L50,40 L53,22 L58,68 L64,12 L70,55 L76,40 L80,40 
              L85,40 L88,32 L93,58 L99,8 L105,48 L111,40 L115,40 

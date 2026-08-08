@@ -16,7 +16,7 @@ const Footer = () => {
           <div>
             {/* Logo on dark background — override */}
             <Link href={"/."}  className="flex items-center gap-2 select-none mb-4">
-              <div className="w-7 h-7 rounded-lg bg-emerald-500 flex items-center justify-center flex-shrink-0">
+              <div className="w-7 h-7 rounded-lg bg-emerald-500 flex items-center justify-center shrink-0">
                 <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4">
                   <path d="M10 2L4 7v9h4v-5h4v5h4V7L10 2z" fill="white" fillOpacity="0.9" />
                 </svg>
@@ -59,15 +59,15 @@ const Footer = () => {
             </h3>
             <ul className="space-y-2.5 text-sm text-slate-400">
               <li className="flex items-center gap-2">
-                <FiPhoneCall className="h-3.5 w-3.5 text-emerald-500 flex-shrink-0" />
+                <FiPhoneCall className="h-3.5 w-3.5 text-emerald-500 shrink-0" />
                 +91-9580561706
               </li>
               <li className="flex items-center gap-2">
-                <MdEmail className="h-3.5 w-3.5 text-emerald-500 flex-shrink-0" />
+                <MdEmail className="h-3.5 w-3.5 text-emerald-500 shrink-0" />
                 gauravt9431@gmail.com
               </li>
               <li className="flex items-center gap-2">
-                <FaRegClock className="h-3.5 w-3.5 text-emerald-500 flex-shrink-0" />
+                <FaRegClock className="h-3.5 w-3.5 text-emerald-500 shrink-0" />
                 24 / 7 Available
               </li>
             </ul>

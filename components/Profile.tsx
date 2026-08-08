@@ -31,6 +31,43 @@ import {
 } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
+/**
+ * Reference ranges below follow the ACC/AHA adult thresholds. They classify a
+ * reading for display only — this is not a diagnosis, and the UI never acts on
+ * the result beyond choosing a colour.
+ */
+type VitalStatusName = "normal" | "low" | "elevated" | "critical" | "info";
+
+const hrStatus = (bpm?: number | string): VitalStatusName => {
+  const n = Number(bpm);
+  if (!Number.isFinite(n) || n <= 0) return "info";
+  if (n < 50 || n > 120) return "critical";
+  if (n < 60) return "low";
+  if (n > 100) return "elevated";
+  return "normal";
+};
+
+const spo2Status = (pct?: number | string): VitalStatusName => {
+  const n = Number(pct);
+  if (!Number.isFinite(n) || n <= 0) return "info";
+  if (n < 90) return "critical";
+  if (n < 95) return "elevated";
+  return "normal";
+};
+
+// Expects "systolic/diastolic", e.g. "118/76".
+const bpStatus = (bp?: string): VitalStatusName => {
+  if (typeof bp !== "string") return "info";
+  const [sysRaw, diaRaw] = bp.split("/");
+  const sys = Number(sysRaw);
+  const dia = Number(diaRaw);
+  if (!Number.isFinite(sys) || !Number.isFinite(dia)) return "info";
+  if (sys >= 180 || dia >= 120) return "critical";
+  if (sys >= 130 || dia >= 80) return "elevated";
+  if (sys < 90 || dia < 60) return "low";
+  return "normal";
+};
+
 const ProfilePage = ({ patient }:any) => {
   const [activeTab, setActiveTab] = useState("overview");
 
@@ -201,7 +238,7 @@ const ProfilePage = ({ patient }:any) => {
   return (
     <div className="max-w-7xl mx-auto p-4 space-y-6">
       {/* Enhanced Profile Header with Gradient and Pattern Background */}
-      <div className="relative bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-800 dark:to-indigo-900 text-white rounded-2xl shadow-lg overflow-hidden">
+      <div className="relative bg-linear-to-r from-blue-600 to-indigo-600 dark:from-blue-800 dark:to-indigo-900 text-white rounded-2xl shadow-lg overflow-hidden">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
@@ -249,16 +286,16 @@ const ProfilePage = ({ patient }:any) => {
                   {mergedPatient?.name}
                 </h1>
                 <div className="flex flex-wrap justify-center md:justify-start gap-2">
-                  <span className="bg-white/20 backdrop-blur px-3 py-1 rounded-full text-xs font-medium">
+                  <span className="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium">
                     ID: #{mergedPatient?.id || "PAT-1234"}
                   </span>
-                  <span className="bg-white/20 backdrop-blur px-3 py-1 rounded-full text-xs font-medium">
+                  <span className="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium">
                     {mergedPatient?.age} years
                   </span>
-                  <span className="bg-white/20 backdrop-blur px-3 py-1 rounded-full text-xs font-medium">
+                  <span className="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium">
                     {mergedPatient?.gender}
                   </span>
-                  <span className="bg-white/20 backdrop-blur px-3 py-1 rounded-full text-xs font-medium">
+                  <span className="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium">
                     Blood: {mergedPatient?.bloodgroup}
                   </span>
                 </div>
@@ -290,7 +327,7 @@ const ProfilePage = ({ patient }:any) => {
             </div>
 
             {/* Health Status Indicator */}
-            <div className="hidden md:flex flex-col items-center justify-center bg-white/10 backdrop-blur p-4 rounded-xl">
+            <div className="hidden md:flex flex-col items-center justify-center bg-white/10 backdrop-blur-sm p-4 rounded-xl">
               <div
                 className={`
                 ${
@@ -316,7 +353,7 @@ const ProfilePage = ({ patient }:any) => {
 
         {/* Tab Navigation */}
         {/* Tab Navigation */}
-        <div className="px-6 sm:px-8 pb-0 pt-2 bg-white/10 backdrop-blur-sm overflow-x-auto">
+        <div className="px-6 sm:px-8 pb-0 pt-2 bg-white/10 backdrop-blur-xs overflow-x-auto">
           <Tabs
             defaultValue="overview"
             value={activeTab}
@@ -366,35 +403,36 @@ const ProfilePage = ({ patient }:any) => {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <VitalCard
                   icon={Heart}
-                  label="Blood Pressure"
+                  label="Blood pressure"
                   value={mergedPatient?.healthMetrics?.bloodPressure}
                   trend={-2.5}
-                  color="text-rose-500"
-                  bgColor="bg-rose-500"
+                  status={bpStatus(mergedPatient?.healthMetrics?.bloodPressure)}
+                  range="<120/80 mmHg"
                 />
                 <VitalCard
                   icon={Activity}
-                  label="Heart Rate"
-                  value={`${mergedPatient?.healthMetrics?.heartRate} BPM`}
+                  label="Heart rate"
+                  value={`${mergedPatient?.healthMetrics?.heartRate} bpm`}
                   trend={1.2}
-                  color="text-blue-500"
-                  bgColor="bg-blue-500"
+                  status={hrStatus(mergedPatient?.healthMetrics?.heartRate)}
+                  range="60–100 bpm"
                 />
                 <VitalCard
                   icon={User}
                   label="Weight"
                   value={`${mergedPatient?.healthMetrics?.weight} kg`}
                   trend={-0.5}
-                  color="text-emerald-500"
-                  bgColor="bg-emerald-500"
+                  status="info"
                 />
                 <VitalCard
                   icon={PieChart}
-                  label="Oxygen Level"
+                  label="Oxygen saturation"
                   value={`${mergedPatient?.healthMetrics?.oxygenLevel || 98}%`}
                   trend={0.3}
-                  color="text-purple-500"
-                  bgColor="bg-purple-500"
+                  status={spo2Status(
+                    mergedPatient?.healthMetrics?.oxygenLevel ?? 98
+                  )}
+                  range="95–100%"
                 />
               </div>
 
@@ -403,7 +441,7 @@ const ProfilePage = ({ patient }:any) => {
                 {/* Left Column - Progress + Appointments */}
                 <div className="lg:col-span-2 space-y-6">
                   {/* Health Progress */}
-                  <Card className="border dark:border-gray-800 shadow-sm hover:shadow-md transition-shadow">
+                  <Card className="border dark:border-gray-800 shadow-xs hover:shadow-md transition-shadow">
                     <CardHeader className="flex flex-row items-center justify-between py-4">
                       <div className="flex items-center gap-2">
                         <TrendingUp className="text-blue-500" size={18} />
@@ -451,7 +489,7 @@ const ProfilePage = ({ patient }:any) => {
                   </Card>
 
                   {/* Upcoming Appointments */}
-                  <Card className="border dark:border-gray-800 shadow-sm hover:shadow-md transition-shadow">
+                  <Card className="border dark:border-gray-800 shadow-xs hover:shadow-md transition-shadow">
                     <CardHeader className="flex flex-row items-center justify-between py-4">
                       <div className="flex items-center gap-2">
                         <Calendar className="text-indigo-500" size={18} />
@@ -479,7 +517,7 @@ const ProfilePage = ({ patient }:any) => {
                 {/* Right Column - Notifications + Goals */}
                 <div className="space-y-6">
                   {/* Recent Notifications */}
-                  <Card className="border dark:border-gray-800 shadow-sm hover:shadow-md transition-shadow">
+                  <Card className="border dark:border-gray-800 shadow-xs hover:shadow-md transition-shadow">
                     <CardHeader className="flex flex-row items-center justify-between py-4">
                       <div className="flex items-center gap-2">
                         <Bell className="text-amber-500" size={18} />
@@ -504,7 +542,7 @@ const ProfilePage = ({ patient }:any) => {
                   </Card>
 
                   {/* Health Goals */}
-                  <Card className="border dark:border-gray-800 shadow-sm hover:shadow-md transition-shadow">
+                  <Card className="border dark:border-gray-800 shadow-xs hover:shadow-md transition-shadow">
                     <CardHeader className="flex flex-row items-center justify-between py-4">
                       <div className="flex items-center gap-2">
                         <Target className="text-green-500" size={18} />
@@ -528,7 +566,7 @@ const ProfilePage = ({ patient }:any) => {
               </div>
 
               {/* Recent Documents - Full Width */}
-              <Card className="border dark:border-gray-800 shadow-sm hover:shadow-md transition-shadow">
+              <Card className="border dark:border-gray-800 shadow-xs hover:shadow-md transition-shadow">
                 <CardHeader className="flex flex-row items-center justify-between py-4">
                   <div className="flex items-center gap-2">
                     <FileText className="text-blue-500" size={18} />
@@ -591,37 +629,74 @@ const ProfilePage = ({ patient }:any) => {
 };
 
 // Enhanced Components
-const VitalCard = ({ icon: Icon, label, value, trend, color, bgColor }:any) => (
-  <Card className="border dark:border-gray-800 overflow-hidden hover:shadow-md transition-shadow">
-    <div className={`h-1 ${bgColor} w-full`}></div>
-    <CardContent className="p-4">
-      <div className="space-y-3">
-        <div className="flex items-center justify-between">
-          <div
-            className={`${color} opacity-90 p-2 rounded-lg bg-opacity-10 ${bgColor} bg-opacity-10`}
-          >
-            <Icon className={color} size={20} />
-          </div>
-          {trend !== undefined && (
-            <div
-              className={`flex items-center text-xs font-medium ${
-                trend > 0 ? "text-emerald-500" : "text-rose-500"
-              }`}
-            >
-              {trend > 0 ? "+" : ""}
-              {trend}%
-            </div>
-          )}
-        </div>
 
-        <div className="space-y-1">
-          <p className="text-sm text-gray-500 dark:text-gray-400">{label}</p>
-          <p className="text-lg font-semibold truncate">{value || "N/A"}</p>
+/**
+ * A single vital reading. `status` maps onto the clinical scale defined in
+ * globals.css, so the colour here means the same thing it does on the hero
+ * monitor and on triage badges. `range` shows the adult reference interval
+ * so the reading is interpretable without leaving the page.
+ */
+const VitalCard = ({ icon: Icon, label, value, trend, status = "normal", range }: any) => {
+  const tone: Record<string, string> = {
+    normal: "text-vital-normal",
+    low: "text-vital-low",
+    elevated: "text-vital-elevated",
+    critical: "text-vital-critical",
+    info: "text-vital-info",
+  };
+  const bar: Record<string, string> = {
+    normal: "bg-vital-normal",
+    low: "bg-vital-low",
+    elevated: "bg-vital-elevated",
+    critical: "bg-vital-critical",
+    info: "bg-vital-info",
+  };
+  const soft: Record<string, string> = {
+    normal: "bg-vital-normal/10",
+    low: "bg-vital-low/10",
+    elevated: "bg-vital-elevated/10",
+    critical: "bg-vital-critical/10",
+    info: "bg-vital-info/10",
+  };
+  const color = tone[status] ?? tone.normal;
+
+  return (
+    <Card className="overflow-hidden border transition-shadow hover:shadow-md dark:border-gray-800">
+      <div className={`h-1 w-full ${bar[status] ?? bar.normal}`} />
+      <CardContent className="p-4">
+        <div className="space-y-3">
+          <div className="flex items-center justify-between">
+            <div className={`rounded-lg p-2 ${soft[status] ?? soft.normal}`}>
+              <Icon className={color} size={20} />
+            </div>
+            {trend !== undefined && (
+              <div
+                className={`vitals-num flex items-center text-xs font-medium ${
+                  trend > 0 ? "text-vital-normal" : "text-vital-critical"
+                }`}
+              >
+                {trend > 0 ? "+" : ""}
+                {trend}%
+              </div>
+            )}
+          </div>
+
+          <div className="space-y-1">
+            <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+              {label}
+            </p>
+            <p className={`vitals-num truncate text-xl font-semibold ${color}`}>
+              {value || "—"}
+            </p>
+            {range && (
+              <p className="text-xs text-muted-foreground">Ref {range}</p>
+            )}
+          </div>
         </div>
-      </div>
-    </CardContent>
-  </Card>
-);
+      </CardContent>
+    </Card>
+  );
+};
 
 const AppointmentCard = ({ appointment }:any) => (
   <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">

@@ -122,7 +122,7 @@ export default function ContactUs() {
 
           <Card className="bg-white dark:bg-slate-800 mb-12 overflow-hidden shadow-xl">
             <CardContent className="p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between relative">
-              <div className="absolute inset-0 bg-gradient-to-r dark:from-slate-950/50 dark:to-slate-900" />
+              <div className="absolute inset-0 bg-linear-to-r dark:from-slate-950/50 dark:to-slate-900" />
               <div className="relative z-10 text-center sm:text-left mb-4 sm:mb-0">
                 <h1 className="text-3xl sm:text-4xl font-bold text-gray-800 dark:text-slate-100">
                   Get in Touch

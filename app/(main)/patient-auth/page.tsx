@@ -13,7 +13,7 @@ const PatientAuth = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <AuthHeader name="Patient" />
-      <div className="flex-grow flex items-center justify-center w-full relative overflow-hidden py-10 px-4 bg-gradient-to-r from-slate-50 to-blue-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
+      <div className="grow flex items-center justify-center w-full relative overflow-hidden py-10 px-4 bg-linear-to-r from-slate-50 to-blue-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
         {/* Background design elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-blue-100 dark:bg-blue-900/20 blur-3xl opacity-50"></div>
@@ -41,7 +41,7 @@ const PatientAuth = () => {
           </svg>
         </div>
 
-        <div className="relative max-w-screen-2xl w-full z-10">
+        <div className="relative max-w-[theme(screens.2xl)] w-full z-10">
           <SignInSignUpTabswitcher
             name="Patient"
             signinTab={<Signin />}

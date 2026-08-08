@@ -41,7 +41,7 @@ const MobileHeader: React.FC = () => {
     <>
       <header className="fixed top-0 left-0 right-0 z-50 bg-blue-900 dark:bg-slate-900 text-white">
         <div className="flex items-center justify-between px-4 py-3">
-          <button onClick={toggleUserMenu} className="focus:outline-none">
+          <button onClick={toggleUserMenu} className="focus:outline-hidden">
             <FiUser className="h-6 w-6" />
           </button>
           <Logo className="text-xl font-bold" />
@@ -57,11 +57,11 @@ const MobileHeader: React.FC = () => {
                 placeholder="Search..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-white dark:bg-slate-700 text-gray-900 dark:text-white rounded-full py-2 pl-4 pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full bg-white dark:bg-slate-700 text-gray-900 dark:text-white rounded-full py-2 pl-4 pr-10 focus:outline-hidden focus:ring-2 focus:ring-blue-500"
               />
               <button
                 onClick={toggleSearch}
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 focus:outline-none"
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 focus:outline-hidden"
               >
                 <FiX className="h-5 w-5 text-gray-500 dark:text-gray-400" />
               </button>

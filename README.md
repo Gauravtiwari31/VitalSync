@@ -100,12 +100,15 @@ VitalSync is a comprehensive healthcare platform built with modern web technolog
 
 | Category | Technologies |
 |---|---|
-| **Frontend** | Next.js 14, TypeScript, ShadCN UI |
-| **UI/UX** | Framer Motion, Lucide React, Tailwind CSS |
-| **Backend** | Node.js, Next.js API Routes |
-| **Database** | PostgreSQL, Prisma ORM |
+| **Frontend** | Next.js 16 (App Router, Turbopack), React 19, TypeScript 5.9, shadcn/ui |
+| **Styling** | Tailwind CSS 4 (CSS-first config), Radix UI, tw-animate-css |
+| **UI/UX** | Motion 13, Lucide React, Recharts 3 |
+| **Typography** | Plus Jakarta Sans (body), Sora (display & vitals readouts) |
+| **Backend** | Node.js, Next.js Route Handlers |
+| **Database** | PostgreSQL, Prisma ORM 6 |
 | **Authentication** | Lucia Auth |
-| **AI/ML** | Gemini API, Python |
+| **AI/ML** | Gemini API |
+| **Realtime** | LiveKit, Pusher |
 | **DevOps** | Vercel |
 
 ---
@@ -113,7 +116,7 @@ VitalSync is a comprehensive healthcare platform built with modern web technolog
 ## 🚀 Installation
 
 ### Prerequisites
-- Node.js (v18+)
+- Node.js (v20.9+, required by Next.js 16)
 - npm or yarn
 - PostgreSQL database
 - Environment variables (see `.env.example`)

@@ -58,7 +58,7 @@ const Faq = () => {
     <section className="w-full max-w-5xl mx-auto px-4 sm:px-6 py-12">
       <div className="space-y-8">
         <div className="text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-teal-600 to-cyan-600 bg-clip-text text-transparent dark:from-teal-400 dark:to-cyan-400 mb-4">
+          <h2 className="text-2xl sm:text-3xl font-bold bg-linear-to-r from-teal-600 to-cyan-600 bg-clip-text text-transparent dark:from-teal-400 dark:to-cyan-400 mb-4">
             Frequently Asked Questions
           </h2>
           <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto text-sm sm:text-base">

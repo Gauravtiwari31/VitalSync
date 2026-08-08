@@ -39,7 +39,7 @@ export const doctorsignup = async (
     });
     const session = await doctorlucia.createSession(doctor.id, {});
     const sessionCookie = await doctorlucia.createSessionCookie(session.id);
-    cookies().set(
+    (await cookies()).set(
       sessionCookie.name,
       sessionCookie.value,
       sessionCookie.attributes
@@ -72,7 +72,7 @@ export const doctorSignIn = async (
     }
 
     //For existing sessions
-    const sessionId = cookies().get(doctorlucia.sessionCookieName)?.value || null;
+    const sessionId = (await cookies()).get(doctorlucia.sessionCookieName)?.value || null;
     if (sessionId) {
       console.log("Logout session ID", sessionId);
       await doctorlucia.invalidateSession(sessionId);
@@ -81,7 +81,7 @@ export const doctorSignIn = async (
 
     const session = await doctorlucia.createSession(doctor.id, {});
     const sessionCookie = await doctorlucia.createSessionCookie(session.id);
-    cookies().set(
+    (await cookies()).set(
       sessionCookie.name,
       sessionCookie.value,
       sessionCookie.attributes
@@ -96,7 +96,7 @@ export const doctorSignIn = async (
 export const doctorLogout = async () => {
   try {
 
-    const sessionId = cookies().get(doctorlucia.sessionCookieName)?.value || null;
+    const sessionId = (await cookies()).get(doctorlucia.sessionCookieName)?.value || null;
     if (!sessionId) {
       return null;
     }
@@ -105,7 +105,7 @@ export const doctorLogout = async () => {
     await doctorlucia.invalidateSession(sessionId);
     console.log("Invalidated session");
     const sessionCookie = await doctorlucia.createBlankSessionCookie();
-    cookies().set(
+    (await cookies()).set(
       sessionCookie.name,
       sessionCookie.value,
       sessionCookie.attributes
@@ -120,7 +120,7 @@ export const doctorLogout = async () => {
 
 export const doctorLogoutFromAllDevices = async () => {
   try {
-    const sessionId = cookies().get(doctorlucia.sessionCookieName)?.value || null;
+    const sessionId = (await cookies()).get(doctorlucia.sessionCookieName)?.value || null;
     if (!sessionId) {
       return null;
     }
@@ -131,7 +131,7 @@ export const doctorLogoutFromAllDevices = async () => {
     await doctorlucia.invalidateUserSessions(user?.id!!);
 
     const sessionCookie = await doctorlucia.createBlankSessionCookie();
-    cookies().set(
+    (await cookies()).set(
       sessionCookie.name,
       sessionCookie.value,
       sessionCookie.attributes
@@ -206,7 +206,7 @@ export const doctorsignupDummy = async (
 
     const session = await doctorlucia.createSession(doctor.id, {});
     const sessionCookie = await doctorlucia.createSessionCookie(session.id);
-    cookies().set(
+    (await cookies()).set(
       sessionCookie.name,
       sessionCookie.value,
       sessionCookie.attributes
